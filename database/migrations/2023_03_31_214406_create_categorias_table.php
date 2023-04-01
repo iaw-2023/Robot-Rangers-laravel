@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pedido', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('mail_cliente');
-            $table->decimal('monto', 12, 2);
-            $table->date('fecha');
+            $table->string('nombre');
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pedido');
+        Schema::dropIfExists('categorias');
     }
 };

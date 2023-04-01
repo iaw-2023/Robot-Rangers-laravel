@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detalle_pedido', function (Blueprint $table) {
-            $table->foreignId('pedido_id')->constrained('pedido')->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId('prenda_id')->constrained('prenda')->cascadeOnUpdate()->restrictOnDelete();
-            $table->primary(['pedido_id', 'prenda_id']);
+        Schema::create('detalle_pedidos', function (Blueprint $table) {
+            $table->foreignId('pedido_id')->constrained('pedidos')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('prenda_id')->constrained('prendas')->cascadeOnUpdate()->restrictOnDelete();
+            $table->id();
             $table->timestamps();
             $table->unsignedSmallInteger('cantidad');
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detalle_pedido');
+        Schema::dropIfExists('detalle_pedidos');
     }
 };

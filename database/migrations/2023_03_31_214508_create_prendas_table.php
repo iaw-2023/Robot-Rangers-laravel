@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prenda', function (Blueprint $table) {
+        Schema::create('prendas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->enum('talle', ['xs', 's','m', 'l', 'xl']);
             $table->string('color');
             $table->decimal('precio', 8, 2);
-            $table->foreignId('marca_id')->constrained('marca')->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId('categoria_id')->constrained('categoria')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('marca_id')->constrained('marcas')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('categoria_id')->constrained('categorias')->cascadeOnUpdate()->restrictOnDelete();
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prenda');
+        Schema::dropIfExists('prendas');
     }
 };
