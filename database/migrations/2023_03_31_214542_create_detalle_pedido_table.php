@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('prenda_id')->constrained('prenda')->cascadeOnUpdate()->restrictOnDelete();
             $table->primary(['pedido_id', 'prenda_id']);
             $table->timestamps();
-            $table->int('cantidad');
+            $table->unsignedSmallInteger('cantidad');
         });
     }
 
