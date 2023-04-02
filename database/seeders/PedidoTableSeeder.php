@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use DB;
-use Illuminate\Support\Str;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Pedido;
 
 class PedidoTableSeeder extends Seeder
 {
@@ -15,12 +14,6 @@ class PedidoTableSeeder extends Seeder
     public function run(): void
     {
         //
-        for ($i = 1; $i <= 1000; $i++) {
-            DB::table('pedido')->insert([
-                'mail_cliente' => Str::random(10).'@gmail.com',
-                'monto' => rand(1, 1000) / 10,
-                'date' => time(),
-            ]);
-        }
+        Pedido::factory(500)->create();
     }
 }
