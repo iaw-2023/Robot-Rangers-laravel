@@ -17,13 +17,16 @@ class PrendaFactory extends Factory
      */
     public function definition(): array
     {
+        $marcas = Marca::pluck('id')->toArray();
+        $categorias = Categoria::pluck('id')->toArray();
         return [
             //
             'talle' => $this->faker->randomElement(['xs' ,'s', 'm', 'l', 'xl']), 
             'color' => $this->faker->randomElement(['rojo' ,'azul', 'amarillo', 'verde', 'negro']),
+            'imagen' => $this->faker->imageUrl(),
             'precio' => rand(1, 1000) / 10,
-            'marca_id' => Marca::factory(),
-            'categoria_id' => Categoria::factory(),
+            'marca_id' => $this->faker->randomElement($marcas),
+            'categoria_id' => $this->faker->randomElement($categorias),
         ];
     }
 }
