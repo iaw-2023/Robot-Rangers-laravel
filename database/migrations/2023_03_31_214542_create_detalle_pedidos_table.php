@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detalle_pedidos', function (Blueprint $table) {
-            $table->foreignId('pedido_id')->constrained('pedidos')->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId('prenda_id')->constrained('prendas')->cascadeOnUpdate()->restrictOnDelete();
             $table->id();
             $table->timestamps();
+            $table->foreignId('pedido_id')->constrained('pedidos')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('prenda_id')->constrained('prendas')->cascadeOnUpdate()->restrictOnDelete();
             $table->unsignedSmallInteger('cantidad');
         });
     }
