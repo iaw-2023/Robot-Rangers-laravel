@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PrendaTableSeeder::class,
             PedidoTableSeeder::class,
             DetallePedidoTableSeeder::class,
+            UserSeeder::class
         ]);        
     }
 }
