@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Categoria;
+use App\Http\StoreCategoriaRequest;
+use App\Http\UpdateCategoriaRequest;
+
 
 class CategoriasController extends Controller
 {
@@ -12,7 +16,7 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        //
+        return view('categoria.index', ['categoria'=>Categoria::orderBy('id')->get()]);
     }
 
     /**
@@ -20,15 +24,16 @@ class CategoriasController extends Controller
      */
     public function create()
     {
-        //
+        return view('categorias.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {  
+        Categoria::create([$categoria => validated()]);
+        return redirect(route('categorias.index'))->with('message', 'Categoria has been created.');;
     }
 
     /**
@@ -36,7 +41,7 @@ class CategoriasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('categorias.show', ['categorias', Categoria::findOrFail($id)]);
     }
 
     /**
@@ -44,7 +49,7 @@ class CategoriasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('categorias.edit', ['categoria' => Categoria::where('id', $id)->first()]);
     }
 
     /**
@@ -52,7 +57,8 @@ class CategoriasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Categoria::where('id', $id)->update(validated());
+        return redirect(route('categorias.index'));
     }
 
     /**
@@ -60,6 +66,7 @@ class CategoriasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Categoria::destroy($id);
+        return redirect(route('categorias.index'))->with('message', 'Categoria has been deleted.');
     }
 }
