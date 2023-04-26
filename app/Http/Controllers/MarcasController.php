@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\StoreMarcaRequest;
+use Illuminate\Http\UpdateMarcaRequest;
+use App\Models\Marca;
 
 class MarcasController extends Controller
 {
@@ -12,7 +15,7 @@ class MarcasController extends Controller
      */
     public function index()
     {
-        //
+        return view('marcas.index', ['marcas'=>Marca::orderBy('id')->get()]);
     }
 
     /**
@@ -20,15 +23,16 @@ class MarcasController extends Controller
      */
     public function create()
     {
-        //
+        return view('marcas.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMarcaRequest $request)
     {
-        //
+        Marca::create([$request->validated()]);
+        return redirect(route('marcas.index'))->with('message', 'Marca has been created.');
     }
 
     /**
@@ -36,7 +40,7 @@ class MarcasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('marcas.show', ['marcas', Marca::findOrFail($id)]);
     }
 
     /**
@@ -44,15 +48,16 @@ class MarcasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('marcas.edit',['marcas' => Marca::where('id', $id)->first()]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateMarcaRequest $request, string $id)
     {
-        //
+        Marca::where('id', $id)->update(validated());
+        return redirect(route('marcas.index'));
     }
 
     /**
@@ -60,6 +65,7 @@ class MarcasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Marca::destroy($id);
+        return redirect(route('marcas.index'))->with('message', 'Marca has been deleted.');
     }
 }

@@ -11,7 +11,7 @@ class UpdatePedidoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdatePedidoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'mail_cliente' => 'required|email:rfc',
+            'monto' => 'required|decimal:2',
+            'fecha' => 'required|date'
         ];
     }
 }
