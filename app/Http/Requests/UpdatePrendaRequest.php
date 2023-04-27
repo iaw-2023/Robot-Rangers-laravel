@@ -22,7 +22,12 @@ class UpdatePrendaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre'=>'required|string|max:100|unique:prendas',
+            'talle'=>'required|enum',
+            'color'=>'required|string|max:30',
+            'imagen'=>['required|mimes:jpg,png,jpeg', 'max:5048'],
+            'precio'=>'required|decimal',
+            'descripcion'=>'required|text|max:1000'
         ];
     }
 }

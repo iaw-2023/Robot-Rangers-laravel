@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
-use App\Http\StoreCategoriaRequest;
-use App\Http\UpdateCategoriaRequest;
+use App\Http\Requests\StoreCategoriaRequest;
+use App\Http\Requests\UpdateCategoriaRequest;
 
 
 class CategoriasController extends Controller
@@ -16,7 +16,7 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        return view('categoria.index', ['categoria'=>Categoria::orderBy('id')->get()]);
+        return view('categorias.index', ['categorias'=>Categoria::orderBy('id')->get()]);
     }
 
     /**
@@ -33,7 +33,7 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {  
         Categoria::create([$categoria => validated()]);
-        return redirect(route('categorias.index'))->with('message', 'Categoria has been created.');;
+        return redirect(route('categorias.index'))->with('message', 'Categoria has been created.');
     }
 
     /**
@@ -41,7 +41,7 @@ class CategoriasController extends Controller
      */
     public function show(string $id)
     {
-        return view('categorias.show', ['categorias', Categoria::findOrFail($id)]);
+        return view('categorias.show', ['categoria', Categoria::findOrFail($id)]);
     }
 
     /**

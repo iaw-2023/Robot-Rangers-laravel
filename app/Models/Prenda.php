@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Prenda extends Model
 {
     use HasFactory;
+    
+    protected $table = 'prendas';
 
     protected $fillable = [
         'nombre',
-        'marca_id',
-        'categoria_id',
         'talle',
         'color',
         'imagen',
