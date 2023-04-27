@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\StorePedidoRequest;
-use Illuminate\Http\UpdatePedidoRequest;
 use App\Models\Pedido;
+use App\Http\Requests\StorePedidoRequest;
+use App\Http\Requests\UpdatePedidoRequest;
+
 
 class PedidosController extends Controller
 {
@@ -15,7 +15,7 @@ class PedidosController extends Controller
      */
     public function index()
     {
-        return view('pedidos.index', ['pedidos'=>Pedido::orderBy('id')->get()]);    
+        return view('pedidos.index', ['pedidos'=>Pedido::all()]);    
     }
 
     /**
@@ -32,7 +32,7 @@ class PedidosController extends Controller
     public function store(StorePedidoRequest $request)
     {
         Pedido::create([$request->validated()]);
-        return redirect(route('pedidos.index'))->with('message', 'Pedido has been created.');
+        return back()->with('message', 'Pedido has been created.');
     }
 
     /**
@@ -56,8 +56,8 @@ class PedidosController extends Controller
      */
     public function update(UpdatePedidoRequest $request, string $id)
     {
-        Pedido::where('id', $id)->update(validated());
-        return redirect(route('pedidos.index'));
+        Pedido::where('id', $id)->update($request->validated());
+        return back()->with('message', 'Pedido has been updated.');
     }
 
     /**
@@ -66,6 +66,6 @@ class PedidosController extends Controller
     public function destroy(string $id)
     {
         Pedido::destroy($id);
-        return redirect(route('pedidos.index'))->with('message', 'Pedido has been deleted.');
+        return back()->with('message', 'Pedido has been deleted.');
     }
 }

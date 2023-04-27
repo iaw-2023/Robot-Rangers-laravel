@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
-
 
 class CategoriasController extends Controller
 {
@@ -16,7 +14,7 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        return view('categorias.index', ['categorias'=>Categoria::orderBy('id')->get()]);
+        return view('categorias.index', ['categorias'=>Categoria::all()]);
     }
 
     /**
@@ -30,10 +28,10 @@ class CategoriasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoriaRequest $request)
     {  
-        Categoria::create([$categoria => validated()]);
-        return redirect(route('categorias.index'))->with('message', 'Categoria has been created.');
+        Categoria::create([$request->validated()]);
+        return back()->with('message', 'Categoria has been created.');
     }
 
     /**
@@ -55,10 +53,10 @@ class CategoriasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCategoriaRequest $request, string $id)
     {
-        Categoria::where('id', $id)->update(validated());
-        return redirect(route('categorias.index'));
+        Categoria::where('id', $id)->update($request->validated());
+        return back()->with('message', 'Categoria has been updated.');
     }
 
     /**
@@ -67,6 +65,6 @@ class CategoriasController extends Controller
     public function destroy(string $id)
     {
         Categoria::destroy($id);
-        return redirect(route('categorias.index'))->with('message', 'Categoria has been deleted.');
+        return back()->with('message', 'Categoria has been deleted.');
     }
 }

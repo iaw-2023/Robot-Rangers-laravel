@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePrendaRequest extends FormRequest
+class StoreMarcaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,9 @@ class StorePrendaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre'=>'required|string|max:100|unique:prendas',
-            'talle'=>'required|enum',
-            'color'=>'required|string|max:30',
-            'imagen'=>['required|mimes:jpg,png,jpeg', 'max:5048'],
-            'precio'=>'required|decimal',
-            'descripcion'=>'required|text|max:1000'
+            'nombre' => 'required|string|max:50',
+            'imagen' => ['required|mimes:jpg,png,jpeg', 'max:5048'],
+            'descripcion' => 'required|string|max:1000'
         ];
     }
 }

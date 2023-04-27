@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Prenda;
 use App\Http\Requests\StorePrendaRequest;
-use App\Http\Requests\UpdatePrendaRequest;
+use App\Http\Requests\UpdateMarcaRequest;
 
 class PrendasController extends Controller
 {
@@ -14,7 +14,7 @@ class PrendasController extends Controller
      */
     public function index()
     {
-        return view('prendas.index', ['prenda'=>Prenda::orderBy('id')->get()]);
+        return view('prendas.index', ['prenda'=>Prenda::all()]);
     }
 
     /**
@@ -28,10 +28,10 @@ class PrendasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePrendaRequest $request)
     {
-        Prenda::create([$prenda => validated()]);
-        return redirect(route('prendas.index'))->with('message', 'Prenda has been created.');
+        Prenda::create([$request->validated()]);
+        return back()->with('message', 'Prenda has been created.');
     }
 
     /**
@@ -53,10 +53,10 @@ class PrendasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateMarcaRequest $request, string $id)
     {
-        Prenda::where('id', $id)->update(validated());
-        return redirect(route('prendas.index'));
+        Prenda::where('id', $id)->update($request->validated());
+        return back()->with('message', 'Prenda has been updated.');
     }
 
     /**
@@ -65,6 +65,6 @@ class PrendasController extends Controller
     public function destroy(string $id)
     {
         Prenda::destroy($id);
-        return redirect(route('prendas.index'))->with('message', 'Prenda has been deleted.');
+        return back()->with('message', 'Prenda has been deleted.');
     }
 }

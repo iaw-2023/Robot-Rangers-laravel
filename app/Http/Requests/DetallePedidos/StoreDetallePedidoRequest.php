@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePrendaRequest extends FormRequest
+class StoreDetallePedidoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,12 +22,7 @@ class UpdatePrendaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre'=>'required|string|max:100|unique:prendas',
-            'talle'=>'required|enum',
-            'color'=>'required|string|max:30',
-            'imagen'=>['required|mimes:jpg,png,jpeg', 'max:5048'],
-            'precio'=>'required|decimal',
-            'descripcion'=>'required|text|max:1000'
+            'cantidad' => 'required|integer|max:2'
         ];
     }
 }

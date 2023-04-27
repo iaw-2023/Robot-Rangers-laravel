@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\StoreDetallePedidoRequest;
-use Illuminate\Http\UpdateDetallePedidoRequest;
+use App\Http\Requests\StoreDetallePedidoRequest;
+use App\Http\Requests\UpdateDetallePedidoRequest;
 use App\Models\DetallePedido;
 
 class DetallePedidosController extends Controller
@@ -15,7 +14,7 @@ class DetallePedidosController extends Controller
      */
     public function index()
     {
-        return view('detallePedidos.index', ['detallePedidos'=>DetallePedido::orderBy('id')->get()]);
+        return view('detallePedidos.index', ['detallePedidos'=>DetallePedido::all()]);
     }
 
     /**
@@ -32,7 +31,7 @@ class DetallePedidosController extends Controller
     public function store(StoreDetallePedidoRequest $request)
     {
         DetallePedido::create([$request->validated()]);
-        return redirect(route('detallePedidos.index'))->with('message', 'Detalle Pedido has been created.');
+        return back()->with('message', 'Detalle Pedido has been created.');
     }
 
     /**
@@ -56,8 +55,8 @@ class DetallePedidosController extends Controller
      */
     public function update(UpdateDetallePedidoRequest $request, string $id)
     {
-        DetallePedido::where('id', $id)->update(validated());
-        return redirect(route('detallePedidos.index'));
+        DetallePedido::where('id', $id)->update($request->validated());
+        return back()->with('message', 'Detalle Pedido has been updated.');
     }
 
     /**
@@ -66,6 +65,6 @@ class DetallePedidosController extends Controller
     public function destroy(string $id)
     {
         DetallePedido::destroy($id);
-        return redirect(route('detallePedidos.index'))->with('message', 'Detalle Pedido has been deleted.');
+        return back()->with('message', 'Detalle Pedido has been deleted.');
     }
 }

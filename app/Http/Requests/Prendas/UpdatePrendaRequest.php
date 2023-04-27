@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMarcaRequest extends FormRequest
+class UpdatePrendaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,9 +22,12 @@ class UpdateMarcaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|max:50|',
-            'image' => ['required|mimes:jpg,png,jpeg', 'max:5048'],
-            'descripcion' => 'required|max:255'
+            'nombre'=>'required|string|max:100|unique:prendas',
+            'talle'=>'required|string|max:2',
+            'color'=>'required|string|max:30',
+            'imagen'=>['required|mimes:jpg,png,jpeg', 'max:5048'],
+            'precio'=>'required|decimal:2',
+            'descripcion'=>'required|text|max:1000'
         ];
     }
 }
