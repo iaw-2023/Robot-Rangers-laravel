@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Prenda;
-use App\Http\Requests\StorePrendaRequest;
-use App\Http\Requests\UpdateMarcaRequest;
+use App\Http\Requests\Prendas\StorePrendaRequest;
+use App\Http\Requests\Prendas\UpdateMarcaRequest;
 
-class PrendasController extends Controller
+class PrendaController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreDetallePedidoRequest;
-use App\Http\Requests\UpdateDetallePedidoRequest;
 use App\Models\DetallePedido;
 
-class DetallePedidosController extends Controller
+class DetallePedidoController extends Controller
 {
     /**
      * Display a listing of the resource.
