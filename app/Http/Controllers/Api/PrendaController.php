@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePrendaRequest;
-use App\Http\Requests\UpdatePrendaRequest;
+use App\Http\Requests\Prendas\StorePrendaRequest;
+use App\Http\Requests\Prendas\UpdatePrendaRequest;
 use App\Models\Prenda;
 
 class PrendaController extends Controller
