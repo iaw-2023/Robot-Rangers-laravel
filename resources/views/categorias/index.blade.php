@@ -6,15 +6,15 @@
     <table class="table">
         <thead>
             <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nombre</th>
+            <th scope="col" style="color:white">ID</th>
+            <th scope="col" style="color:white">Nombre</th>
             </tr>
         </thead>
         <tbody>
             @foreach($categorias as $categoria)
             <tr>
-                <th scope="row">{{$categoria->id}}</th>
-                <td>{{$categoria->nombre}}</td>
+                <th scope="row" style="color:white">{{$categoria->id}}</th>
+                <td style="color:white">{{$categoria->nombre}}</td>
                 <td>
                     <form action="/categorias/{{$categoria->id}}" method="POST">
                         @method('DELETE')
