@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreMarcaRequest;
-use App\Http\Requests\UpdateMarcaRequest;
+use App\Http\Requests\Marcas\StoreMarcaRequest;
+use App\Http\Requests\Marcas\UpdateMarcaRequest;
 use App\Models\Marca;
 
 class MarcaController extends Controller

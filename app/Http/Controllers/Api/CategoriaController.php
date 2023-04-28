@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCategoriaRequest;
-use App\Http\Requests\UpdateCategoriaRequest;
+use App\Http\Requests\Categorias\StoreCategoriaRequest;
+use App\Http\Requests\Categorias\UpdateCategoriaRequest;
 use App\Models\Categoria;
 
 class CategoriaController extends Controller

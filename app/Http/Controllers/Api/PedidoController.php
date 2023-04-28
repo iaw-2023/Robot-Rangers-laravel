@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePedidoRequest;
-use App\Http\Requests\UpdateMarcaRequest;
+use App\Http\Requests\Pedidos\StorePedidoRequest;
+use App\Http\Requests\Pedidos\UpdatePedidoRequest;
 use App\Models\Pedido;
 
 class PedidoController extends Controller
@@ -71,7 +71,7 @@ class PedidoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMarcaRequest $request, string $id)
+    public function update(UpdatePedidoRequest $request, string $id)
     {
         $validator = $request->validate();
         $pedido = Pedido::find($id);

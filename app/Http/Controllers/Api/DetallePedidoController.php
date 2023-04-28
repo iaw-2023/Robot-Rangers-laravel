@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreDetallePedidoRequest;
-use App\Http\Requests\UpdateDetallePedidoRequest;
+use App\Http\Requests\DetallePedidos\StoreDetallePedidoRequest;
+use App\Http\Requests\DetallePedidos\UpdateDetallePedidoRequest;
 use App\Models\DetallePedido;
 
 class DetallePedidoController extends Controller
