@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePrendaRequest;
-use App\Http\Requests\UpdateMarcaRequest;
+use App\Http\Requests\Prendas\StorePrendaRequest;
+use App\Http\Requests\Prendas\UpdateMarcaRequest;
 use App\Models\Prenda;
 
 class PrendaController extends Controller

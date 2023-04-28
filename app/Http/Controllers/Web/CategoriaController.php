@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCategoriaRequest;
-use App\Http\Requests\UpdateCategoriaRequest;
 use App\Models\Categoria;
+use App\Http\Requests\Categorias\StoreCategoriaRequest;
+use App\Http\Requests\Categorias\UpdateCategoriaRequest;
 
 class CategoriaController extends Controller
 {
@@ -30,8 +30,8 @@ class CategoriaController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {  
-        Categoria::create([$request->validated()]);
-        return back()->with('message', 'Categoria has been created.');
+        Categoria::create($request->validated());
+        return back()->with('success', 'Categoria has been created.');
     }
 
     /**
@@ -39,7 +39,7 @@ class CategoriaController extends Controller
      */
     public function show(string $id)
     {
-        return view('categorias.show', ['categoria', Categoria::findOrFail($id)]);
+        return view('categorias.show',['categoria' => Categoria::where('id', $id)->first()]);
     }
 
     /**
@@ -56,7 +56,7 @@ class CategoriaController extends Controller
     public function update(UpdateCategoriaRequest $request, string $id)
     {
         Categoria::where('id', $id)->update($request->validated());
-        return back()->with('message', 'Categoria has been updated.');
+        return back()->with('success', 'Categoria has been updated.');
     }
 
     /**
@@ -65,6 +65,6 @@ class CategoriaController extends Controller
     public function destroy(string $id)
     {
         Categoria::destroy($id);
-        return back()->with('message', 'Categoria has been deleted.');
+        return back()->with('success', 'Categoria has been deleted.');
     }
 }
