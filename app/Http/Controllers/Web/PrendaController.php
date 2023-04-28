@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Prendas\StorePrendaRequest;
-use App\Http\Requests\Prendas\UpdateMarcaRequest;
+use App\Http\Requests\Prendas\UpdatePrendaRequest;
 use App\Models\Prenda;
 
 class PrendaController extends Controller
@@ -53,7 +53,7 @@ class PrendaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMarcaRequest $request, string $id)
+    public function update(UpdatePrendaRequest $request, string $id)
     {
         Prenda::where('id', $id)->update($request->validated());
         return back()->with('message', 'Prenda has been updated.');
