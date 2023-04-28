@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoriaRequest;
+use App\Http\Requests\UpdateCategoriaRequest;
 use App\Models\Categoria;
-use App\Http\Requests\Categorias\StoreCategoriaRequest;
-use App\Http\Requests\Categorias\UpdateCategoriaRequest;
 
 class CategoriaController extends Controller
 {

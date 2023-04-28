@@ -13,6 +13,8 @@ class Prenda extends Model
 
     protected $fillable = [
         'nombre',
+        'marca_id',
+        'categoria_id',
         'talle',
         'color',
         'imagen',

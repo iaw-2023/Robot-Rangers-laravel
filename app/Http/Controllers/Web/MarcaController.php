@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreMarcaRequest;
+use App\Http\Requests\UpdateMarcaRequest;
 use App\Models\Marca;
-use App\Http\Requests\Marcas\StoreMarcaRequest;
-use App\Http\Requests\Marcas\UpdateMarcaRequest;
-
 
 class MarcaController extends Controller
 {

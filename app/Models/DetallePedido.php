@@ -12,6 +12,8 @@ class DetallePedido extends Model
     protected $table = 'detallePedidos';
 
     protected $fillable = [
+        'pedido_id',
+        'prenda_id',
         'cantidad'
     ];
 }
