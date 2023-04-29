@@ -33,5 +33,13 @@ Route::middleware('auth')->group(function () {
 Route::resource('categorias',CategoriaController::class);
 Route::resource('marcas',MarcaController::class);
 Route::resource('prendas',PrendaController::class);
+Route::prefix('/pedidos')->group(function(){
+    Route::get('', [PedidoController::class, 'index'])->name('pedidos.index');
+    Route::get('/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
+});
+Route::prefix('/detallePedidos')->group(function(){
+    Route::get('', [detallePedidoController::class, 'index'])->name('detallePedidos.index');
+    Route::get('/{id}', [detallePedidoController::class, 'show'])->name('detallePedidos.show');
+});
 
 require __DIR__.'/auth.php';

@@ -39,7 +39,7 @@ class PrendaController extends Controller
      */
     public function show(string $id)
     {
-        return view('prendas.show', ['prenda', Prenda::findOrFail($id)]);
+        return view('prendas.show',['prendas' => Prenda::where('id', $id)->first()]);
     }
 
     /**

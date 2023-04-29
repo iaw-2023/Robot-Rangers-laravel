@@ -12,7 +12,7 @@ class DetallePedidoController extends Controller
      */
     public function index()
     {
-        return view('detallePedidos.index', ['detallePedidos'=>DetallePedido::all()]);
+        return view('detallePedidos.index', ['detalle_pedidos'=>DetallePedido::all()]);
     }
 
     /**
@@ -20,6 +20,6 @@ class DetallePedidoController extends Controller
      */
     public function show(string $id)
     {
-        return view('detallePedidos.show', ['detallePedidos', DetallePedido::findOrFail($id)]);
+        return view('detallePedidos.show',['detalle_pedidos' => DetallePedido::where('id', $id)->first()]);
     }
 }

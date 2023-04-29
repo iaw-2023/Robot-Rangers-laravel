@@ -20,6 +20,6 @@ class PedidoController extends Controller
      */
     public function show(string $id)
     {
-        return view('pedidos.show', ['pedidos', Pedido::findOrFail($id)]);
+        return view('pedidos.show',['pedidos' => Pedido::where('id', $id)->first()]);
     }
 }
