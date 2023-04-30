@@ -23,7 +23,7 @@ class UpdateMarcaRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string|max:50|unique:marcas'.$this->id,
-            'imagen' => ['required|mimes:jpg,png,jpeg', 'max:5048'],
+            'imagen' => 'required',//['required|mimes:jpg,png,jpeg', 'max:5048'],
             'descripcion' => 'required|string|max:1000'
         ];
     }

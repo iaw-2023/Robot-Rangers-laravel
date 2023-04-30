@@ -14,7 +14,8 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        return view('marcas.index', ['marcas'=>Marca::all()]);
+        $marcas = Marca::orderBy('id')->get();
+        return view('marcas.index', ['marcas'=>$marcas]);
     }
 
     /**
@@ -30,8 +31,8 @@ class MarcaController extends Controller
      */
     public function store(StoreMarcaRequest $request)
     {
-        Marca::create([$request->validated()]);
-        return back()->with('message', 'Marca has been created.');
+        Marca::create($request->validated());
+        return redirect('marcas')->with('success', 'Marca has been created.');
     }
 
     /**
@@ -39,7 +40,9 @@ class MarcaController extends Controller
      */
     public function show(string $id)
     {
-        return view('marcas.show',['marcas' => Marca::where('id', $id)->first()]);
+        //$marca = Marca::where('id', $id)->first();
+        $marca = Marca::FindOrFail($id);
+        return view('marcas.show',['marca' => $marca]);
     }
 
     /**
@@ -47,7 +50,8 @@ class MarcaController extends Controller
      */
     public function edit(string $id)
     {
-        return view('marcas.edit',['marcas' => Marca::where('id', $id)->first()]);
+        $marca = Marca::FindOrFail($id);
+        return view('marcas.edit',['marca' => $marca]);
     }
 
     /**
@@ -56,7 +60,7 @@ class MarcaController extends Controller
     public function update(UpdateMarcaRequest $request, string $id)
     {
         Marca::where('id', $id)->update($request->validated());
-        return back()->with('message', 'Marca has been updated.');;
+        return redirect('marcas')->with('success', 'Marca has been updated.');;
     }
 
     /**
@@ -65,6 +69,6 @@ class MarcaController extends Controller
     public function destroy(string $id)
     {
         Marca::destroy($id);
-        return back()->with('message', 'Marca has been deleted.');
+        return redirect('marcas')->with('success', 'Marca has been deleted.');
     }
 }
