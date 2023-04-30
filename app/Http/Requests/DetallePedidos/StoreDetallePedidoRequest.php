@@ -22,7 +22,9 @@ class StoreDetallePedidoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cantidad' => 'required|integer|max:2'
+            'pedido_id' => 'required|integer',
+            'prenda_id' => 'required|integer',
+            'cantidad' => 'required|integer|max:99'
         ];
     }
 }

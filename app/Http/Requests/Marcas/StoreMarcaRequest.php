@@ -22,7 +22,7 @@ class StoreMarcaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|max:50',
+            'nombre' => 'required|string|max:50|unique:marcas',
             'imagen' => ['required|mimes:jpg,png,jpeg', 'max:5048'],
             'descripcion' => 'required|string|max:1000'
         ];

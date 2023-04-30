@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pedidos\StorePedidoRequest;
 use App\Http\Requests\Pedidos\UpdatePedidoRequest;
+use App\Http\Resources\PedidoResource;
 use App\Models\Pedido;
 
 class PedidoController extends Controller
@@ -14,21 +15,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::all();
-        
-        if ($pedidos->count() > 0) {
-            return response()->json(['status'=>200,'pedidos'=>$pedidos], 200);
-        } else {
-            return response()->json(['status'=>404,'No pedidos found.'], 404);
-        }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return PedidoResource::collection(Pedido::all());
     }
 
     /**
@@ -36,66 +23,32 @@ class PedidoController extends Controller
      */
     public function store(StorePedidoRequest $request)
     {
-        $validator = $request->validate();
-
-        if($validator) {
-            Pedido::create([$validator]);
-            return response()->json(['status'=>200, 'message'=>'Pedido has been created.'], 200);
-        } else {
-            return response()->json(['status'=>404, 'message'=>'ERROR: Pedido has not been created.'], 404);
-        }
+        return new PedidoResource(Pedido::create($request->all()));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Pedido $pedido)
     {
-        $pedido = Pedido::find($id);
-
-        if($pedido){
-            return response()->json(['status'=>200, 'pedido'=>$pedido], 200);
-        } else {
-            return response()->json(['status'=>404, 'message'=> 'Pedido has not found.'], 404);
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        return $this->show($id);
+        return new PedidoResource($pedido);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePedidoRequest $request, string $id)
+    public function update(UpdatePedidoRequest $request, Pedido $pedido)
     {
-        $validator = $request->validate();
-        $pedido = Pedido::find($id);
-
-        if($validator && $pedido) {
-            $pedido->update([$validator]);
-            return response()->json(['status'=>200, 'message'=>'Pedido has been updated.'], 200);
-        } else {
-            return response()->json(['status'=>404, 'message'=>'ERROR: Pedido has not been updated.'], 404);
-        }
+        $pedido->update($request->all());
+        return new PedidoResource($pedido);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pedido $pedido)
     {
-        $pedido = Pedido::find($id);
-
-        if($pedido){
-            $pedido->delete();
-            return response()->json(['status'=>200, 'message'=>'Pedido has been deleted.'], 200);
-        } else {
-            return response()->json(['status'=>404, 'message'=>'ERROR: Pedido has not been deleted.'], 404);
-        }
+        $pedido->delete();
+        return new PedidoResource($pedido); 
     }
 }

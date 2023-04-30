@@ -23,9 +23,7 @@ class PrendaFactory extends Factory
             'color' => $this->faker->randomElement(['rojo' ,'azul', 'amarillo', 'verde', 'negro']),
             'imagen' => $this->faker->imageUrl(),
             'precio' => rand(1, 1000) / 10,
-            //'marca_id' => rand(1, 100),
             'marca_id' => Marca::all()->random(),
-            //'categoria_id' => rand(1, 100),
             'categoria_id' => Categoria::all()->random(),
             'descripcion' => $this->faker->text(),
         ];

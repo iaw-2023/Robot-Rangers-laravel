@@ -19,7 +19,7 @@ class PedidoFactory extends Factory
         return [
             'mail_cliente' => $this->faker->email(),
             'monto' => rand(1, 1000) / 10,
-            'fecha' => $this->faker->dateTime(),
+            'fecha' => $this->faker->date(),
         ];
     }
 }
