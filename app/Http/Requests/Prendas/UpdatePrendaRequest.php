@@ -25,7 +25,7 @@ class UpdatePrendaRequest extends FormRequest
             'nombre'=>'required|string|max:100|unique:prendas',
             'talle'=>'required|string|max:2',
             'color'=>'required|string|max:30',
-            'imagen'=>['required|mimes:jpg,png,jpeg', 'max:5048'],
+            'imagen'=>'required',
             'precio'=>'required|decimal:2',
             'descripcion'=>'required|text|max:1000'
         ];

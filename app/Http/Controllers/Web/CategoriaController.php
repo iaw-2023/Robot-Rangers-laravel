@@ -31,7 +31,7 @@ class CategoriaController extends Controller
     public function store(StoreCategoriaRequest $request)
     {  
         Categoria::create($request->validated());
-        return back()->with('success', 'Categoria has been created.');
+        return redirect('categorias')->with('success', 'Categoria has been created.');
     }
 
     /**
@@ -56,7 +56,7 @@ class CategoriaController extends Controller
     public function update(UpdateCategoriaRequest $request, string $id)
     {
         Categoria::where('id', $id)->update($request->validated());
-        return back()->with('success', 'Categoria has been updated.');
+        return redirect('categorias')->with('success', 'Categoria has been updated.');
     }
 
     /**
@@ -65,6 +65,6 @@ class CategoriaController extends Controller
     public function destroy(string $id)
     {
         Categoria::destroy($id);
-        return back()->with('success', 'Categoria has been deleted.');
+        return redirect('categorias')->with('success', 'Categoria has been deleted.');
     }
 }

@@ -14,7 +14,7 @@ class PrendaController extends Controller
      */
     public function index()
     {
-        return view('prendas.index', ['prenda'=>Prenda::all()]);
+        return view('prendas.index', ['prendas'=>Prenda::all()]);
     }
 
     /**
@@ -31,7 +31,7 @@ class PrendaController extends Controller
     public function store(StorePrendaRequest $request)
     {
         Prenda::create([$request->validated()]);
-        return back()->with('message', 'Prenda has been created.');
+        return redirect('prendas')->with('message', 'Prenda has been created.');
     }
 
     /**
@@ -39,7 +39,7 @@ class PrendaController extends Controller
      */
     public function show(string $id)
     {
-        return view('prendas.show',['prendas' => Prenda::where('id', $id)->first()]);
+        return view('prendas.show',['prenda' => Prenda::where('id', $id)->first()]);
     }
 
     /**
@@ -56,7 +56,7 @@ class PrendaController extends Controller
     public function update(UpdatePrendaRequest $request, string $id)
     {
         Prenda::where('id', $id)->update($request->validated());
-        return back()->with('message', 'Prenda has been updated.');
+        return redirect('prendas')->with('message', 'Prenda has been updated.');
     }
 
     /**
@@ -65,6 +65,6 @@ class PrendaController extends Controller
     public function destroy(string $id)
     {
         Prenda::destroy($id);
-        return back()->with('message', 'Prenda has been deleted.');
+        return redirect('prendas')->with('message', 'Prenda has been deleted.');
     }
 }
