@@ -15,7 +15,8 @@
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        
+        <div class="min-h-screen bg-dark">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -28,7 +29,7 @@
             @endif
 
             <!-- Page Content -->
-            <main class="py-4">
+            <main class="py-4 bg-dark dark:bg-gray-800 shadow">
                 @yield('content')
             </main>
         </div>
