@@ -20,6 +20,6 @@ class DetallePedidoController extends Controller
      */
     public function show(string $id)
     {
-        return view('detallePedidos.show',['detalle_pedidos' => DetallePedido::where('id', $id)->first()]);
+        return view('detallePedidos.show',['detalle_pedido' => DetallePedido::where('id', $id)->first()]);
     }
 }
