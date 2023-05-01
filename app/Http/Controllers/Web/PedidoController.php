@@ -12,7 +12,8 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        return view('pedidos.index', ['pedidos'=>Pedido::all()]);    
+        $pedidos = Pedido::orderBy('id')->get();
+        return view('pedidos.index', ['pedidos'=>$pedidos]);
     }
 
     /**
@@ -20,6 +21,7 @@ class PedidoController extends Controller
      */
     public function show(string $id)
     {
-        return view('pedidos.show',['pedidos' => Pedido::where('id', $id)->first()]);
+        $pedido = Pedido::FindOrFail($id);
+        return view('pedidos.show',['pedido' => $pedido]);
     }
 }

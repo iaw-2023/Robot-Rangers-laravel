@@ -12,7 +12,8 @@ class DetallePedidoController extends Controller
      */
     public function index()
     {
-        return view('detallePedidos.index', ['detalle_pedidos'=>DetallePedido::all()]);
+        $detallePedidos = DetallePedido::orderBy('id')->get();
+        return view('detallePedidos.index', ['detallePedidos'=>$detallePedidos]);
     }
 
     /**
@@ -20,6 +21,7 @@ class DetallePedidoController extends Controller
      */
     public function show(string $id)
     {
-        return view('detallePedidos.show',['detalle_pedido' => DetallePedido::where('id', $id)->first()]);
+        $detallePedido = DetallePedido::FindOrFail($id);
+        return view('detallePedidos.show',['detallePedido' => $detallePedido]);
     }
 }

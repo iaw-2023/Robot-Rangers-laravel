@@ -13,16 +13,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($detalle_pedidos as $detalle)
+            @foreach($detallePedidos as $detallePedido)
             <tr>
-                <th scope="row" style="color:white">{{$detalle->id}}</th>
-                <td style="color:white">{{$detalle->pedido_id}}</td>
-                <td style="color:white">{{$detalle->prenda_id}}</td>
-                <td style="color:white">{{$detalle->cantidad}}</td>
+                <th scope="row" style="color:white">{{$detallePedido->id}}</th>
+                <td style="color:white">{{$detallePedido->pedido_id}}</td>
+                <td style="color:white">{{$detallePedido->prenda_id}}</td>
+                <td style="color:white">{{$detallePedido->cantidad}}</td>
                 <td>
-                    <form action="/detallePedidos/{{$detalle->id}}" method="POST">
+                    <form action="/detallePedidos/{{$detallePedido->id}}" method="POST">
                         @csrf 
-                        <a href="/detallePedidos/{{$detalle->id}}" class="btn btn-success">Ver</a>
+                        <a href="/detallePedidos/{{$detallePedido->id}}" class="btn btn-success">Ver</a>
                     </form>
                 </td>
             </tr>

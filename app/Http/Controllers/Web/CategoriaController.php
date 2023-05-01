@@ -14,7 +14,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return view('categorias.index', ['categorias'=>Categoria::all()]);
+        $categorias = Categoria::orderBy('id')->get();
+        return view('categorias.index', ['categorias'=>$categorias]);
     }
 
     /**
@@ -39,7 +40,8 @@ class CategoriaController extends Controller
      */
     public function show(string $id)
     {
-        return view('categorias.show',['categoria' => Categoria::where('id', $id)->first()]);
+        $categoria = Categoria::FindOrFail($id);
+        return view('categorias.show',['categoria' => $categoria]);
     }
 
     /**
@@ -47,7 +49,8 @@ class CategoriaController extends Controller
      */
     public function edit(string $id)
     {
-        return view('categorias.edit', ['categoria' => Categoria::where('id', $id)->first()]);
+        $categoria = Categoria::FindOrFail($id);
+        return view('categorias.edit',['categoria' => $categoria]);
     }
 
     /**

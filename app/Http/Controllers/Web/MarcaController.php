@@ -40,7 +40,6 @@ class MarcaController extends Controller
      */
     public function show(string $id)
     {
-        //$marca = Marca::where('id', $id)->first();
         $marca = Marca::FindOrFail($id);
         return view('marcas.show',['marca' => $marca]);
     }
