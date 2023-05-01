@@ -23,7 +23,7 @@ class StorePrendaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre'=>'required|string|max:100|unique:prendas',
+            'nombre'=>'required|string|max:100',
             'marca_id'=> ['required', Rule::exists('marcas', 'id')],
             'categoria_id'=> ['required', Rule::exists('categorias', 'id')],
             'talle'=>['required','in:xs,s,m,l,xl'],
