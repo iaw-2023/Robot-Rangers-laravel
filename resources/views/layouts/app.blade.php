@@ -32,6 +32,7 @@
             <main class="py-4 bg-dark dark:bg-gray-800 shadow">
                 @yield('content')
             </main>
+            @yield('logo')  
         </div>
     </body>
 </html>

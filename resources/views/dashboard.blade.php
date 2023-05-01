@@ -42,5 +42,15 @@
     <div class="col-md-2"></div>
   </div>
 </div>
-
+@endsection
+@section('logo')
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="d-flex justify-content-center">
+            <img src="{{ asset('images/logo.png') }}" class="img-fluid w-30">
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
 @endsection
