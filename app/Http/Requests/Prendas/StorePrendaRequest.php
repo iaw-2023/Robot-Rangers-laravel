@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Prendas;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePrendaRequest extends FormRequest
 {
@@ -23,11 +24,14 @@ class StorePrendaRequest extends FormRequest
     {
         return [
             'nombre'=>'required|string|max:100|unique:prendas',
-            'talle'=>'required|string|max:2',
+            'marca_id'=> ['required', Rule::exists('marcas', 'id')],
+            'categoria_id'=> ['required', Rule::exists('categorias', 'id')],
+            'talle'=>['required','in:xs,s,m,l,xl'],
             'color'=>'required|string|max:30',
             'imagen'=>'required',
-            'precio'=>'required|decimal:2',
-            'descripcion'=>'required|text|max:1000'
+            'precio'=>['required','numeric','regex:/^\d{1,6}(\.\d{1,2})?$/'],
+            'descripcion'=>'required|string|max:1000'
         ];
+        
     }
 }

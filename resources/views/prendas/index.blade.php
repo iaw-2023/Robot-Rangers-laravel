@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     @include('messages')
-    <a href="/categorias/create" class="btn btn-success">Crear prenda</a>
+    <a href="/prendas/create" class="btn btn-success">Crear prenda</a>
     <table class="table border-b border-gray-100 dark:border-gray-700">
         <thead>
             <tr>

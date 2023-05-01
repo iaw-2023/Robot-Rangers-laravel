@@ -31,7 +31,7 @@ class PrendaController extends Controller
      */
     public function store(StorePrendaRequest $request)
     {
-        Prenda::create([$request->validated()]);
+        Prenda::create($request->validated());
         return redirect('prendas')->with('success', 'Prenda has been created.');
     }
 
