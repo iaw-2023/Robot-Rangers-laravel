@@ -34,4 +34,10 @@ class StorePrendaRequest extends FormRequest
         ];
         
     }
+    public function messages()
+    {
+        return [
+            'precio.regex' => 'The :attribute must have a maximum of 6 digits in the integer part and 2 digits in the decimal part '
+        ];
+    }
 }

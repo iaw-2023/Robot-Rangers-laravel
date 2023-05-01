@@ -22,7 +22,7 @@
         Imagen = <a href="{{$prenda->imagen}}">Link</a>
     </div>
     <div class="card-header">
-        Precio = {{$prenda->precio}}
+        Precio = ${{$prenda->precio}}
     </div>
     <div class="card-header">
         Descripcion = {{$prenda->descripcion}}

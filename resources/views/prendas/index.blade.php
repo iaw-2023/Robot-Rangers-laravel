@@ -28,7 +28,7 @@
                 <td style="color:white">{{$prenda->talle}}</td>
                 <td style="color:white">{{$prenda->color}}</td>
                 <td style="color:white"> <a href="{{$prenda->imagen}}">Link</a></td>
-                <td style="color:white">{{$prenda->precio}}</td>
+                <td style="color:white">${{$prenda->precio}}</td>
                 <td style="color:white">{{$prenda->descripcion}}</td>
                 <td>
                     <form action="/prendas/{{$prenda->id}}" method="POST">
