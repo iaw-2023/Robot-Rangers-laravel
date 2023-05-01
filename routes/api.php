@@ -32,14 +32,10 @@ Route::get('marcas/{marca}', [MarcaController::class, 'show']);
 Route::get('prendas', [PrendaController::class, 'index']);
 Route::get('prendas/{prenda}', [PrendaController::class, 'show']);
 
-Route::get('pedidos', [PedidoController::class, 'index']);
 Route::post('pedidos', [PedidoController::class, 'store']);
 Route::get('pedidos/{pedido}', [PedidoController::class, 'show']);
-Route::put('pedidos/{pedido}', [PedidoController::class, 'update']);
-Route::delete('pedidos/{pedido}', [PedidoController::class, 'destroy']);
+Route::get('pedidos/cliente/{mail_cliente}', [PedidoController::class, 'showAll']);
 
-Route::get('detalle_pedidos', [DetallePedidoController::class, 'index']);
 Route::post('detalle_pedidos', [DetallePedidoController::class, 'store']);
 Route::get('detalle_pedidos/{detalle_pedido}', [DetallePedidoController::class, 'show']);
-Route::put('detalle_pedidos/{detalle_pedido}', [DetallePedidoController::class, 'update']);
-Route::delete('detalle_pedidos/{detalle_pedido}', [DetallePedidoController::class, 'destroy']);
+Route::get('detalle_pedidos/pedidos/{pedido}', [DetallePedidoController::class, 'showAll']);

@@ -4,19 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DetallePedidos\StoreDetallePedidoRequest;
-use App\Http\Requests\DetallePedidos\UpdateDetallePedidoRequest;
 use App\Http\Resources\DetallePedidoResource;
 use App\Models\DetallePedido;
+use App\Models\Pedido;
 
 class DetallePedidoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return DetallePedidoResource::collection(DetallePedido::all());
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,20 +28,12 @@ class DetallePedidoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Display all the resources of an order.
      */
-    public function update(UpdateDetallePedidoRequest $request, DetallePedido $detalle_pedido)
+    public function showAll(Pedido $pedido)
     {
-        $detalle_pedido->update($request->all());
-        return new DetallePedidoResource($detalle_pedido);
+        $detalle_pedidos = DetallePedido::where('pedido_id', $pedido->id)->get();
+        return DetallePedidoResource::collection($detalle_pedidos);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(DetallePedido $detalle_pedido)
-    {
-        $detalle_pedido->delete();
-        return new DetallePedidoResource($detalle_pedido); 
-    }
 }

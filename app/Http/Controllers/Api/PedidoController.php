@@ -10,13 +10,6 @@ use App\Models\Pedido;
 
 class PedidoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return PedidoResource::collection(Pedido::all());
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,20 +28,12 @@ class PedidoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Display all the resources of a client.
      */
-    public function update(UpdatePedidoRequest $request, Pedido $pedido)
+    public function showAll(string $mail_cliente)
     {
-        $pedido->update($request->all());
-        return new PedidoResource($pedido);
+        $pedidos = Pedido::where('mail_cliente', $mail_cliente)->get();
+        return PedidoResource::collection($pedidos);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pedido $pedido)
-    {
-        $pedido->delete();
-        return new PedidoResource($pedido); 
-    }
 }
