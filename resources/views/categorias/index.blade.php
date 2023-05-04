@@ -30,4 +30,5 @@
         </tbody>
     </table>
 </div>
+{{$categorias->links()}}
 @endsection
