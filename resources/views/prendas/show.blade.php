@@ -16,7 +16,7 @@
         Talle = {{$prenda->talle}}
     </div>
     <div class="card-header">
-        Color = {{$prenda->color}}
+        Color = <span style="display: inline-block; width: 20px; height: 20px; background-color: {{$prenda->color}}; margin-right: 5px;"></span>
     </div>
     <div class="card-header">
         Imagen = <a href="{{$prenda->imagen}}">Link</a>

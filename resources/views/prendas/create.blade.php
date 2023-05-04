@@ -47,16 +47,11 @@
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
             <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Color</label>
-            <input type="text" name="color" class="form-control @error('color') is-invalid @enderror" value="{{old('color')}}">
-            @error('color')
-                <span class="text-danger">
-                    <strong>{{$message}}</strong>
-                </span>
-            @enderror
+            <input type="color" name="color" class="bg-transparent" value="{{old('color')}}" style="width: 100%;">
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
             <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Imagen</label>
-            <input type="text" name="imagen" class="form-control @error('imagen') is-invalid @enderror" value="{{old('imagen')}}">
+            <input type="text" name="imagen" class="form-control @error('imagen') is-invalid @enderror " value="{{old('imagen')}}">
             @error('imagen')
                 <span class="text-danger">
                     <strong>{{$message}}</strong>

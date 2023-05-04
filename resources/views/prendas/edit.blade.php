@@ -8,6 +8,8 @@
   @include('messages')
      <form action="/prendas/{{$prenda->id}}" method="POST">
         @csrf
+        @method('PUT')
+        
         <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
             <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Nombre</label>
             <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{$prenda->nombre}}">
@@ -47,12 +49,7 @@
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
             <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Color</label>
-            <input type="text" name="color" class="form-control @error('color') is-invalid @enderror" value="{{$prenda->color}}">
-            @error('color')
-                <span class="text-danger">
-                    <strong>{{$message}}</strong>
-                </span>
-            @enderror
+            <input type="color" name="color" class="bg-transparent" value="{{old('color')}}" style="width: 100%;">
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
             <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Imagen</label>
