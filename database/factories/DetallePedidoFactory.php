@@ -19,8 +19,8 @@ class DetallePedidoFactory extends Factory
     public function definition(): array
     {
         return [
-            'pedido_id' => rand(1, 500),
-            'prenda_id' => rand(1, 500),
+            'pedido_id' => Pedido::all()->random(),
+            'prenda_id' => Prenda::all()->random(),
             'cantidad' => rand(1, 10),
         ];
     }
