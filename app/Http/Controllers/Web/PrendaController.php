@@ -40,7 +40,7 @@ class PrendaController extends Controller
      */
     public function show(string $id)
     {
-        $prenda = Prenda::FindOrFail($id);
+        $prenda = Prenda::with(['marca', 'categoria'])->findOrFail($id);
         return view('prendas.show',['prenda' => $prenda]);
     }
 

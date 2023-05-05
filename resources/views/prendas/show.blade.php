@@ -7,10 +7,10 @@
         Nombre = {{$prenda->nombre}}
     </div>
     <div class="card-header">
-        ID Marca = {{$prenda->marca_id}}
+        Marca = {{$prenda->marca->nombre}}
     </div>
     <div class="card-header">
-        ID Categoria = {{$prenda->categoria_id}}
+        Categoria = {{$prenda->categoria->nombre}}
     </div>
     <div class="card-header">
         Talle = {{$prenda->talle}}
