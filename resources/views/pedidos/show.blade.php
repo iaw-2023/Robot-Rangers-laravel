@@ -12,6 +12,15 @@
     <div class="card-header">
         Fecha = {{$pedido->fecha}}
     </div>
+    <div class="card-header">
+        @foreach ($pedido->prendas as $prenda)
+        <div>
+            <h4>{{ $prenda->nombre }}</h4>
+            <p>Precio: ${{ $prenda->precio }}</p>
+            <p>Cantidad: {{ $prenda->pivot->cantidad }}</p>
+        </div>
+        @endforeach
+    </div>
     </div>
 </div>
 @endsection

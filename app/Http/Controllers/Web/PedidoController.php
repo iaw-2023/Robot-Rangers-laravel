@@ -21,7 +21,7 @@ class PedidoController extends Controller
      */
     public function show(string $id)
     {
-        $pedido = Pedido::FindOrFail($id);
+        $pedido = Pedido::with('prendas')->FindOrFail($id);
         return view('pedidos.show',['pedido' => $pedido]);
     }
 }

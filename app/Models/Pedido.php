@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Prenda;
 
 class Pedido extends Model
 {
@@ -16,4 +17,9 @@ class Pedido extends Model
         'monto',
         'fecha',
     ];
+
+    public function prendas(){
+        return $this->belongsToMany(Prenda::class, 'detalle_pedidos')
+                    ->withPivot('cantidad');
+    }
 }
