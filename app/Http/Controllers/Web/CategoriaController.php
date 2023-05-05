@@ -7,7 +7,6 @@ use App\Models\Categoria;
 use App\Http\Requests\Categorias\StoreCategoriaRequest;
 use App\Http\Requests\Categorias\UpdateCategoriaRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
@@ -17,12 +16,11 @@ class CategoriaController extends Controller
     public function index(Request $request)
     {
         $filtro = $request->input('filtro');
-        $categorias = DB::table('categorias')
-                ->select('id', 'nombre')
-                ->where('nombre', 'LIKE', '%'.$filtro.'%')
-                ->orderBy('id')
-                ->paginate(10);      
-            
+        $categorias = Categoria::select('id', 'nombre')
+            ->whereRaw('LOWER(nombre) LIKE ?', ['%'.strtolower($filtro).'%'])
+            ->orderBy('id')
+            ->paginate(10);    
+                
         return view('categorias.index', compact('categorias', 'filtro'));
     }
 
