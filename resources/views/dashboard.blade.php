@@ -32,12 +32,6 @@
                 <a class="btn btn-dark btn-block" href="/pedidos" role="button">Ver pedidos</a>
             </div>
         </div>
-        <div class="card bg-success text-white m-3" style="width: 18rem;">
-        <div class="card-header">Detalle Pedidos:</div>
-            <div class="card-body py-5 d-grid">
-                <a class="btn btn-dark btn-block" href="/detallePedidos" role="button">Ver detalles de pedidos</a>
-            </div>
-        </div>
     </div>
     <div class="col-md-2"></div>
   </div>
