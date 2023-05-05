@@ -6,16 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Marcas\StoreMarcaRequest;
 use App\Http\Requests\Marcas\UpdateMarcaRequest;
 use App\Models\Marca;
+use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $marcas = Marca::orderBy('id')->get();
-        return view('marcas.index', ['marcas'=>$marcas]);
+        $filtro = $request->input('filtro');
+        $marcas = Marca::select('id', 'nombre', 'imagen')
+            ->whereRaw('LOWER(nombre) LIKE ?', ['%'.strtolower($filtro).'%'])
+            ->orderBy('id')
+            ->paginate(10);    
+                
+        return view('marcas.index', compact('marcas', 'filtro'));
     }
 
     /**

@@ -6,16 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Prendas\StorePrendaRequest;
 use App\Http\Requests\Prendas\UpdatePrendaRequest;
 use App\Models\Prenda;
+use Illuminate\Http\Request;
 
 class PrendaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $prendas = Prenda::orderBy('id')->get();
-        return view('prendas.index', ['prendas'=>$prendas]);
+        $filtro = $request->input('filtro');
+        $prendas = Prenda::select('id', 'nombre', 'talle', 'color', 'imagen', 'precio')
+            ->whereRaw('LOWER(nombre) LIKE ?', ['%'.strtolower($filtro).'%'])
+            ->orderBy('id')
+            ->paginate(10);    
+                
+        return view('prendas.index', compact('prendas', 'filtro'));
     }
 
     /**

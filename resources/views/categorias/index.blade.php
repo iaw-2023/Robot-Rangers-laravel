@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     @include('messages')
-
     <div class="col-xl-12">
          <form action = "{{route('categorias.index')}}" method = "GET">
          <div class="input-group align-items-center w-50">
@@ -14,9 +13,7 @@
         </div>
          </form>
     </div>
-
     <a href="/categorias/create" class="btn btn-success my-3">Crear categoria</a>
-    
     <table class="table border-b border-gray-100 dark:border-gray-700">
         <thead>
             <tr>

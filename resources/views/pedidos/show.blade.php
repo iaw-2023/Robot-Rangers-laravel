@@ -7,20 +7,20 @@
         Mail Cliente = {{$pedido->mail_cliente}}
     </div>
     <div class="card-header">
-        Monto = {{$pedido->monto}}
+        Monto = ${{$pedido->monto}}
     </div>
     <div class="card-header">
         Fecha = {{$pedido->fecha}}
     </div>
-    <div class="card-header">
-        @foreach ($pedido->prendas as $prenda)
-        <div>
-            <h4>{{ $prenda->nombre }}</h4>
-            <p>Precio: ${{ $prenda->precio }}</p>
-            <p>Cantidad: {{ $prenda->pivot->cantidad }}</p>
+    @foreach ($pedido->prendas as $index => $prenda)
+        <div class="card-header">
+            <div>
+                <h4>Prenda {{ $index + 1 }}: {{ $prenda->nombre }}</h4>
+                <p>Precio: ${{ $prenda->precio }}</p>
+                <p>Cantidad: {{ $prenda->pivot->cantidad }}</p>
+            </div>
         </div>
-        @endforeach
-    </div>
+    @endforeach
     </div>
 </div>
 @endsection
