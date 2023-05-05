@@ -18,7 +18,7 @@ class PedidoController extends Controller
             ->whereRaw('LOWER(mail_cliente) LIKE ?', ['%'.strtolower($filtro).'%'])
             ->orderBy('id')
             ->paginate(10);    
-                
+
         return view('pedidos.index', compact('pedidos', 'filtro'));
     }
 
