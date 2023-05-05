@@ -36,7 +36,7 @@
                     <th scope="row" style="color:white">{{$prenda->id}}</th>
                     <td style="color:white">{{$prenda->nombre}}</td>
                     <td style="color:white">{{$prenda->talle}}</td>
-                    <td style="color:white">{{$prenda->color}}</td>
+                    <td><span style="display: inline-block; width: 20px; height: 20px; background-color: {{$prenda->color}}; margin-right: 5px;"></span></td>
                     <td style="color:white"> <a href="{{$prenda->imagen}}">Link</a></td>
                     <td style="color:white">${{$prenda->precio}}</td>
                     <td>

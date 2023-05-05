@@ -33,7 +33,7 @@
                     <th scope="row" style="color:white">{{$pedido->id}}</th>
                     <td style="color:white">{{$pedido->mail_cliente}}</td>
                     <td style="color:white">${{$pedido->monto}}</td>
-                    <td style="color:white">{{date('d-m-Y', strtotime($pedido->fecha))}}</td>
+                    <td style="color:white">{{ date('d-m-Y H:i:s', strtotime($pedido->fechaHora)) }}</td>
                     <td>
                         <form action="/pedidos/{{$pedido->id}}" method="POST">
                             @csrf 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('mail_cliente');
             $table->decimal('monto', 12, 2);
-            $table->date('fecha');
+            $table->dateTime('fechaHora');
         });
     }
 

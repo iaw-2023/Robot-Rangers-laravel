@@ -24,8 +24,8 @@ class PrendaResource extends JsonResource
             'imagen' => $this->imagen,
             'precio' => $this->precio,
             'descripcion' => $this->descripcion,
-            'created_at' => $this->created_at->format('d-m-Y'),
-            'updated_at' => $this->updated_at->format('d-m-Y'),
+            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

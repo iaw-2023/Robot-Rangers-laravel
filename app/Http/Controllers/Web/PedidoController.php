@@ -14,7 +14,7 @@ class PedidoController extends Controller
     public function index(Request $request)
     {
         $filtro = $request->input('filtro');
-        $pedidos = Pedido::select('id', 'mail_cliente', 'monto', 'fecha')
+        $pedidos = Pedido::select('id', 'mail_cliente', 'monto', 'fechaHora')
             ->whereRaw('LOWER(mail_cliente) LIKE ?', ['%'.strtolower($filtro).'%'])
             ->orderBy('id')
             ->paginate(10);    
