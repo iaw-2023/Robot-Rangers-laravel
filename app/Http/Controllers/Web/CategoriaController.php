@@ -6,16 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Http\Requests\Categorias\StoreCategoriaRequest;
 use App\Http\Requests\Categorias\UpdateCategoriaRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categorias = Categoria::orderBy('id')->paginate();
-        return view('categorias.index', ['categorias'=>$categorias]);
+        $filtro = $request->input('filtro');
+        $categorias = DB::table('categorias')
+                ->select('id', 'nombre')
+                ->where('nombre', 'LIKE', '%'.$filtro.'%')
+                ->orderBy('id')
+                ->paginate(10);      
+            
+        return view('categorias.index', compact('categorias', 'filtro'));
     }
 
     /**
