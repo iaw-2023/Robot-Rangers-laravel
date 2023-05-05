@@ -49,7 +49,7 @@
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
             <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Color</label>
-            <input type="color" name="color" class="bg-transparent" value="{{old('color')}}" style="width: 100%;">
+            <input type="color" name="color" class="bg-transparent" value="{{$prenda->color}}" style="width: 100%;">
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
             <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Imagen</label>

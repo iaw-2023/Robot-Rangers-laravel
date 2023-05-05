@@ -6,14 +6,12 @@
 
     <div class="col-xl-12">
          <form action = "{{route('categorias.index')}}" method = "GET">
-            <div class="form-row">
-                <div class="col-sm-4 my-1">
-                    <input type = "text" class = "form-control" name = "filtro" value = "{{$filtro}}">
-                </div>
-                <div class="col-auto ml-auto">
-                    <input type = "submit" class = "btn btn-primary" value = "Buscar">
-                </div>
+         <div class="input-group align-items-center w-50">
+            <input type="text" class="form-control h-100" name="filtro" value="{{$filtro}}">
+            <div class="input-group-append">
+                <input type="submit" class="btn btn-primary h-100 btn-block ml-5" value="Buscar">
             </div>
+        </div>
          </form>
     </div>
 
@@ -50,6 +48,6 @@
             @endif
         </tbody>
     </table>
+    {{$categorias->links()}}
 </div>
-{{$categorias->links()}}
 @endsection
