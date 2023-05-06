@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="container" >
-<div class="card col-6 offset-3 bg-gray-800 dark:bg-gray-900 shadow"style="border-color:black" >
-  <h5 class="card-header bg-gray-800 dark:bg-gray-900" style="color:white">Editar prendas</h5>
+<div class="card col-6 offset-3 bg-gray-800 dark:bg-gray-900 shadow">
+  <h5 class="card-header bg-gray-800 dark:bg-gray-900"">Editar prendas</h5>
   <div class="card-body">
   @include('messages')
      <form action="/prendas/{{$prenda->id}}" method="POST">
         @csrf
         @method('PUT')
         
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
-            <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Nombre</label>
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
+            <label class="form-label bg-gray-800 dark:bg-gray-900">Nombre</label>
             <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{$prenda->nombre}}">
             @error('nombre')
                 <span class="text-danger">
@@ -19,8 +19,8 @@
                 </span>
             @enderror
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
-            <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">ID Marca</label>
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
+            <label class="form-label bg-gray-800 dark:bg-gray-900">ID Marca</label>
             <input type="text" name="marca_id" class="form-control @error('marca_id') is-invalid @enderror" value="{{$prenda->marca_id}}">
             @error('marca_id')
                 <span class="text-danger">
@@ -28,8 +28,8 @@
                 </span>
             @enderror
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
-            <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">ID Categoria</label>
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
+            <label class="form-label bg-gray-800 dark:bg-gray-900">ID Categoria</label>
             <input type="text" name="categoria_id" class="form-control @error('categoria_id') is-invalid @enderror" value="{{$prenda->categoria_id}}">
             @error('categoria_id')
                 <span class="text-danger">
@@ -37,8 +37,8 @@
                 </span>
             @enderror
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:dark">
-        <label for="talle" style="color:white">Seleccione un talle:</label>
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900 seleccionable">
+        <label for="talle" class="form-label">Seleccione un talle:</label>
             <select id="talle" name="talle">
                 <option value="xs" {{ $prenda->talle == 'xs' ? 'selected' : '' }}>xs</option>
                 <option value="s" {{ $prenda->talle == 's' ? 'selected' : '' }}>s</option>
@@ -47,12 +47,12 @@
                 <option value="xl" {{ $prenda->talle == 'xl' ? 'selected' : '' }}>xl</option>
             </select>
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
-            <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Color</label>
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
+            <label class="form-label bg-gray-800 dark:bg-gray-900">Color</label>
             <input type="color" name="color" class="bg-transparent" value="{{$prenda->color}}" style="width: 100%;">
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
-            <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Imagen</label>
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
+            <label class="form-label bg-gray-800 dark:bg-gray-900">Imagen</label>
             <input type="text" name="imagen" class="form-control @error('imagen') is-invalid @enderror" value="{{$prenda->imagen}}">
             @error('imagen')
                 <span class="text-danger">
@@ -60,8 +60,8 @@
                 </span>
             @enderror
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
-            <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Precio</label>
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
+            <label class="form-label bg-gray-800 dark:bg-gray-900">Precio</label>
             <input type="text" name="precio" class="form-control @error('precio') is-invalid @enderror" value="{{$prenda->precio}}">
             @error('precio')
                 <span class="text-danger">
@@ -69,8 +69,8 @@
                 </span>
             @enderror
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
-            <label class="form-label bg-gray-800 dark:bg-gray-900" style="color:white">Descripcion</label>
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
+            <label class="form-label bg-gray-800 dark:bg-gray-900">Descripcion</label>
             <input type="text" name="descripcion" class="form-control @error('descripcion') is-invalid @enderror" value="{{$prenda->descripcion}}">
             @error('descripcion')
                 <span class="text-danger">
@@ -78,7 +78,7 @@
                 </span>
             @enderror
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900" style="color:white">
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
             <button type="submit" class="btn btn-success">Enviar</button>
         </div>
      </form>

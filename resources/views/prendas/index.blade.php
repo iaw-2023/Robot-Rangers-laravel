@@ -17,28 +17,28 @@
     <table class="table border-b border-gray-100 dark:border-gray-700">
         <thead>
             <tr>
-            <th scope="col" style="color:white">ID</th>
-            <th scope="col" style="color:white">Nombre</th>
-            <th scope="col" style="color:white">Talle</th>
-            <th scope="col" style="color:white">Color</th>
-            <th scope="col" style="color:white">Imagen</th>
-            <th scope="col" style="color:white">Precio</th>
+            <th scope="col" class="col">ID</th>
+            <th scope="col" class="col">Nombre</th>
+            <th scope="col" class="col">Talle</th>
+            <th scope="col" class="col">Color</th>
+            <th scope="col" class="col">Imagen</th>
+            <th scope="col" class="col">Precio</th>
             </tr>
         </thead>
         <tbody>
             @if($prendas->count()==0)
                 <tr>
-                    <td colspan="2" style="color:white"> No se encontraron resultados </td>
+                    <td colspan="2" class="text-white"> No se encontraron resultados </td>
                 </tr>
             @else
                 @foreach($prendas as $prenda)
                 <tr>
-                    <th scope="row" style="color:white">{{$prenda->id}}</th>
-                    <td style="color:white">{{$prenda->nombre}}</td>
-                    <td style="color:white">{{$prenda->talle}}</td>
-                    <td><span style="display: inline-block; width: 20px; height: 20px; background-color: {{$prenda->color}}; margin-right: 5px;"></span></td>
-                    <td style="color:white"> <a href="{{$prenda->imagen}}">Link</a></td>
-                    <td style="color:white">${{$prenda->precio}}</td>
+                    <th scope="row" class="text-white">{{$prenda->id}}</th>
+                    <td class="text-white">{{$prenda->nombre}}</td>
+                    <td class="text-white">{{$prenda->talle}}</td>
+                    <td><span class="color-box" style="background-color: {{$prenda->color}}"></span></td>
+                    <td class="text-white"> <a href="{{$prenda->imagen}}">Link</a></td>
+                    <td class="text-white">${{$prenda->precio}}</td>
                     <td>
                         <form action="/prendas/{{$prenda->id}}" method="POST">
                             @method('DELETE')

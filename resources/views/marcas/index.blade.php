@@ -17,22 +17,22 @@
     <table class="table border-b border-gray-100 dark:border-gray-700">
         <thead>
             <tr>
-            <th scope="col" style="color:white">ID</th>
-            <th scope="col" style="color:white">Nombre</th>
-            <th scope="col" style="color:white">Imagen</th>
+            <th scope="col" class="col">ID</th>
+            <th scope="col" class="col">Nombre</th>
+            <th scope="col" class="col">Imagen</th>
             </tr>
         </thead>
         <tbody>
             @if($marcas->count()==0)
                 <tr>
-                    <td colspan="2" style="color:white"> No se encontraron resultados </td>
+                    <td colspan="2" class="text-white"> No se encontraron resultados </td>
                 </tr>
             @else
                 @foreach($marcas as $marca)
                 <tr>
-                    <th scope="row" style="color:white">{{$marca->id}}</th>
-                    <td style="color:white">{{$marca->nombre}}</td>
-                    <td style="color:white"> <a href="{{$marca->imagen}}">Link</a> </td>
+                    <th scope="row" class="text-white">{{$marca->id}}</th>
+                    <td class="text-white">{{$marca->nombre}}</td>
+                    <td class="text-white"> <a href="{{$marca->imagen}}">Link</a> </td>
                     <td>
                         <form action="/marcas/{{$marca->id}}" method="POST">
                             @method('DELETE')

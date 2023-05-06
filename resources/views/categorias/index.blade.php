@@ -17,20 +17,20 @@
     <table class="table border-b border-gray-100 dark:border-gray-700">
         <thead>
             <tr>
-            <th scope="col" style="color:white">ID</th>
-            <th scope="col" style="color:white">Nombre</th>
+            <th scope="col" class="col">ID</th>
+            <th scope="col" class="col">Nombre</th>
             </tr>
         </thead>
         <tbody>
             @if($categorias->count()==0)
                 <tr>
-                    <td colspan="2" style="color:white"> No se encontraron resultados </td>
+                    <td colspan="2" class="text-white"> No se encontraron resultados </td>
                 </tr>
             @else
                 @foreach($categorias as $categoria)
                 <tr>
-                    <th scope="row" style="color:white">{{$categoria->id}}</th>
-                    <td style="color:white">{{$categoria->nombre}}</td>
+                    <th scope="row" class="text-white">{{$categoria->id}}</th>
+                    <td class="text-white">{{$categoria->nombre}}</td>
                     <td>
                         <form action="/categorias/{{$categoria->id}}" method="POST">
                             @method('DELETE')

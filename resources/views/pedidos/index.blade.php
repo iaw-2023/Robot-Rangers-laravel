@@ -16,24 +16,24 @@
     <table class="table border-b border-gray-100 dark:border-gray-700">
         <thead>
             <tr>
-            <th scope="col" style="color:white">ID</th>
-            <th scope="col" style="color:white">Mail Cliente</th>
-            <th scope="col" style="color:white">Monto</th>
-            <th scope="col" style="color:white">Fecha</th>
+            <th scope="col" class="col">ID</th>
+            <th scope="col" class="col">Mail Cliente</th>
+            <th scope="col" class="col">Monto</th>
+            <th scope="col" class="col">Fecha</th>
             </tr>
         </thead>
         <tbody>
             @if($pedidos->count()==0)
                 <tr>
-                    <td colspan="2" style="color:white"> No se encontraron resultados </td>
+                    <td colspan="2" class="text-white"> No se encontraron resultados </td>
                 </tr>
             @else
                 @foreach($pedidos as $pedido)
                 <tr>
-                    <th scope="row" style="color:white">{{$pedido->id}}</th>
-                    <td style="color:white">{{$pedido->mail_cliente}}</td>
-                    <td style="color:white">${{$pedido->monto}}</td>
-                    <td style="color:white">{{ date('d-m-Y H:i:s', strtotime($pedido->fechaHora)) }}</td>
+                    <th scope="row" class="text-white">{{$pedido->id}}</th>
+                    <td class="text-white">{{$pedido->mail_cliente}}</td>
+                    <td class="text-white">${{$pedido->monto}}</td>
+                    <td class="text-white">{{ date('d-m-Y H:i:s', strtotime($pedido->fechaHora)) }}</td>
                     <td>
                         <form action="/pedidos/{{$pedido->id}}" method="POST">
                             @csrf 
