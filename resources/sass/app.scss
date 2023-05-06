@@ -7,33 +7,6 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-.col {
-    color: white;
-}
+//Style
+@import'style';
 
-.card-header{
-    color:white;
-}
-
-.mb-3{
-    color:white;
-}
-
-.form-label{
-    color:white;
-}
-
-.show{
-    color:black;
-}
-
-.seleccionable{
-    color:black;
-}
-
-.color-box {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
