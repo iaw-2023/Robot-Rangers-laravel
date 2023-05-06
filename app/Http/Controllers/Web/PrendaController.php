@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Prendas\StorePrendaRequest;
 use App\Http\Requests\Prendas\UpdatePrendaRequest;
 use App\Models\Prenda;
+use App\Models\Marca;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class PrendaController extends Controller
@@ -29,7 +31,9 @@ class PrendaController extends Controller
      */
     public function create()
     {
-        return view('prendas.create');
+        $marcas = Marca::orderBy('nombre')->get();
+        $categorias = Categoria::orderBy('nombre')->get();
+        return view('prendas.create', ['marcas' => $marcas, 'categorias' => $categorias]);
     }
 
     /**
@@ -55,8 +59,10 @@ class PrendaController extends Controller
      */
     public function edit(string $id)
     {
+        $marcas = Marca::orderBy('nombre')->get();
+        $categorias = Categoria::orderBy('nombre')->get();
         $prenda = Prenda::FindOrFail($id);
-        return view('prendas.edit',['prenda' => $prenda]);
+        return view('prendas.edit',['prenda' => $prenda, 'marcas' => $marcas, 'categorias' => $categorias]);
     }
 
     /**

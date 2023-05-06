@@ -19,23 +19,21 @@
                 </span>
             @enderror
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
-            <label class="form-label bg-gray-800 dark:bg-gray-900">ID Marca</label>
-            <input type="text" name="marca_id" class="form-control @error('marca_id') is-invalid @enderror" value="{{$prenda->marca_id}}">
-            @error('marca_id')
-                <span class="text-danger">
-                    <strong>{{$message}}</strong>
-                </span>
-            @enderror
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900 seleccionable">
+            <label class="form-label bg-gray-800 dark:bg-gray-900">Marca</label>
+            <select name="marca_id" >
+                @foreach ($marcas as $marca)
+                    <option value="{{$marca->id}}" @if($prenda->marca_id == $marca->id) selected @endif>{{$marca->nombre}}</option>
+                @endforeach
+        </select>
         </div>
-        <div class="mb-3 bg-gray-800 dark:bg-gray-900">
-            <label class="form-label bg-gray-800 dark:bg-gray-900">ID Categoria</label>
-            <input type="text" name="categoria_id" class="form-control @error('categoria_id') is-invalid @enderror" value="{{$prenda->categoria_id}}">
-            @error('categoria_id')
-                <span class="text-danger">
-                    <strong>{{$message}}</strong>
-                </span>
-            @enderror
+        <div class="mb-3 bg-gray-800 dark:bg-gray-900 seleccionable">
+            <label class="form-label bg-gray-800 dark:bg-gray-900">Categoria</label>
+            <select name="categoria_id" >
+                @foreach ($categorias as $categoria)
+                    <option value="{{$categoria->id}}" @if($prenda->categoria_id == $categoria->id) selected @endif>{{$categoria->nombre}}</option>
+                @endforeach
+        </select>
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900 seleccionable">
         <label for="talle" class="form-label">Seleccione un talle:</label>
