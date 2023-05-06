@@ -19,7 +19,7 @@
         Color = <span class="color-box" style="background-color: {{$prenda->color}}"></span>
     </div>
     <div class="card-header show">
-        Imagen = <a href="{{$prenda->imagen}}">Link</a>
+        Imagen = <img class="card-img-top img-fluid imagen-td" src="{{$prenda->imagen}}">
     </div>
     <div class="card-header show">
         Precio = ${{$prenda->precio}}

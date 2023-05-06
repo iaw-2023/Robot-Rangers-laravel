@@ -21,7 +21,6 @@
             <th scope="col" class="col">Nombre</th>
             <th scope="col" class="col">Talle</th>
             <th scope="col" class="col">Color</th>
-            <th scope="col" class="col">Imagen</th>
             <th scope="col" class="col">Precio</th>
             </tr>
         </thead>
@@ -37,7 +36,6 @@
                     <td class="text-white">{{$prenda->nombre}}</td>
                     <td class="text-white">{{$prenda->talle}}</td>
                     <td><span class="color-box" style="background-color: {{$prenda->color}}"></span></td>
-                    <td class="text-white"> <a href="{{$prenda->imagen}}">Link</a></td>
                     <td class="text-white">${{$prenda->precio}}</td>
                     <td>
                         <form action="/prendas/{{$prenda->id}}" method="POST">

@@ -19,7 +19,6 @@
             <tr>
             <th scope="col" class="col">ID</th>
             <th scope="col" class="col">Nombre</th>
-            <th scope="col" class="col">Imagen</th>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +31,6 @@
                 <tr>
                     <th scope="row" class="text-white">{{$marca->id}}</th>
                     <td class="text-white">{{$marca->nombre}}</td>
-                    <td class="text-white"> <a href="{{$marca->imagen}}">Link</a> </td>
                     <td>
                         <form action="/marcas/{{$marca->id}}" method="POST">
                             @method('DELETE')

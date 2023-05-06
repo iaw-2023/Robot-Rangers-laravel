@@ -7,7 +7,7 @@
         Nombre = {{$marca->nombre}}
     </div>
     <div class="card-header show">
-        Imagen = <a href="{{$marca->imagen}}">Link</a>
+        Imagen = <img class="card-img-top img-fluid imagen-td" src="{{$marca->imagen}}">
     </div>
     <div class="card-header show">
         Descripcion = {{$marca->descripcion}}
