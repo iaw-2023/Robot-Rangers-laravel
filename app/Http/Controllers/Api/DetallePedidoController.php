@@ -19,21 +19,4 @@ class DetallePedidoController extends Controller
         return new DetallePedidoResource(DetallePedido::create($request->all()));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(DetallePedido $detalle_pedido)
-    {
-        return new DetallePedidoResource($detalle_pedido);
-    }
-
-    /**
-     * Display all the resources of an order.
-     */
-    public function showAll(Pedido $pedido)
-    {
-        $detalle_pedidos = DetallePedido::where('pedido_id', $pedido->id)->get();
-        return DetallePedidoResource::collection($detalle_pedidos);
-    }
-
 }

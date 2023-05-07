@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pedidos\StorePedidoRequest;
-use App\Http\Requests\Pedidos\UpdatePedidoRequest;
 use App\Http\Resources\PedidoResource;
+use App\Http\Resources\PedidoWithPrendasResource;
 use App\Models\Pedido;
 
 class PedidoController extends Controller
@@ -24,7 +24,7 @@ class PedidoController extends Controller
      */
     public function show(Pedido $pedido)
     {
-        return new PedidoResource($pedido);
+        return new PedidoWithPrendasResource($pedido);
     }
 
     /**

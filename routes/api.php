@@ -37,5 +37,3 @@ Route::get('pedidos/{pedido}', [PedidoController::class, 'show']);
 Route::get('pedidos/cliente/{mail_cliente}', [PedidoController::class, 'showAll']);
 
 Route::post('detalle_pedidos', [DetallePedidoController::class, 'store']);
-Route::get('detalle_pedidos/{detalle_pedido}', [DetallePedidoController::class, 'show']);
-Route::get('detalle_pedidos/pedidos/{pedido}', [DetallePedidoController::class, 'showAll']);

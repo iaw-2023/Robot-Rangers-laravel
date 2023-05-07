@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DetallePedidoResource extends JsonResource
+class PedidoWithPrendasResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,16 @@ class DetallePedidoResource extends JsonResource
             'id' => $this->id,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
-            'pedido_id' => $this->pedido_id,
-            'prenda_id' => $this->prenda_id,
-            'cantidad' => $this->cantidad,
+            'mail_cliente' => $this->mail_cliente,
+            'monto' => $this->monto,
+            'fechaHora' => $this->fechaHora,
+            'prendas' => $this->prendas->map(function ($prenda) {
+                return [
+                    'id' => $prenda->id,
+                    'nombre' => $prenda->nombre,
+                    'cantidad' => $prenda->pivot->cantidad,
+                ];
+            }),
         ];
     }
 }

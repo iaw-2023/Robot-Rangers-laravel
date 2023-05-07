@@ -33,10 +33,6 @@
                                                         "type": "number",
                                                         "example": "1"
                                                     },
-                                                    "nombre": {
-                                                        "type": "string",
-                                                        "example": "Remeras"
-                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "example": "2023-05-07 00:00:00"
@@ -44,6 +40,10 @@
                                                     "updated_at": {
                                                         "type": "string",
                                                         "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "nombre": {
+                                                        "type": "string",
+                                                        "example": "Remeras"
                                                     }
                                                 },
                                                 "type": "object"
@@ -86,10 +86,6 @@
                                             "type": "number",
                                             "example": 2
                                         },
-                                        "nombre": {
-                                            "type": "string",
-                                            "example": "Buzos"
-                                        },
                                         "created_at": {
                                             "type": "string",
                                             "example": "2023-05-07 19:57:30"
@@ -97,6 +93,10 @@
                                         "updated_at": {
                                             "type": "string",
                                             "example": "2023-05-07 19:57:30"
+                                        },
+                                        "nombre": {
+                                            "type": "string",
+                                            "example": "Buzos"
                                         }
                                     },
                                     "type": "object"
@@ -145,6 +145,14 @@
                                                         "type": "number",
                                                         "example": "1"
                                                     },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
                                                     "nombre": {
                                                         "type": "string",
                                                         "example": "Adidas"
@@ -156,14 +164,6 @@
                                                     "descripcion": {
                                                         "type": "string",
                                                         "example": "Imposible is Nothing"
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "example": "2023-05-07 00:00:00"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "example": "2023-05-07 00:00:00"
                                                     }
                                                 },
                                                 "type": "object"
@@ -206,6 +206,14 @@
                                             "type": "number",
                                             "example": 2
                                         },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
                                         "nombre": {
                                             "type": "string",
                                             "example": "Nike"
@@ -217,14 +225,6 @@
                                         "descripcion": {
                                             "type": "string",
                                             "example": "Just do it"
-                                        },
-                                        "created_at": {
-                                            "type": "string",
-                                            "example": "2023-05-07 19:57:30"
-                                        },
-                                        "updated_at": {
-                                            "type": "string",
-                                            "example": "2023-05-07 19:57:30"
                                         }
                                     },
                                     "type": "object"
@@ -241,6 +241,210 @@
                                         "message": {
                                             "type": "string",
                                             "example": "No query results for model [App\\\\Models\\\\Marca] #id"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/prendas": {
+            "get": {
+                "tags": [
+                    "Prendas"
+                ],
+                "summary": "Listado de todas las prendas.",
+                "operationId": "8f75d8a393740fa83c4d7f6741c5c333",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "example": "1"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "nombre": {
+                                                        "type": "string",
+                                                        "example": "Harden II"
+                                                    },
+                                                    "marca": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "number",
+                                                                "example": "1"
+                                                            },
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "Adidas"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "categoria": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "number",
+                                                                "example": "1"
+                                                            },
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "Remeras"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "talle": {
+                                                        "type": "string",
+                                                        "example": "xl"
+                                                    },
+                                                    "color": {
+                                                        "type": "string",
+                                                        "example": "#FF0000"
+                                                    },
+                                                    "imagen": {
+                                                        "type": "string",
+                                                        "example": "https://d2j6dbq0eux0bg.cloudfront.net/images/62219457/3384172981.jpg"
+                                                    },
+                                                    "precio": {
+                                                        "type": "string",
+                                                        "example": "9999.99"
+                                                    },
+                                                    "descripcion": {
+                                                        "type": "string",
+                                                        "example": "Edicion limitada 2023"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/prendas/{id}": {
+            "get": {
+                "tags": [
+                    "Prendas"
+                ],
+                "summary": "Mostrar la información de una prenda.",
+                "operationId": "cf9d78154d91c80c893fdd9aa48a39b8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 2
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
+                                        "nombre": {
+                                            "type": "string",
+                                            "example": "Lebron V"
+                                        },
+                                        "marca": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": "2"
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Nike"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "categoria": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": "2"
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Buzos"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "talle": {
+                                            "type": "string",
+                                            "example": "s"
+                                        },
+                                        "color": {
+                                            "type": "string",
+                                            "example": "#808080"
+                                        },
+                                        "imagen": {
+                                            "type": "string",
+                                            "example": "https://ferreira.vtexassets.com/arquivos/ids/375759-800-auto?v=637538350967900000&width=800&height=auto&aspect=true"
+                                        },
+                                        "precio": {
+                                            "type": "string",
+                                            "example": "999999.99"
+                                        },
+                                        "descripcion": {
+                                            "type": "string",
+                                            "example": "Edicion NBA"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Prenda] #id"
                                         }
                                     },
                                     "type": "object"

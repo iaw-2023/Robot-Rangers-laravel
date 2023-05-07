@@ -8,7 +8,7 @@ use App\Http\Resources\CategoriaResource;
 class CategoriaController extends ApiController
 {
     /**
-     * Listado de todas las categorias.
+     * Retorna un listado con la informacion de todas las categorias
      * @OA\Get (
      *     path="/rest/categorias",
      *     tags={"Categorias"},
@@ -27,11 +27,6 @@ class CategoriaController extends ApiController
      *                         example="1"
      *                     ),
      *                     @OA\Property(
-     *                         property="nombre",
-     *                         type="string",
-     *                         example="Remeras"
-     *                     ),
-     *                     @OA\Property(
      *                         property="created_at",
      *                         type="string",
      *                         example="2023-05-07 00:00:00"
@@ -40,6 +35,11 @@ class CategoriaController extends ApiController
      *                         property="updated_at",
      *                         type="string",
      *                         example="2023-05-07 00:00:00"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="nombre",
+     *                         type="string",
+     *                         example="Remeras"
      *                     )
      *                 )
      *             )
@@ -53,7 +53,7 @@ class CategoriaController extends ApiController
     }
 
      /**
-     * Mostrar la información de una categoria.
+     * Retorna la información de una categoria especifica
      * @OA\Get (
      *     path="/rest/categorias/{id}",
      *     tags={"Categorias"},
@@ -68,9 +68,9 @@ class CategoriaController extends ApiController
      *         description="OK",
      *         @OA\JsonContent(
      *              @OA\Property(property="id", type="number", example=2),
-     *              @OA\Property(property="nombre", type="string", example="Buzos"),
      *              @OA\Property(property="created_at", type="string", example="2023-05-07 19:57:30"),
-     *              @OA\Property(property="updated_at", type="string", example="2023-05-07 19:57:30")
+     *              @OA\Property(property="updated_at", type="string", example="2023-05-07 19:57:30"),
+     *              @OA\Property(property="nombre", type="string", example="Buzos")
      *         )
      *     ),
      *      @OA\Response(
