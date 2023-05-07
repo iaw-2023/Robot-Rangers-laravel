@@ -29,7 +29,7 @@ class UpdateMarcaRequest extends FormRequest
                 'max:255',
                 Rule::unique('marcas')->ignore($this->marca->id),
             ],
-            'imagen' => 'required',//['required|mimes:jpg,png,jpeg', 'max:5048'],
+            'imagen' => 'required|url',
             'descripcion' => 'required|string|max:1000'
         ];
     }
