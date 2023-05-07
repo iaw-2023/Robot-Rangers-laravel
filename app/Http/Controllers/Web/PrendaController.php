@@ -68,9 +68,9 @@ class PrendaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePrendaRequest $request, string $id)
+    public function update(UpdatePrendaRequest $request, Prenda $prenda)
     {
-        Prenda::where('id', $id)->update($request->validated());
+        $prenda->update($request->validated());
         return redirect('prendas')->with('success', 'Prenda has been updated.');
     }
 

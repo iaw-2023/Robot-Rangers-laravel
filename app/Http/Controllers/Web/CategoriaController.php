@@ -62,9 +62,9 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoriaRequest $request, string $id)
+    public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        Categoria::where('id', $id)->update($request->validated());
+        $categoria->update($request->validated());
         return redirect('categorias')->with('success', 'Categoria has been updated.');
     }
 

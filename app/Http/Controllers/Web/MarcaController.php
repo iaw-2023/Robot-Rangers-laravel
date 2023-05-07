@@ -62,9 +62,9 @@ class MarcaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMarcaRequest $request, string $id)
+    public function update(UpdateMarcaRequest $request, Marca $marca)
     {
-        Marca::where('id', $id)->update($request->validated());
+        $marca->update($request->validated());
         return redirect('marcas')->with('success', 'Marca has been updated.');;
     }
 
