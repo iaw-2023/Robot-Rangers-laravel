@@ -34,6 +34,32 @@
     height: 200px; 
 }
 
-.anchoDashboard{
+.cardDashboard{
     width:18rem;
+    background-color: gold;
+}
+
+.cardHeaderDashboard{
+    color:black;
+    font-weight: bold;
+}
+
+
+.pagination a {
+    background-color: #198754;
+    color: white;
+    font-weight: bold;
+}
+  
+.pagination a {
+    font-size: 14px;
+}
+
+.page-item.active .page-link{
+  background-color: black;
+  border-color: white;
+}
+
+.page-item.disabled .page-link{
+    background-color: rgba(255, 255, 255, 0);
 }
