@@ -8,7 +8,7 @@
          <div class="input-group align-items-center w-50">
             <input type="text" class="form-control h-100" name="filtro" value="{{$filtro}}">
             <div class="input-group-append">
-                <input type="submit" class="btn btn-primary h-100 btn-block ml-5" value="Buscar">
+                <input type="submit" class="btn btn-primary h-100 btn-block ml-3" value="Buscar">
             </div>
         </div>
          </form>
