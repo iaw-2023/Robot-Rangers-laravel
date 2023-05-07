@@ -10,6 +10,7 @@ class MarcaController extends ApiController
 
      /**
      * Retorna un listado con la informacion de todas las marcas
+     * 
      * @OA\Get (
      *     path="/rest/marcas",
      *     tags={"Marcas"},
@@ -57,6 +58,8 @@ class MarcaController extends ApiController
      *         )
      *     )
      * )
+     * 
+     * @return MarcaResource
      */
     public function index()
     {
@@ -65,6 +68,7 @@ class MarcaController extends ApiController
 
      /**
      * Retorna la información de una marca especifica
+     * 
      * @OA\Get (
      *     path="/rest/marcas/{id}",
      *     tags={"Marcas"},
@@ -96,6 +100,9 @@ class MarcaController extends ApiController
      *          )
      *      )
      * )
+     * 
+     * @param Marca $marca {$id} de la marca a retornar.
+     * @return MarcaResource
      */
     public function show(Marca $marca)
     {

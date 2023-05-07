@@ -9,6 +9,7 @@ class CategoriaController extends ApiController
 {
     /**
      * Retorna un listado con la informacion de todas las categorias
+     * 
      * @OA\Get (
      *     path="/rest/categorias",
      *     tags={"Categorias"},
@@ -44,8 +45,17 @@ class CategoriaController extends ApiController
      *                 )
      *             )
      *         )
-     *     )
+     *     ),
+     *     @OA\Response(
+     *          response=404,
+     *          description="NOT FOUND",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="No categorias found"),
+     *          )
+     *      )
      * )
+     * 
+     * @return CategoriaResource:collection()
      */
     public function index()
     {
@@ -77,10 +87,13 @@ class CategoriaController extends ApiController
      *          response=404,
      *          description="NOT FOUND",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="No query results for model [App\\Models\\Categoria] #id"),
+     *              @OA\Property(property="message", type="string", example="No categoria {$id} found"),
      *          )
      *      )
      * )
+     * 
+     * @param Categoria $categoria {$id} de la categoria a retornar.
+     * @return CategoriaResource
      */
     public function show(Categoria $categoria)
     {

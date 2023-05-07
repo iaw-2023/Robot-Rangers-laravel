@@ -19,8 +19,7 @@ class PedidoResource extends JsonResource
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
             'mail_cliente' => $this->mail_cliente,
-            'monto' => $this->monto,
-            'fechaHora' => $this->fechaHora,
+            'monto' => $this->monto        
         ];
     }
 }

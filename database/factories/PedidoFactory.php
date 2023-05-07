@@ -18,8 +18,7 @@ class PedidoFactory extends Factory
     {
         return [
             'mail_cliente' => $this->faker->email(),
-            'monto' => rand(1, 1000) / 10,
-            'fechaHora' => $this->faker->dateTimeBetween('-1 year', '+1 year')->format('Y-m-d H:i:s'),
+            'monto' => $this->faker->randomFloat(2, 0, 9999999.99)
         ];
     }
 }
