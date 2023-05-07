@@ -37,6 +37,6 @@ Route::get('prendas/talles/{talle}', [PrendaController::class, 'showByTalle']);
 
 Route::post('pedidos', [PedidoController::class, 'store']);
 Route::get('pedidos/{pedido}', [PedidoController::class, 'show']);
-Route::get('pedidos/cliente/{mail_cliente}', [PedidoController::class, 'showAll']);
+Route::get('pedidos/clientes/{mail_cliente}', [PedidoController::class, 'showAll']);
 
 Route::post('detalle_pedidos', [DetallePedidoController::class, 'store']);

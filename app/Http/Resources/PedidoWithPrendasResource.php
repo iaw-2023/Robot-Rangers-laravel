@@ -20,7 +20,6 @@ class PedidoWithPrendasResource extends JsonResource
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
             'mail_cliente' => $this->mail_cliente,
             'monto' => $this->monto,
-            'fechaHora' => $this->fechaHora,
             'prendas' => $this->prendas->map(function ($prenda) {
                 return [
                     'id' => $prenda->id,

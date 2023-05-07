@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 
 /**
 * @OA\Info(
@@ -17,5 +15,5 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 */
 class ApiController extends Controller
 {
-    use AuthorizesRequests, ValidatesRequests;
+    // Definición de información general de la API.
 }
