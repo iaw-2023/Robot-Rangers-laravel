@@ -10,7 +10,7 @@
         Monto = ${{$pedido->monto}}
     </div>
     <div class="card-header show">
-        Fecha = {{$pedido->fecha}}
+        Fecha | Hora = <td class="text-white">{{ date('d/m/Y H:i:s', strtotime($pedido->fechaHora)) }}</td>
     </div>
     @foreach ($pedido->prendas as $index => $prenda)
         <div class="card-header show">

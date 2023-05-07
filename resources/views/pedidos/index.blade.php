@@ -19,7 +19,7 @@
             <th scope="col" class="col">ID</th>
             <th scope="col" class="col">Mail Cliente</th>
             <th scope="col" class="col">Monto</th>
-            <th scope="col" class="col">Fecha</th>
+            <th scope="col" class="col">Fecha | Hora</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +33,7 @@
                     <th scope="row" class="text-white">{{$pedido->id}}</th>
                     <td class="text-white">{{$pedido->mail_cliente}}</td>
                     <td class="text-white">${{$pedido->monto}}</td>
-                    <td class="text-white">{{ date('d-m-Y H:i:s', strtotime($pedido->fechaHora)) }}</td>
+                    <td class="text-white">{{ date('d/m/Y H:i:s', strtotime($pedido->fechaHora)) }}</td>
                     <td>
                         <form action="/pedidos/{{$pedido->id}}" method="POST">
                             @csrf 
