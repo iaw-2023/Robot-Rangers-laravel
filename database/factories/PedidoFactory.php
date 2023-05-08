@@ -18,7 +18,7 @@ class PedidoFactory extends Factory
     {
         return [
             'mail_cliente' => $this->faker->email(),
-            'monto' => $this->faker->randomFloat(2, 0, 9999999.99)
+            'monto' => $this->faker->randomFloat(2, 0, 9999999999.99)
         ];
     }
 }

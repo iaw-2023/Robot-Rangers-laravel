@@ -24,8 +24,11 @@ class StorePedidoRequest extends FormRequest
         return [
             'mail_cliente' => 'required|email:rfc',
             'monto' => ['required','numeric','regex:/^\d{1,10}(\.\d{1,2})?$/'],
+            'prendas' => 'required|array|min:1',
+            'prendas.*.id' => 'required|exists:prendas,id',
+            'prendas.*.cantidad' => 'required|numeric|min:1'
         ];
-    }
+    }   
 
     public function messages()
     {

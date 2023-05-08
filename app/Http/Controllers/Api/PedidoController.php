@@ -29,12 +29,29 @@ class PedidoController extends ApiController
      *                      @OA\Property(
      *                          property="monto",
      *                          type="number"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="prendas",
+     *                          type="array",
+     *                          @OA\Items(
+     *                              @OA\Property(
+     *                                  property="id",
+     *                                  type="number",
+     *                                  example="1"
+     *                              ),
+     *                          @OA\Property(
+     *                              property="nombre",
+     *                              type="string",
+     *                              example="Remera Lebron II"
+     *                          ),
+     *                          @OA\Property(
+     *                              property="cantidad",
+     *                              type="number",
+     *                              example="4"
+     *                          )
      *                      )
+     *                    )
      *                 ),
-     *                 example={
-     *                     "mail_cliente":"clienteiaw2023@gmail.com",
-     *                     "monto":"9999999999.99"
-     *                }
      *             )
      *         )
      *      ),
@@ -64,7 +81,12 @@ class PedidoController extends ApiController
      */
     public function store(StorePedidoRequest $request)
     {
-        return new PedidoResource(Pedido::create($request->validated()));
+        $pedido = Pedido::create($request->validated());
+        foreach ($request->input('prendas') as $prenda) {
+            $pedido->prendas()->attach($prenda['id'], ['cantidad' => $prenda['cantidad']]);
+        }
+
+        return new PedidoResource($pedido);
     }
 
     /**
