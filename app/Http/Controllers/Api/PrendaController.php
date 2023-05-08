@@ -108,8 +108,6 @@ class PrendaController extends ApiController
      *          )
      *      )
      * )
-     * 
-     *  @return PrendaController:collection()
      */
     public function index()
     {

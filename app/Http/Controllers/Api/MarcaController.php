@@ -65,8 +65,6 @@ class MarcaController extends ApiController
      *          )
      *      )
      * )
-     * 
-     * @return MarcaResource
      */
     public function index()
     {
