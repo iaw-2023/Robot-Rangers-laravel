@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000"
+            "url": "https://robot-rangers-laravel-git-crud-api-robotrangers.vercel.app/"
         }
     ],
     "paths": {
