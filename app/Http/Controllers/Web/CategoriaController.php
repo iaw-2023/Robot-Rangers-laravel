@@ -44,18 +44,16 @@ class CategoriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Categoria $categoria)
     {
-        $categoria = Categoria::FindOrFail($id);
         return view('categorias.show',['categoria' => $categoria]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Categoria $categoria)
     {
-        $categoria = Categoria::FindOrFail($id);
         return view('categorias.edit',['categoria' => $categoria]);
     }
 
@@ -71,9 +69,9 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Categoria $categoria)
     {
-        Categoria::destroy($id);
+        $categoria->delete();
         return redirect('categorias')->with('success', 'Categoria has been deleted.');
     }
 }

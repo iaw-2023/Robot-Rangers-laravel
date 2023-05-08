@@ -48,20 +48,19 @@ class PrendaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Prenda $prenda)
     {
-        $prenda = Prenda::with(['marca', 'categoria'])->findOrFail($id);
-        return view('prendas.show',['prenda' => $prenda]);
+        $prenda->load(['marca', 'categoria']);
+        return view('prendas.show', compact('prenda'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Prenda $prenda)
     {
         $marcas = Marca::orderBy('nombre')->get();
         $categorias = Categoria::orderBy('nombre')->get();
-        $prenda = Prenda::FindOrFail($id);
         return view('prendas.edit',['prenda' => $prenda, 'marcas' => $marcas, 'categorias' => $categorias]);
     }
 
@@ -77,9 +76,9 @@ class PrendaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Prenda $prenda)
     {
-        Prenda::destroy($id);
+        $prenda->delete();
         return redirect('prendas')->with('success', 'Prenda has been deleted.');
     }
 }

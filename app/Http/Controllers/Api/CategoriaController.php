@@ -50,12 +50,10 @@ class CategoriaController extends ApiController
      *          response=404,
      *          description="NOT FOUND",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="No categorias found"),
+     *              @OA\Property(property="message", type="string", example="Categorias not found"),
      *          )
      *      )
-     * )
-     * 
-     * @return CategoriaResource:collection()
+     * ),
      */
     public function index()
     {
@@ -87,13 +85,10 @@ class CategoriaController extends ApiController
      *          response=404,
      *          description="NOT FOUND",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="No categoria {$id} found"),
+     *              @OA\Property(property="message", type="string", example="Categoria not found {$id}"),
      *          )
      *      )
      * )
-     * 
-     * @param Categoria $categoria {$id} de la categoria a retornar.
-     * @return CategoriaResource
      */
     public function show(Categoria $categoria)
     {

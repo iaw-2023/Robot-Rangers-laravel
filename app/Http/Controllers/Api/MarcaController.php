@@ -56,7 +56,14 @@ class MarcaController extends ApiController
      *                 )
      *             )
      *         )
-     *     )
+     *     ),
+     *     @OA\Response(
+     *          response=404,
+     *          description="NOT FOUND",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="Marcas not found"),
+     *          )
+     *      )
      * )
      * 
      * @return MarcaResource
@@ -96,13 +103,11 @@ class MarcaController extends ApiController
      *          response=404,
      *          description="NOT FOUND",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="No query results for model [App\\Models\\Marca] #id"),
+     *              @OA\Property(property="message", type="string", example="Marca not found {$id}"),
      *          )
      *      )
      * )
      * 
-     * @param Marca $marca {$id} de la marca a retornar.
-     * @return MarcaResource
      */
     public function show(Marca $marca)
     {

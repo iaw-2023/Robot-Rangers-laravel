@@ -24,11 +24,13 @@ class PedidoController extends ApiController
      *                      type="object",
      *                      @OA\Property(
      *                          property="mail_cliente",
-     *                          type="number"
+     *                          type="string",
+     *                          example="cliente@iaw2023.com"  
      *                      ),
      *                      @OA\Property(
      *                          property="monto",
-     *                          type="number"
+     *                          type="number",
+     *                          example=9999.99
      *                      ),
      *                      @OA\Property(
      *                          property="prendas",
@@ -39,45 +41,42 @@ class PedidoController extends ApiController
      *                                  type="number",
      *                                  example="1"
      *                              ),
-     *                          @OA\Property(
-     *                              property="nombre",
-     *                              type="string",
-     *                              example="Remera Lebron II"
-     *                          ),
-     *                          @OA\Property(
-     *                              property="cantidad",
-     *                              type="number",
-     *                              example="4"
+     *                              @OA\Property(
+     *                                  property="nombre",
+     *                                  type="string",
+     *                                  example="Remera Lebron II"
+     *                              ),
+     *                              @OA\Property(
+     *                                  property="cantidad",
+     *                                  type="number",
+     *                                  example="4"
+     *                              )
      *                          )
      *                      )
-     *                    )
-     *                 ),
+     *                 )
      *             )
      *         )
-     *      ),
-     *      @OA\Response(
-     *          response=201,
-     *          description="CREATED",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="id", type="number", example=1),
-     *              @OA\Property(property="created_at", type="string", example="2023-05-07 00:00:00"),
-     *              @OA\Property(property="updated_at", type="string", example="2023-05-07 00:00:00"),
-     *              @OA\Property(property="mail_cliente", type="string", example="clienteiaw2023@gmail.com"),
-     *              @OA\Property(property="monto", type="number", example="9999999999.99")
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="UNPROCESSABLE CONTENT",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="The mail_cliente field is required."),
-     *              @OA\Property(property="errors", type="string", example="Objeto de errores"),
-     *          )
-     *      )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="CREATED",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="id", type="number", example=1),
+     *             @OA\Property(property="created_at", type="string", example="2023-05-07 00:00:00"),
+     *             @OA\Property(property="updated_at", type="string", example="2023-05-07 00:00:00"),
+     *             @OA\Property(property="mail_cliente", type="string", example="clienteiaw2023@gmail.com"),
+     *             @OA\Property(property="monto", type="number", example="9999999999.99")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="UNPROCESSABLE CONTENT",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="The mail_cliente field is required."),
+     *             @OA\Property(property="errors", type="string", example="Objeto de errores")
+     *         )
+     *     )
      * )
-     * 
-     * @param StorePedidoRequest $request Informacion del pedido a crear.
-     * @return PedidoResource
      */
     public function store(StorePedidoRequest $request)
     {
@@ -169,9 +168,6 @@ class PedidoController extends ApiController
      *       )
      *    )
      * )
-     * 
-     * @param Pedido $request Pedido a mostrar
-     * @return PedidoWithPrendasResource
      */
     public function show(Pedido $pedido)
     {
@@ -208,9 +204,6 @@ class PedidoController extends ApiController
      *         )
      *     )
      * )
-     *
-     * @param string $mail_cliente Mail del cliente a buscar
-     * @return PedidoResource:collection()
      */
     public function showAll(string $mail_cliente)
     {
