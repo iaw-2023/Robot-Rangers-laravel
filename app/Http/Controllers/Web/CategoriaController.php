@@ -6,16 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Http\Requests\Categorias\StoreCategoriaRequest;
 use App\Http\Requests\Categorias\UpdateCategoriaRequest;
+use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categorias = Categoria::orderBy('id')->paginate();
-        return view('categorias.index', ['categorias'=>$categorias]);
+        $filtro = $request->input('filtro');
+        $categorias = Categoria::select('id', 'nombre')
+            ->whereRaw('LOWER(nombre) LIKE ?', ['%'.strtolower($filtro).'%'])
+            ->orderBy('id')
+            ->paginate(10);    
+                
+        return view('categorias.index', compact('categorias', 'filtro'));
     }
 
     /**
@@ -38,36 +44,34 @@ class CategoriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Categoria $categoria)
     {
-        $categoria = Categoria::FindOrFail($id);
         return view('categorias.show',['categoria' => $categoria]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Categoria $categoria)
     {
-        $categoria = Categoria::FindOrFail($id);
         return view('categorias.edit',['categoria' => $categoria]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoriaRequest $request, string $id)
+    public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        Categoria::where('id', $id)->update($request->validated());
+        $categoria->update($request->validated());
         return redirect('categorias')->with('success', 'Categoria has been updated.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Categoria $categoria)
     {
-        Categoria::destroy($id);
+        $categoria->delete();
         return redirect('categorias')->with('success', 'Categoria has been deleted.');
     }
 }

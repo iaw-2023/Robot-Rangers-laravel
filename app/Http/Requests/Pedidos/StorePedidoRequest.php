@@ -23,8 +23,17 @@ class StorePedidoRequest extends FormRequest
     {
         return [
             'mail_cliente' => 'required|email:rfc',
-            'monto' => 'required|decimal:2',
-            'fecha' => 'required|date'
+            'monto' => ['required','numeric','regex:/^\d{1,10}(\.\d{1,2})?$/'],
+            'prendas' => 'required|array|min:1',
+            'prendas.*.id' => 'required|exists:prendas,id',
+            'prendas.*.cantidad' => 'required|numeric|min:1'
+        ];
+    }   
+
+    public function messages()
+    {
+        return [
+            'monto.regex' => 'The :attribute must have a maximum of 10 digits in the integer part and 2 digits in the decimal part '
         ];
     }
 }

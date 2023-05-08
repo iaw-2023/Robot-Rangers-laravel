@@ -23,7 +23,7 @@ class StoreMarcaRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string|max:50|unique:marcas',
-            'imagen' => 'required', //['required|mimes:jpg,png,jpeg', 'max:5048'],
+            'imagen' => 'required|url',
             'descripcion' => 'required|string|max:1000'
         ];
     }

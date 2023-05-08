@@ -3,28 +3,28 @@
 @section('content')
 <div class="container">
     <div class="card col-6 offset-3">
-    <div class="card-header">
+    <div class="card-header show">
         Nombre = {{$prenda->nombre}}
     </div>
-    <div class="card-header">
-        ID Marca = {{$prenda->marca_id}}
+    <div class="card-header show">
+        Marca = {{$prenda->marca->nombre}}
     </div>
-    <div class="card-header">
-        ID Categoria = {{$prenda->categoria_id}}
+    <div class="card-header show">
+        Categoria = {{$prenda->categoria->nombre}}
     </div>
-    <div class="card-header">
+    <div class="card-header show">
         Talle = {{$prenda->talle}}
     </div>
-    <div class="card-header">
-        Color = {{$prenda->color}}
+    <div class="card-header show">
+        Color = <span class="color-box" style="background-color: {{$prenda->color}}"></span>
     </div>
-    <div class="card-header">
-        Imagen = <a href="{{$prenda->imagen}}">Link</a>
+    <div class="card-header show">
+        Imagen = <img class="card-img-top img-fluid imagen-td" src="{{$prenda->imagen}}">
     </div>
-    <div class="card-header">
+    <div class="card-header show">
         Precio = ${{$prenda->precio}}
     </div>
-    <div class="card-header">
+    <div class="card-header show">
         Descripcion = {{$prenda->descripcion}}
     </div>
     </div>

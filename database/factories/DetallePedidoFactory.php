@@ -19,9 +19,9 @@ class DetallePedidoFactory extends Factory
     public function definition(): array
     {
         return [
-            'pedido_id' => Pedido::all()->random(),
-            'prenda_id' => Prenda::all()->random(),
-            'cantidad' => rand(1, 10),
+            'pedido_id' => Pedido::inRandomOrder()->first(),
+            'prenda_id' => Prenda::inRandomOrder()->first(),
+            'cantidad' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

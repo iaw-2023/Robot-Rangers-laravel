@@ -6,16 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Prendas\StorePrendaRequest;
 use App\Http\Requests\Prendas\UpdatePrendaRequest;
 use App\Models\Prenda;
+use App\Models\Marca;
+use App\Models\Categoria;
+use Illuminate\Http\Request;
 
 class PrendaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $prendas = Prenda::orderBy('id')->get();
-        return view('prendas.index', ['prendas'=>$prendas]);
+        $filtro = $request->input('filtro');
+        $prendas = Prenda::select('id', 'nombre', 'talle', 'color', 'imagen', 'precio')
+            ->whereRaw('LOWER(nombre) LIKE ?', ['%'.strtolower($filtro).'%'])
+            ->orderBy('id')
+            ->paginate(10);
+                
+        return view('prendas.index', compact('prendas', 'filtro'));
     }
 
     /**
@@ -23,7 +31,9 @@ class PrendaController extends Controller
      */
     public function create()
     {
-        return view('prendas.create');
+        $marcas = Marca::orderBy('nombre')->get();
+        $categorias = Categoria::orderBy('nombre')->get();
+        return view('prendas.create', ['marcas' => $marcas, 'categorias' => $categorias]);
     }
 
     /**
@@ -38,36 +48,37 @@ class PrendaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Prenda $prenda)
     {
-        $prenda = Prenda::FindOrFail($id);
-        return view('prendas.show',['prenda' => $prenda]);
+        $prenda->load(['marca', 'categoria']);
+        return view('prendas.show', compact('prenda'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Prenda $prenda)
     {
-        $prenda = Prenda::FindOrFail($id);
-        return view('prendas.edit',['prenda' => $prenda]);
+        $marcas = Marca::orderBy('nombre')->get();
+        $categorias = Categoria::orderBy('nombre')->get();
+        return view('prendas.edit',['prenda' => $prenda, 'marcas' => $marcas, 'categorias' => $categorias]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePrendaRequest $request, string $id)
+    public function update(UpdatePrendaRequest $request, Prenda $prenda)
     {
-        Prenda::where('id', $id)->update($request->validated());
+        $prenda->update($request->validated());
         return redirect('prendas')->with('success', 'Prenda has been updated.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Prenda $prenda)
     {
-        Prenda::destroy($id);
+        $prenda->delete();
         return redirect('prendas')->with('success', 'Prenda has been deleted.');
     }
 }

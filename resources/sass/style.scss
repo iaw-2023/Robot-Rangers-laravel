@@ -1,0 +1,65 @@
+.col {
+    color: white;
+}
+
+.card-header{
+    color:white;
+}
+
+.mb-3{
+    color:white;
+}
+
+.form-label{
+    color:white;
+}
+
+.show{
+    color:black;
+}
+
+.seleccionable{
+    color:black;
+}
+
+.color-box {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.imagen-td {
+    width: 200px;
+    height: 200px; 
+}
+
+.cardDashboard{
+    width:18rem;
+    background-color: gold;
+}
+
+.cardHeaderDashboard{
+    color:black;
+    font-weight: bold;
+}
+
+
+.pagination a {
+    background-color: #198754;
+    color: white;
+    font-weight: bold;
+}
+  
+.pagination a {
+    font-size: 14px;
+}
+
+.page-item.active .page-link{
+  background-color: black;
+  border-color: white;
+}
+
+.page-item.disabled .page-link{
+    background-color: rgba(255, 255, 255, 0);
+}

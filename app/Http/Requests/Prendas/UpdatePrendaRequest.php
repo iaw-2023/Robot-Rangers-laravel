@@ -12,7 +12,7 @@ class UpdatePrendaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,12 +23,12 @@ class UpdatePrendaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre'=>'required|string|max:100|unique:prendas',
+            'nombre'=>'required|string|max:100',
             'marca_id'=> ['required', Rule::exists('marcas', 'id')],
             'categoria_id'=> ['required', Rule::exists('categorias', 'id')],
             'talle'=>['required','in:xs,s,m,l,xl'],
             'color'=>'required|string|max:30',
-            'imagen'=>'required',
+            'imagen'=>'required|url',
             'precio'=>['required','numeric','regex:/^\d{1,6}(\.\d{1,2})?$/'],
             'descripcion'=>'required|string|max:1000'
         ];

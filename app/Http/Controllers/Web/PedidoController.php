@@ -4,16 +4,22 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pedido;
+use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pedidos = Pedido::orderBy('id')->get();
-        return view('pedidos.index', ['pedidos'=>$pedidos]);
+        $filtro = $request->input('filtro');
+        $pedidos = Pedido::select('id', 'mail_cliente', 'monto', 'created_at')
+            ->whereRaw('LOWER(mail_cliente) LIKE ?', ['%'.strtolower($filtro).'%'])
+            ->latest()
+            ->paginate(10);    
+
+        return view('pedidos.index', compact('pedidos', 'filtro'));
     }
 
     /**
@@ -21,7 +27,7 @@ class PedidoController extends Controller
      */
     public function show(string $id)
     {
-        $pedido = Pedido::FindOrFail($id);
+        $pedido = Pedido::with('prendas')->FindOrFail($id);
         return view('pedidos.show',['pedido' => $pedido]);
     }
 }
