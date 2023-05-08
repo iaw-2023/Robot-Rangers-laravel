@@ -544,13 +544,23 @@
                 }
             }
         },
-        "/rest/pedidos/{pedido}": {
+        "/rest/pedidos/{id}": {
             "get": {
                 "tags": [
                     "Pedidos"
                 ],
                 "summary": "Retorna la información de un pedido especifico con todas sus prendas",
-                "operationId": "b272409a761690bf40b077b10ca8d8fe",
+                "operationId": "e6508c3e918b41350d3abaac0d07fe27",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -637,7 +647,7 @@
                 "operationId": "f88b2c61575a4c186cb0622a49b51964",
                 "parameters": [
                     {
-                        "name": "cliente",
+                        "name": "mail_cliente",
                         "in": "path",
                         "description": "Mail del cliente a buscar",
                         "required": true,

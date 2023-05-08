@@ -71,8 +71,14 @@ class PedidoController extends ApiController
      * Retorna la información de un pedido especifico con todas sus prendas
      *
      * @OA\Get(
-     *     path="/rest/pedidos/{pedido}",
+     *     path="/rest/pedidos/{id}",
      *     tags={"Pedidos"},
+     *     @OA\Parameter(
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="OK",
@@ -157,7 +163,7 @@ class PedidoController extends ApiController
      *     path="/rest/pedidos/clientes/{mail_cliente}",
      *     tags={"Pedidos"},
      *     @OA\Parameter(
-     *         name="cliente",
+     *         name="mail_cliente",
      *         in="path",
      *         description="Mail del cliente a buscar",
      *         required=true,
@@ -186,7 +192,7 @@ class PedidoController extends ApiController
      */
     public function showAll(string $mail_cliente)
     {
-        $pedidos = Pedido::where('mail_cliente', $mail_cliente)->get();
+        $pedidos = Pedido::where('mail_cliente', $mail_cliente)->latest()->get();
         return PedidoResource::collection($pedidos);
     }
 
