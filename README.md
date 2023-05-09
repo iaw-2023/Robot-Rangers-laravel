@@ -22,3 +22,6 @@ Documentacion
 ../rest/documentation
 * La forma utilizada para documentar es la que ofrece swagger para hacerla directamente sobre el codigo, sin necesidad
 de crear archivos yaml.
+
+Quedan pendientes hacer los datos que se van a utilizar en la proxima entrega, osea con datos reales y no los generados por el faker.
+Link de vercel: https://robot-rangers-laravel.vercel.app/
