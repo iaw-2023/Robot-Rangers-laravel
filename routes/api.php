@@ -35,7 +35,6 @@ Route::get('prendas/categorias/{categoria}', [PrendaController::class, 'showByCa
 Route::get('prendas/marcas/{marca}', [PrendaController::class, 'showByMarca']);
 Route::get('prendas/talles/{talle}', [PrendaController::class, 'showByTalle']);
 Route::get('prendas/colores/{color}', [PrendaController::class, 'showByColor']);
-Route::get('prendas/precio/{order}', [PrendaController::class, 'showByPrecio']);
 
 Route::post('pedidos', [PedidoController::class, 'store']);
 Route::get('pedidos/{pedido}', [PedidoController::class, 'show']);
