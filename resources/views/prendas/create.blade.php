@@ -18,8 +18,8 @@
             @enderror
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900 seleccionable">
-            <label class="form-label bg-gray-800 dark:bg-gray-900">Marca</label>
-            <select name="marca_id" >
+            <label class="form-label bg-gray-800 dark:bg-gray-900" for="marca-select">Marca</label>
+            <select name="marca_id" class="form-select select2">
                 @foreach ($marcas as $marca)
                     <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
                 @endforeach
@@ -27,7 +27,7 @@
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900 seleccionable">
             <label class="form-label bg-gray-800 dark:bg-gray-900">Categoria</label>
-            <select name="categoria_id" >
+            <select name="categoria_id" class="form-select select2">
                 @foreach ($categorias as $categoria)
                     <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                 @endforeach
