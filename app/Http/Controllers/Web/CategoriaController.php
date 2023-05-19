@@ -71,7 +71,11 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
+        if ($categoria->prendas()->exists()) {
+            return redirect('categorias')->with('error', 'The categoria cannot be deleted because there are associated prendas.');
+        }
+
         $categoria->delete();
-        return redirect('categorias')->with('success', 'Categoria has been deleted.');
+        return redirect('categorias')->with('success', 'Categoría has been deleted.');
     }
 }

@@ -16,4 +16,9 @@ class Marca extends Model
         'imagen',
         'descripcion',
     ];
+
+    public function prendas()
+    {
+        return $this->hasMany(Prenda::class);
+    }
 }

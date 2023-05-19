@@ -15,4 +15,9 @@ class Categoria extends Model
         'nombre',
     ];
 
+    public function prendas()
+    {
+        return $this->hasMany(Prenda::class);
+    }
+
 }

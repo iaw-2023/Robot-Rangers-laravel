@@ -71,6 +71,10 @@ class MarcaController extends Controller
      */
     public function destroy(Marca $marca)
     {
+        if ($marca->prendas()->exists()) {
+            return redirect('categorias')->with('error', 'The marca cannot be deleted because there are associated prendas.');
+        }
+
         $marca->delete();
         return redirect('marcas')->with('success', 'Marca has been deleted.');
     }
