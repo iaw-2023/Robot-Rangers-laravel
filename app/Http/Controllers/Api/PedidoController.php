@@ -29,8 +29,8 @@ class PedidoController extends ApiController
      *                 ),
      *                 @OA\Property(
      *                     property="monto",
-     *                     type="number",
-     *                     example=9999.99,
+     *                     type="string",
+     *                     example="9999.99",
      *                     description="El monto total del pedido."
      *                 ),
      *                 @OA\Property(

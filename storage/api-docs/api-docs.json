@@ -458,8 +458,8 @@
                                     },
                                     "monto": {
                                         "description": "El monto total del pedido.",
-                                        "type": "number",
-                                        "example": 9999.99
+                                        "type": "string",
+                                        "example": "9999.99"
                                     },
                                     "prendas": {
                                         "description": "Un arreglo de prendas que contiene el id, nombre y cantidad de cada prenda.",

@@ -20,6 +20,7 @@ class Pedido extends Model
 
     public function prendas(){
         return $this->belongsToMany(Prenda::class, 'detalle_pedidos')
+                    ->withTrashed()
                     ->withPivot('cantidad');
     }
 }
