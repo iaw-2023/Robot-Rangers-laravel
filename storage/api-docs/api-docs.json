@@ -462,12 +462,11 @@
                                         "example": "9999.99"
                                     },
                                     "prendas": {
-                                        "description": "Un arreglo de prendas que contiene el id, nombre y cantidad de cada prenda.",
+                                        "description": "Un arreglo de prendas que contiene el id y cantidad de cada prenda del pedido.",
                                         "type": "array",
                                         "items": {
                                             "required": [
                                                 "id",
-                                                "nombre",
                                                 "cantidad"
                                             ],
                                             "properties": {

@@ -36,10 +36,10 @@ class PedidoController extends ApiController
      *                 @OA\Property(
      *                     property="prendas",
      *                     type="array",
-     *                     description="Un arreglo de prendas que contiene el id, nombre y cantidad de cada prenda.",
+     *                     description="Un arreglo de prendas que contiene el id y cantidad de cada prenda del pedido.",
      *                     @OA\Items(
      *                         type="object",
-     *                         required={"id", "nombre", "cantidad"},
+     *                         required={"id", "cantidad"},
      *                         @OA\Property(
      *                             property="id",
      *                             type="integer",
