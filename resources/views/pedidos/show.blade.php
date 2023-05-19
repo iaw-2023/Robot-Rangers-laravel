@@ -4,17 +4,17 @@
 <div class="container">
     <div class="card col-6 offset-3">
         <div class="card-header text-center text-black">
-            <h2>Factura</h2>
+            <h2>Pedido {{$pedido->id}}</h2>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-6">
                     <h5>Información del Cliente:</h5>
-                    <p><strong>Mail Cliente:</strong> {{$pedido->mail_cliente}}</p>
+                    <p><strong>Mail:</strong> {{$pedido->mail_cliente}}</p>
                 </div>
                 <div class="col-6 text-right">
-                    <h5>Fecha y Hora:</h5>
-                    <p>{{$pedido->created_at->format('d/m/Y H:i:s')}}</p>
+                    <h5>Dia: {{$pedido->created_at->format('d/m/Y')}} </h5>
+                    <h5>Hora: {{$pedido->created_at->format('H:i:s')}} </h5>
                 </div>
             </div>
             <table class="table table-bordered text-center mt-4">
