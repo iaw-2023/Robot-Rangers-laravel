@@ -79,6 +79,6 @@ class PrendaController extends Controller
     public function destroy(Prenda $prenda)
     {
         $prenda->delete();
-        return redirect('prendas')->with('success', 'Prenda has been deleted.');
+        return redirect('prendas')->with('success', 'Prenda has been disabled.');
     }
 }

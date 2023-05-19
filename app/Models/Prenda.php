@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Marca;
 use App\Models\Categoria;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Prenda extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     
     protected $table = 'prendas';
 
