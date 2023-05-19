@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\MarcaController;
 use App\Http\Controllers\Api\PrendaController;
 use App\Http\Controllers\Api\PedidoController;
-use App\Http\Controllers\Api\DetallePedidoController;
 
 /*
 |--------------------------------------------------------------------------

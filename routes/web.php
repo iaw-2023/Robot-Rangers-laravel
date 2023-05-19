@@ -4,7 +4,6 @@ use App\Http\Controllers\Web\CategoriaController;
 use App\Http\Controllers\Web\MarcaController;
 use App\Http\Controllers\Web\PrendaController;
 use App\Http\Controllers\Web\PedidoController;
-use App\Http\Controllers\Web\DetallePedidoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +35,5 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
     });
 });
-
-
 
 require __DIR__.'/auth.php';
