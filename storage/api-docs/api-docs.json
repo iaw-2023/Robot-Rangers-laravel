@@ -558,7 +558,7 @@
                     "Prendas"
                 ],
                 "summary": "Retorna un listado de prendas.",
-                "description": "Si se especifican parametros de filtrado, se retornan las prendas filtradas.\nDe lo contrario, se retornan todas las prendas.",
+                "description": "Si se especifican parametros de filtrado, se retornan las prendas filtradas.\nDe lo contrario, se retornan todas las prendas.\n(Las prendas se devuelven paginadas de a 10)",
                 "operationId": "0d3515795801364ca5c2e37d264f6bb9",
                 "parameters": [
                     {

@@ -14,6 +14,7 @@ class PrendaController extends ApiController
      * Retorna un listado de prendas.
      * Si se especifican parametros de filtrado, se retornan las prendas filtradas.
      * De lo contrario, se retornan todas las prendas.
+     * (Las prendas se devuelven paginadas de a 10)
      * @OA\Get (
      *     path="/rest/prendas/",
      *     tags={"Prendas"},
