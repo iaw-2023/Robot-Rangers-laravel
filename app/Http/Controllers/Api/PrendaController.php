@@ -151,7 +151,7 @@ class PrendaController extends ApiController
             ->when($request->has('color'), fn($query) => $query->whereRaw('LOWER(color) = ?', [strtolower($request->input('color'))]))
             ->when($request->has('precio'), fn($query) => $query->orderBy('precio', $request->input('precio')));
 
-        $result = $prendas->get()->paginate(10);
+        $result = $prendas->paginate(10);
 
         if ($result->isEmpty()) {
             return response()->json(['message' => 'Prendas not found'], 404);
