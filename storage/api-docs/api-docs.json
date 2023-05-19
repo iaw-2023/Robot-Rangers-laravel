@@ -476,11 +476,6 @@
                                                     "type": "integer",
                                                     "example": 1
                                                 },
-                                                "nombre": {
-                                                    "description": "El nombre de la prenda.",
-                                                    "type": "string",
-                                                    "example": "Mrs. Alysson Weber"
-                                                },
                                                 "cantidad": {
                                                     "description": "La cantidad de la prenda.",
                                                     "type": "integer",
