@@ -417,14 +417,14 @@
                         }
                     },
                     "404": {
-                        "description": "Not found",
+                        "description": "NOT FOUND",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Pedido not found"
+                                            "example": "Pedidos not found"
                                         }
                                     },
                                     "type": "object"
@@ -535,7 +535,7 @@
                         }
                     },
                     "422": {
-                        "description": "UNPROCESSABLE ENTITY",
+                        "description": "UNPROCESSABLE CONTENT",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -543,7 +543,7 @@
                                         "message": {
                                             "description": "El mensaje de error.",
                                             "type": "string",
-                                            "example": "The given data was invalid."
+                                            "example": "La informacion ingresada es invalida."
                                         },
                                         "errors": {
                                             "description": "Un objeto que contiene los errores de validación.",

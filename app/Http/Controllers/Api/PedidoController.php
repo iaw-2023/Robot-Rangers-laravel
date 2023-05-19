@@ -76,7 +76,7 @@ class PedidoController extends ApiController
      *     ),
      *     @OA\Response(
      *         response=422,
-     *         description="UNPROCESSABLE ENTITY",
+     *         description="UNPROCESSABLE CONTENT",
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="La informacion ingresada es invalida.", description="El mensaje de error."),
      *             @OA\Property(property="errors", type="object", description="Un objeto que contiene los errores de validación.")
@@ -226,12 +226,12 @@ class PedidoController extends ApiController
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found",
+     *         description="NOT FOUND",
      *         @OA\JsonContent(
      *             @OA\Property(
      *                 property="message",
      *                 type="string",
-     *                 example="Pedido not found"
+     *                 example="Pedidos not found"
      *             )
      *         )
      *     )
@@ -254,7 +254,7 @@ class PedidoController extends ApiController
             return response()->json(['message' => 'Pedidos not found'], 404);
         }
 
-        return PedidoResource::collection($pedidos);
+        return PedidoResource::collection($result);
     }
 
 }

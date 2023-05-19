@@ -147,16 +147,16 @@ class PrendaController extends ApiController
         $prendas = Prenda::query()
             ->when($request->has('categoria'), fn($query) => $query->where('categoria_id', $request->input('categoria')))
             ->when($request->has('marca'), fn($query) => $query->where('marca_id', $request->input('marca')))
-            ->when($request->has('talle'), fn($query) => $query->where('talle', $request->input('talle')))
-            ->when($request->has('color'), fn($query) => $query->where('color', $request->input('color')))
+            ->when($request->has('talle'), fn($query) => $query->whereRaw('LOWER(talle) = ?', [strtolower($request->input('talle'))]))
+            ->when($request->has('color'), fn($query) => $query->whereRaw('LOWER(color) = ?', [strtolower($request->input('color'))]))
             ->when($request->has('precio'), fn($query) => $query->orderBy('precio', $request->input('precio')));
-    
+
         $result = $prendas->get();
 
         if ($result->isEmpty()) {
             return response()->json(['message' => 'Prendas not found'], 404);
         }
- 
+
         return PrendaResource::collection($result);
     }
 
