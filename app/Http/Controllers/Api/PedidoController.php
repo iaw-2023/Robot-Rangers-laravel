@@ -47,12 +47,6 @@ class PedidoController extends ApiController
      *                             description="El id de la prenda."
      *                         ),
      *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Mrs. Alysson Weber",
-     *                             description="El nombre de la prenda."
-     *                         ),
-     *                         @OA\Property(
      *                             property="cantidad",
      *                             type="integer",
      *                             example=4,
