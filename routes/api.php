@@ -31,11 +31,6 @@ Route::get('marcas/{marca}', [MarcaController::class, 'show']);
 
 Route::get('prendas', [PrendaController::class, 'index']);
 Route::get('prendas/{prenda}', [PrendaController::class, 'show']);
-Route::get('prendas/categorias/{categoria}', [PrendaController::class, 'showByCategoria']);
-Route::get('prendas/marcas/{marca}', [PrendaController::class, 'showByMarca']);
-Route::get('prendas/talles/{talle}', [PrendaController::class, 'showByTalle']);
-Route::get('prendas/colores/{color}', [PrendaController::class, 'showByColor']);
 
 Route::post('pedidos', [PedidoController::class, 'store']);
-Route::get('pedidos/{pedido}', [PedidoController::class, 'show']);
-Route::get('pedidos/clientes/{mail_cliente}', [PedidoController::class, 'showAll']);
+Route::get('pedidos', [PedidoController::class, 'show']);

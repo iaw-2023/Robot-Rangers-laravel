@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Categoria;
 use App\Http\Resources\CategoriaResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategoriaController extends ApiController
 {
     /**
-     * Retorna un listado con la informacion de todas las categorias
+     * Retorna un listado con la informacion de todas las categorias.
      * 
      * @OA\Get (
-     *     path="/rest/categorias",
+     *     path="/rest/categorias/",
      *     tags={"Categorias"},
      *     @OA\Response(
      *         response=200,
@@ -57,11 +58,17 @@ class CategoriaController extends ApiController
      */
     public function index()
     {
-        return CategoriaResource::collection(Categoria::all());
+        $categorias = Categoria::all();
+
+        if ($categorias->count() === 0) {
+            return response()->json(['message' => 'Categorias not found'], 404);
+        }
+
+        return CategoriaResource::collection($categorias);
     }
 
      /**
-     * Retorna la información de una categoria especifica
+     * Retorna la información de una categoria especifica.
      * @OA\Get (
      *     path="/rest/categorias/{id}",
      *     tags={"Categorias"},
@@ -85,13 +92,18 @@ class CategoriaController extends ApiController
      *          response=404,
      *          description="NOT FOUND",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Categoria not found {$id}"),
+     *              @OA\Property(property="message", type="string", example="Categoria not found"),
      *          )
      *      )
      * )
      */
-    public function show(Categoria $categoria)
+    public function show(string $id)
     {
-        return new CategoriaResource($categoria);
+        try {
+            $categoria = Categoria::findOrFail($id);
+            return new CategoriaResource($categoria);
+        } catch (ModelNotFoundException) {
+            return response()->json(['message' => 'Categoria not found'], 404);
+        }
     }
 }

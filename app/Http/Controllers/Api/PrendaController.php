@@ -3,17 +3,50 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\PrendaResource;
-use App\Models\Categoria;
-use App\Models\Marca;
 use App\Models\Prenda;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class PrendaController extends ApiController
 {
+
     /**
-     * Retorna un listado con la informacion de todas las prendas
+     * Retorna un listado de prendas.
+     * Si se especifican parametros de filtrado, se retornan las prendas filtradas.
+     * De lo contrario, se retornan todas las prendas.
      * @OA\Get (
-     *     path="/rest/prendas",
+     *     path="/rest/prendas/",
      *     tags={"Prendas"},
+     *     @OA\Parameter(
+     *         in="query",
+     *         name="categoria",
+     *         required=false,
+     *         @OA\Schema(type="number")
+     *     ),
+     *     @OA\Parameter(
+     *         in="query",
+     *         name="marca",
+     *         required=false,
+     *         @OA\Schema(type="number")
+     *     ),
+     *     @OA\Parameter(
+     *         in="query",
+     *         name="talle",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         in="query",
+     *         name="color",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         in="query",
+     *         name="precio",
+     *         required=false,
+     *         @OA\Schema(type="string", enum={"asc", "desc"})
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -104,19 +137,31 @@ class PrendaController extends ApiController
      *          response=404,
      *          description="NOT FOUND",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Prendas not found."),
+     *              @OA\Property(property="message", type="string", example="Prendas not found"),
      *          )
      *      )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
-        return PrendaResource::collection(Prenda::all());
+        $prendas = Prenda::query()
+            ->when($request->has('categoria'), fn($query) => $query->where('categoria_id', $request->input('categoria')))
+            ->when($request->has('marca'), fn($query) => $query->where('marca_id', $request->input('marca')))
+            ->when($request->has('talle'), fn($query) => $query->where('talle', $request->input('talle')))
+            ->when($request->has('color'), fn($query) => $query->where('color', $request->input('color')))
+            ->when($request->has('precio'), fn($query) => $query->orderBy('precio', $request->input('precio')));
+    
+        $result = $prendas->get();
+
+        if ($result->isEmpty()) {
+            return response()->json(['message' => 'Prendas not found'], 404);
+        }
+ 
+        return PrendaResource::collection($result);
     }
 
-
     /**
-     * Retorna la informacion de una prenda especifica
+     * Retorna la informacion de una prenda especifica.
      * @OA\Get (
      *     path="/rest/prendas/{id}",
      *     tags={"Prendas"},
@@ -177,475 +222,19 @@ class PrendaController extends ApiController
      *          response=404,
      *          description="NOT FOUND",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Prendas not found {$id}"),
+     *              @OA\Property(property="message", type="string", example="Prenda not found"),
      *          )
      *      )
      * )
      */
-    public function show(Prenda $prenda)
+    public function show(string $id)
     {
-        return new PrendaResource($prenda);
-    }
-
-    /**
-     * Retorna un listado con la informacion de las prendas de una categoria.
-     * @OA\Get (
-     *     path="/rest/prendas/categorias/{categoria}",
-     *     tags={"Prendas"},
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="categoria",
-     *         required=true,
-     *         @OA\Schema(type="number")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="OK",
-     *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 type="array",
-     *                 property="rows",
-     *                 @OA\Items(
-     *                     type="object",
-     *                     @OA\Property(
-     *                         property="id",
-     *                         type="number",
-     *                         example="1"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="created_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="updated_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="nombre",
-     *                         type="string",
-     *                         example="Harden II"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="marca",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Adidas"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="categoria",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Remeras"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="talle",
-     *                         type="string",
-     *                         example="xl"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="color",
-     *                         type="string",
-     *                         example="#FF0000"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="imagen",
-     *                         type="string",
-     *                         example="https://d2j6dbq0eux0bg.cloudfront.net/images/62219457/3384172981.jpg"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="precio",
-     *                         type="string",
-     *                         example="9999.99"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="descripcion",
-     *                         type="string",
-     *                         example="Edicion limitada 2023"
-     *                     )
-     *                 )
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *          response=404,
-     *          description="NOT FOUND",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Prendas not found {$categoria}"),
-     *          )
-     *      )
-     * )
-     */
-    public function showByCategoria(Categoria $categoria)
-    {
-        $prendas = Prenda::where('categoria_id', $categoria->id)
-            ->orderBy('id')
-            ->get();
-
-        return PrendaResource::collection($prendas);
-    }
-
-    /**
-     * Retorna un listado con la informacion de las prendas de una marca.
-     * @OA\Get (
-     *     path="/rest/prendas/marcas/{marca}",
-     *     tags={"Prendas"},
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="marca",
-     *         required=true,
-     *         @OA\Schema(type="number")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="OK",
-     *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 type="array",
-     *                 property="rows",
-     *                 @OA\Items(
-     *                     type="object",
-     *                     @OA\Property(
-     *                         property="id",
-     *                         type="number",
-     *                         example="1"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="created_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="updated_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="nombre",
-     *                         type="string",
-     *                         example="Harden II"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="marca",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Adidas"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="categoria",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Remeras"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="talle",
-     *                         type="string",
-     *                         example="xl"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="color",
-     *                         type="string",
-     *                         example="#FF0000"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="imagen",
-     *                         type="string",
-     *                         example="https://d2j6dbq0eux0bg.cloudfront.net/images/62219457/3384172981.jpg"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="precio",
-     *                         type="string",
-     *                         example="9999.99"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="descripcion",
-     *                         type="string",
-     *                         example="Edicion limitada 2023"
-     *                     )
-     *                 )
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *          response=404,
-     *          description="NOT FOUND",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Prendas not found {$marca}"),
-     *          )
-     *      )
-     * )
-     */
-    public function showByMarca(Marca $marca)
-    {
-        $prendas = Prenda::where('marca_id', $marca->id)
-            ->orderBy('id')
-            ->get();
-
-        return PrendaResource::collection($prendas);
-    }
-
-    /**
-     * Retorna un listado con la informacion de las prendas de un talle.
-     * @OA\Get (
-     *     path="/rest/prendas/talles/{talle}",
-     *     tags={"Prendas"},
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="talle",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="OK",
-     *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 type="array",
-     *                 property="rows",
-     *                 @OA\Items(
-     *                     type="object",
-     *                     @OA\Property(
-     *                         property="id",
-     *                         type="number",
-     *                         example="1"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="created_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="updated_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="nombre",
-     *                         type="string",
-     *                         example="Harden II"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="marca",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Adidas"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="categoria",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Remeras"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="talle",
-     *                         type="string",
-     *                         example="xl"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="color",
-     *                         type="string",
-     *                         example="#FF0000"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="imagen",
-     *                         type="string",
-     *                         example="https://d2j6dbq0eux0bg.cloudfront.net/images/62219457/3384172981.jpg"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="precio",
-     *                         type="string",
-     *                         example="9999.99"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="descripcion",
-     *                         type="string",
-     *                         example="Edicion limitada 2023"
-     *                     )
-     *                 )
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *          response=404,
-     *          description="NOT FOUND",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Prendas not found {$talle}"),
-     *          )
-     *      )
-     * )
-     */
-    public function showByTalle(string $talle)
-    {
-        $prendas = Prenda::where('talle', $talle)
-            ->orderBy('id')
-            ->get();
-
-        return PrendaResource::collection($prendas);
-    }
-
-
-    /**
-     * Retorna un listado con la informacion de las prendas de un color.
-     * @OA\Get (
-     *     path="/rest/prendas/colores/{color}",
-     *     tags={"Prendas"},
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="color",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="OK",
-     *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 type="array",
-     *                 property="rows",
-     *                 @OA\Items(
-     *                     type="object",
-     *                     @OA\Property(
-     *                         property="id",
-     *                         type="number",
-     *                         example="1"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="created_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="updated_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="nombre",
-     *                         type="string",
-     *                         example="Harden II"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="marca",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Adidas"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="categoria",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Remeras"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="talle",
-     *                         type="string",
-     *                         example="xl"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="color",
-     *                         type="string",
-     *                         example="#FF0000"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="imagen",
-     *                         type="string",
-     *                         example="https://d2j6dbq0eux0bg.cloudfront.net/images/62219457/3384172981.jpg"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="precio",
-     *                         type="string",
-     *                         example="9999.99"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="descripcion",
-     *                         type="string",
-     *                         example="Edicion limitada 2023"
-     *                     )
-     *                 )
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *          response=404,
-     *          description="NOT FOUND",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Prendas not found {$color}"),
-     *          )
-     *      )
-     * )
-     */
-    public function showByColor(string $color)
-    {
-        $prendas = Prenda::whereRaw('LOWER(color) = ?', [strtolower($color)])
-            ->orderBy('id')
-            ->get();
-
-        return PrendaResource::collection($prendas);
+        try {
+            $prenda = Prenda::findOrFail($id);
+            return new PrendaResource($prenda);
+        } catch (ModelNotFoundException) {
+            return response()->json(['message' => 'Prenda not found'], 404);
+        }
     }
 
 }

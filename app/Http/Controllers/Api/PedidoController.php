@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Pedidos\StorePedidoRequest;
 use App\Http\Resources\PedidoResource;
-use App\Http\Resources\PedidoWithPrendasResource;
 use App\Models\Pedido;
+use Illuminate\Http\Request;
 
 class PedidoController extends ApiController
 {
 
     /**
      * @OA\Post(
-     *     path="/rest/pedidos",
+     *     path="/rest/pedidos/",
      *     tags={"Pedidos"},
-     *     summary="Crear un pedido",
+     *     summary="Crea un pedido.",
      *     description="Permite crear un pedido con la información del cliente, el monto y las prendas.",
      *     @OA\RequestBody(
      *         @OA\MediaType(
@@ -49,7 +49,7 @@ class PedidoController extends ApiController
      *                         @OA\Property(
      *                             property="nombre",
      *                             type="string",
-     *                             example="Remera Lebron II",
+     *                             example="Mrs. Alysson Weber",
      *                             description="El nombre de la prenda."
      *                         ),
      *                         @OA\Property(
@@ -78,7 +78,7 @@ class PedidoController extends ApiController
      *         response=422,
      *         description="UNPROCESSABLE ENTITY",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="The given data was invalid.", description="El mensaje de error."),
+     *             @OA\Property(property="message", type="string", example="La informacion ingresada es invalida.", description="El mensaje de error."),
      *             @OA\Property(property="errors", type="object", description="Un objeto que contiene los errores de validación.")
      *         )
      *     )
@@ -95,15 +95,22 @@ class PedidoController extends ApiController
     }
 
     /**
-     * Retorna la información de un pedido especifico con todas sus prendas
+     * Retorna los pedidos de un cliente.
+     * En caso de especificar el parametro opcional {id} se retorna el pedido especifico del cliente.
      *
      * @OA\Get(
-     *     path="/rest/pedidos/{id}",
+     *     path="/rest/pedidos/",
      *     tags={"Pedidos"},
      *     @OA\Parameter(
-     *         in="path",
-     *         name="id",
+     *         in="query",
+     *         name="mail_cliente",
      *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         in="query",
+     *         name="id",
+     *         required=false,
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
@@ -112,50 +119,105 @@ class PedidoController extends ApiController
      *         @OA\JsonContent(
      *             @OA\Property(
      *                 property="data",
-     *                 type="object",
-     *                 @OA\Property(
-     *                     property="id",
-     *                     type="number",
-     *                     example="1000"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="created_at",
-     *                     type="string",
-     *                     example="2023-05-07 20:13:03"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="updated_at",
-     *                     type="string",
-     *                     example="2023-05-07 20:13:03"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="mail_cliente",
-     *                     type="string",
-     *                     example="clienteiaw2023@gmail.com"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="monto",
-     *                     type="string",
-     *                     example="35999.99"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="prendas",
-     *                     type="array",
-     *                     @OA\Items(
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Harden"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="cantidad",
-     *                             type="number",
-     *                             example="4"
+     *                 type="array",
+     *                 @OA\Items(
+     *                     @OA\Property(
+     *                         property="id",
+     *                         type="number",
+     *                         example="1000"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="created_at",
+     *                         type="string",
+     *                         example="2023-05-07 20:13:03"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="updated_at",
+     *                         type="string",
+     *                         example="2023-05-07 20:13:03"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="mail_cliente",
+     *                         type="string",
+     *                         example="clienteiaw2023@gmail.com"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="monto",
+     *                         type="string",
+     *                         example="35999.99"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="prendas",
+     *                         type="array",
+     *                         @OA\Items(
+     *                             @OA\Property(
+     *                                 property="id",
+     *                                 type="number",
+     *                                 example="1"
+     *                             ),
+     *                             @OA\Property(
+     *                                 property="nombre",
+     *                                 type="string",
+     *                                 example="Harden"
+     *                             ),
+     *                             @OA\Property(
+     *                                 property="marca",
+     *                                 type="object",
+     *                                 @OA\Property(
+     *                                     property="id",
+     *                                     type="number",
+     *                                     example="1"
+     *                                 ),
+     *                                 @OA\Property(
+     *                                     property="nombre",
+     *                                     type="string",
+     *                                     example="Adidas"
+     *                                 )
+     *                             ),
+     *                             @OA\Property(
+     *                                 property="categoria",
+     *                                 type="object",
+     *                                 @OA\Property(
+     *                                     property="id",
+     *                                     type="number",
+     *                                     example="1"
+     *                                 ),
+     *                                 @OA\Property(
+     *                                     property="nombre",
+     *                                     type="string",
+     *                                     example="Remeras"
+     *                                 )
+     *                             ),
+     *                             @OA\Property(
+     *                                 property="talle",
+     *                                 type="string",
+     *                                 example="xl"
+     *                             ),
+     *                             @OA\Property(
+     *                                 property="color",
+     *                                 type="string",
+     *                                 example="#FF0000"
+     *                             ),
+     *                             @OA\Property(
+     *                                 property="imagen",
+     *                                 type="string",
+     *                                 example="https://d2j6dbq0eux0bg.cloudfront.net/images/62219457/3384172981.jpg"
+     *                             ),
+     *                             @OA\Property(
+     *                                 property="precio",
+     *                                 type="string",
+     *                                 example="9999.99"
+     *                             ),
+     *                             @OA\Property(
+     *                                 property="descripcion",
+     *                                 type="string",
+     *                                 example="Edicion limitada 2023"
+     *                             ),
+     *                             @OA\Property(
+     *                                 property="cantidad",
+     *                                 type="number",
+     *                                 example="4"
+     *                             ),
      *                         )
      *                     )
      *                 )
@@ -163,68 +225,35 @@ class PedidoController extends ApiController
      *         )
      *     ),
      *     @OA\Response(
-     *       response=404,
-     *       description="Not found",
-     *       @OA\JsonContent(
-     *           @OA\Property(
-     *               property="message",
-     *               type="string",
-     *               example="Pedido not found {$id}"
-     *           )
-     *       )
-     *    )
-     * )
-     */
-    public function show(Pedido $pedido)
-    {
-        return new PedidoWithPrendasResource($pedido);
-    }
-
-    /**
-     * Obtiene una lista con todos los pedidos de un cliente
-     *
-     * @OA\Get(
-     *     path="/rest/pedidos/clientes/{mail_cliente}",
-     *     tags={"Pedidos"},
-     *     @OA\Parameter(
-     *         name="mail_cliente",
-     *         in="path",
-     *         description="Mail del cliente a buscar",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="OK",
+     *         response=404,
+     *         description="Not found",
      *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(
-     *                 @OA\Property(property="id", type="number", example=1),
-     *                 @OA\Property(property="created_at", type="string", example="2023-05-07 00:00:00"),
-     *                 @OA\Property(property="updated_at", type="string", example="2023-05-07 00:00:00"),
-     *                 @OA\Property(property="mail_cliente", type="string", example="clienteiaw2023@gmail.com"),
-     *                 @OA\Property(property="monto", type="number", example="9999999999.99")
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 example="Pedido not found"
      *             )
      *         )
-     *     ),
-     *      @OA\Response(
-     *       response=404,
-     *       description="Not found",
-     *       @OA\JsonContent(
-     *           @OA\Property(
-     *               property="message",
-     *               type="string",
-     *               example="Pedidos not found {mail_cliente}"
-     *           )
-     *       )
-     *    )
+     *     )
      * )
      */
-    public function showAll(string $mail_cliente)
+    public function show(Request $request)
     {
-        $pedidos = Pedido::where('mail_cliente', $mail_cliente)->latest()->get();
+        $mail_cliente = $request->input('mail_cliente');
+        $id = $request->input('id');
+
+        $pedidos = Pedido::where('mail_cliente', $mail_cliente);
+
+        if ($id) {
+            $pedidos->where('id', $id);
+        }
+
+        $result = $pedidos->get();
+
+        if ($result->isEmpty()) {
+            return response()->json(['message' => 'Pedidos not found'], 404);
+        }
+
         return PedidoResource::collection($pedidos);
     }
 

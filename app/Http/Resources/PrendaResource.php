@@ -16,11 +16,9 @@ class PrendaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
             'nombre' => $this->nombre,
-            'marca' => $this->marca->only(['id', 'nombre']),
-            'categoria' => $this->categoria->only(['id', 'nombre']),
+            'marca' => new MarcaResource($this->marca),
+            'categoria' => new CategoriaResource($this->categoria),
             'talle' => $this->talle,
             'color' => $this->color,
             'imagen' => $this->imagen,

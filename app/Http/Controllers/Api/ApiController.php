@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 *             description="Lista de URI's de la API"
 * )
 *
-* @OA\Server(url="https://robot-rangers-laravel.vercel.app/")
+* @OA\Server(url="http://localhost:8000/")
 */
 class ApiController extends Controller
 {

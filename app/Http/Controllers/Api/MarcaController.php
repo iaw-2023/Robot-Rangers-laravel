@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Marca;
 use App\Http\Resources\MarcaResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MarcaController extends ApiController
 {
@@ -12,7 +13,7 @@ class MarcaController extends ApiController
      * Retorna un listado con la informacion de todas las marcas
      * 
      * @OA\Get (
-     *     path="/rest/marcas",
+     *     path="/rest/marcas/",
      *     tags={"Marcas"},
      *     @OA\Response(
      *         response=200,
@@ -68,11 +69,17 @@ class MarcaController extends ApiController
      */
     public function index()
     {
-        return MarcaResource::collection(Marca::all());
+        $marcas = Marca::all();
+
+        if ($marcas->count() === 0) {
+            return response()->json(['message' => 'Marcas not found'], 404);
+        }
+
+        return MarcaResource::collection($marcas);
     }
 
      /**
-     * Retorna la información de una marca especifica
+     * Retorna la información de una marca especifica.
      * 
      * @OA\Get (
      *     path="/rest/marcas/{id}",
@@ -101,15 +108,20 @@ class MarcaController extends ApiController
      *          response=404,
      *          description="NOT FOUND",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Marca not found {$id}"),
+     *              @OA\Property(property="message", type="string", example="Marca not found"),
      *          )
      *      )
      * )
      * 
      */
-    public function show(Marca $marca)
+    public function show(string $id)
     {
-        return new MarcaResource($marca);
+        try {
+            $marca = Marca::findOrFail($id);
+            return new MarcaResource($marca);
+        } catch (ModelNotFoundException) {
+            return response()->json(['message' => 'Marca not found'], 404);
+        }
     }
 
 }
