@@ -21,6 +21,12 @@ class PrendaController extends ApiController
      *     tags={"Prendas"},
      *     @OA\Parameter(
      *         in="query",
+     *         name="nombre",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         in="query",
      *         name="categoria",
      *         required=false,
      *         @OA\Schema(type="number")
@@ -94,13 +100,14 @@ class PrendaController extends ApiController
     public function index(Request $request)
     {
         $prendas = Prenda::query()
+            ->when($request->has('nombre'), fn($query) => $query->whereRaw('LOWER(nombre) LIKE ?', ['%'.strtolower($request->input('nombre')).'%']))
             ->when($request->has('categoria'), fn($query) => $query->where('categoria_id', $request->input('categoria')))
             ->when($request->has('marca'), fn($query) => $query->where('marca_id', $request->input('marca')))
             ->when($request->has('talle'), fn($query) => $query->whereRaw('LOWER(talle) = ?', [strtolower($request->input('talle'))]))
             ->when($request->has('color'), fn($query) => $query->whereRaw('LOWER(color) = ?', [strtolower($request->input('color'))]))
             ->when($request->has('precio'), fn($query) => $query->orderBy('precio', $request->input('precio')));
 
-        $result = $prendas->paginate(10);
+        $result = $prendas->paginate(12);
 
         if ($result->isEmpty()) {
             return response()->json(['message' => 'Prendas not found'], 404);
