@@ -1,53 +1,30 @@
-## Proyecto Inicial
+## Proyecto Framework PHP Laravel
 
-- Respecto del modelo E-R:
+Aclaraciones
 
-Las entidades que se utilizan son:
-* Pedido
-* Prenda
-* DetallePedido (relación Pedido-Prenda)
-* Marca
-* Categoria
+Prendas
+* Al cargar una prenda, el color seleccionado en el picker debe respetar el estandar de html colours.
+https://htmlcolorcodes.com/es/
+Esto es necesario realizarlo, para que despues el filtrado por color funcione segun lo esperado.
 
-El diagrama E-R asociado al modelo esta en el repositorio del proyecto.
+Pedidos / Detalle_pedidos
+* Al cargar un pedido con sus respectivas prendas por API es porque se entiende que el pedido esta confirmado por el cliente y esta acción no puede revertirse. Es decir, no se permite realizar un update() o un destroy() una vez que el pedido esta creado, ya que para esto se deberia utilizar un estado del pedido y realizar un trackeo del mismo, ya que si esta en cierto estado deberia limitar las funcionalidades.
+* La relacion detalle_pedidos al cargar un pedido queda implicita dentro del arreglo de prendas que se le envian en el body del request. De esta forma, se puede cargar un pedido y todas sus prendas asociadas con un solo request en lugar de tener que cargar el pedido y una vez creado, cargar prenda por prenda, lo cual implica hacer varias llamadas en la API.
+* La fecha de crecion del pedido que antes se modelaba como un atributo mas de la entidad pedido, ahora se aprovechan los timestamps que ofrece laravel para utilizar la propiedad created_at que al fin y al cabo modela lo mismo, pero ya esta implementado sin necesidad de agregar nada. Lo unico que se necesita es configurar la zona horaria de los timestamps.
 
-- Respecto al [Proyecto Framework PHP - Laravel]
+Funcionalidades
+* En cuanto al admin se ofrecen busquedas por nombre para las tablas de Categorias, Marcas y Prendas, y busquedas por mail_cliente para los Pedidos.
+* Mientras que a nivel de API se permite diversos filtrados adicionales que puede utilizar el usuario.
+* Esto se realiza por simplicidad en las vistas y cuestiones de tiempo, pero ofrecer las mismas funcionalidades de filtrado para el admin como para clientes no es complicado, pero decidimos centrarnos en otros aspectos del desarrollo.
 
-* Las entidades que se podran actualizar son: Prenda, Marca y Categoría.
-* Los reportes que se podran generar son: 
-    - Historial de pedidos
-    - Prendas asociadas a un pedido en particular
-    - Prendas correspondientes a una Marca
-    - Prendas correspondientes a una Categoria 
-* Las entidades que se podrán obtener por API son: Prenda, Marca, Categoria.
-* Las entidades que se podrán modificar por API son: Pedido, DetallePedido.
-    
-- Respecto al [Proyecto Javascript - React/Vue]
-* La informacion que podra ver el usuario respecto de las entidades es la siguiente:
-    - Prenda: precio, imagen, talle, color, descripcion
-    - Marca: nombre, descripcion
-    - Categoria: nombre
-  Ademas de que esta informacion estara estructurada de acuerdo a una pagina de inicio (imagenes, marcas, productos), que sera basicamente una presentación de la pagina.
-  Respecto de los productos, la idea es mostrarlos de manera aleatoria o prestablecida en la pagina de inicio (un conjunto de los mismos) y brindar la posibilidad de filtrado por marca, por categoria, por rango de precio, entre otros. Tanto las categorias, como las marcas se podran visualizar en la barra superior para poder seleccionarlas, acompañadas de un buscador para realizar busquedas mas especificas, informacion de contacto y botones para redireccionar a las redes sociales.
-*  Las acciones que podra realizar el usuario son entre ellas:
-    - Realizar busquedas y filtrados: buscador, categoria, marca, rango de precios, talle, color.
-    - Agregar un articulo al carrito.
-    - Realizar la compra del carrito.
-    - Ver sus pedidos realizados y la informacion asociada a cada pedido.
+Documentacion 
+* La manera de encontrar la documentacion de swagger es accediendo en el link de vercel: 
+../rest/documentation
+* La forma utilizada para documentar es la que ofrece swagger para hacerla directamente sobre el codigo, sin necesidad
+de crear archivos yaml.
 
-* Las migrations realizadas para crear la base de datos son:
-    - marcas
-    - categorias
-    - prendas
-    - pedidos
-    - detalle_pedidos
-  El motor utilizado es PostgreSQL.
-* Los seeders son implementados con factories e incluyen datos de prueba para:
-    - 100 categorias
-    - 100 marcas
-    - 500 pedidos
-    - 500 prendas
-    - 1000 detalle_pedidos
-  creados con Faker, con el fin de abarcar una amplia variedad de casos.
-  Para la creacion de detalle_pedidos y prenda en las factories, utilizamos random para establecer las llaves foraneas, ya que sabemos de antemano la cantidad de entidades que utilizamos y los ids en laravel son incrementales (1..n). En lugar de esto, es posible utilizar pluck() que permite obtener las columnas que se le especifica por parametro de las tablas creadas y mapearlas a un arreglo, pero la función es ineficiente a la hora de crear grandes cantidades de entidades. Es por esto que decidimos usar esta simplificación y evitar el tiempo extra que conlleva.
-  Además, entendemos que para identificar un detalle_pedido basta con utilizar las llaves foraneas de las entidades pedido y prenda como llave primaria, pero debido a los standares de laravel y evitar complejidad, le dejamos el id() que viene por defecto como llave primaria.
+JavaScript
+Utilizamos la libreria select2 para hacer el select de categoria y marca de una mejor manera en el apartado de prendas, ahora se puede buscar lo cual agiliza mucho al usuario el seleccionar una categoria y una prenda.
+
+Quedan pendientes hacer los datos que se van a utilizar en la proxima entrega, osea con datos reales y no los generados por el faker.
+Link de vercel: https://robot-rangers-laravel.vercel.app/

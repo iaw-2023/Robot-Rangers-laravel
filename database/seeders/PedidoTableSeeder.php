@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Pedido;
 
@@ -13,6 +12,6 @@ class PedidoTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Pedido::factory(500)->create();
+        Pedido::factory(200)->create();
     }
 }

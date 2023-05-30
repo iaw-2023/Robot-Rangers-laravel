@@ -13,6 +13,6 @@ class PrendaTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Prenda::factory(500)->create();
+        Prenda::factory(100)->create();
     }
 }

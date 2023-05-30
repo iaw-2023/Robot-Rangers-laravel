@@ -1,0 +1,823 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Robot Rangers",
+        "description": "Lista de URI's de la API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://robot-rangers-laravel.vercel.app/"
+        }
+    ],
+    "paths": {
+        "/rest/categorias/": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Retorna un listado con la informacion de todas las categorias.",
+                "operationId": "289ebfdba4df77821523e861c95f3c1f",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "example": "1"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "nombre": {
+                                                        "type": "string",
+                                                        "example": "Remeras"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Categorias not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/categorias/{id}": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Retorna la información de una categoria especifica.",
+                "operationId": "ba06836325c76e95b6677967d89e2c6f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 2
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
+                                        "nombre": {
+                                            "type": "string",
+                                            "example": "Buzos"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Categoria not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/marcas/": {
+            "get": {
+                "tags": [
+                    "Marcas"
+                ],
+                "summary": "Retorna un listado con la informacion de todas las marcas",
+                "operationId": "1bcf6c4cefdd50c6e2d63a2633dd4f72",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "example": "1"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "nombre": {
+                                                        "type": "string",
+                                                        "example": "Adidas"
+                                                    },
+                                                    "imagen": {
+                                                        "type": "string",
+                                                        "example": "https://highxtar.com/wp-content/uploads/2021/04/highxtar-impossible-is-nothing-adidas-campana-1.jpg"
+                                                    },
+                                                    "descripcion": {
+                                                        "type": "string",
+                                                        "example": "Imposible is Nothing"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Marcas not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/marcas/{id}": {
+            "get": {
+                "tags": [
+                    "Marcas"
+                ],
+                "summary": "Retorna la información de una marca especifica.",
+                "operationId": "0b6865c623deb71fd8abbc07d7584b88",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 2
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
+                                        "nombre": {
+                                            "type": "string",
+                                            "example": "Nike"
+                                        },
+                                        "imagen": {
+                                            "type": "string",
+                                            "example": "https://static.ffx.io/images/$zoom_1%2C$multiply_2.1113%2C$ratio_1.777778%2C$width_485%2C$x_53%2C$y_54/t_crop_custom/q_86%2Cf_auto/f54a63f81d65d0b5b4db5f2235bbe665f5310227"
+                                        },
+                                        "descripcion": {
+                                            "type": "string",
+                                            "example": "Just do it"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Marca not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/pedidos/": {
+            "get": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "Retorna los pedidos de un cliente.",
+                "description": "En caso de especificar el parametro opcional {id} se retorna el pedido especifico del cliente.",
+                "operationId": "f3107a30b7ffba5fa77e981432d0455e",
+                "parameters": [
+                    {
+                        "name": "mail_cliente",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "example": "1000"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 20:13:03"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 20:13:03"
+                                                    },
+                                                    "mail_cliente": {
+                                                        "type": "string",
+                                                        "example": "clienteiaw2023@gmail.com"
+                                                    },
+                                                    "monto": {
+                                                        "type": "string",
+                                                        "example": "35999.99"
+                                                    },
+                                                    "prendas": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "number",
+                                                                    "example": "1"
+                                                                },
+                                                                "nombre": {
+                                                                    "type": "string",
+                                                                    "example": "Harden"
+                                                                },
+                                                                "marca": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "number",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "nombre": {
+                                                                            "type": "string",
+                                                                            "example": "Adidas"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "categoria": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "number",
+                                                                            "example": "1"
+                                                                        },
+                                                                        "nombre": {
+                                                                            "type": "string",
+                                                                            "example": "Remeras"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "talle": {
+                                                                    "type": "string",
+                                                                    "example": "xl"
+                                                                },
+                                                                "color": {
+                                                                    "type": "string",
+                                                                    "example": "#FF0000"
+                                                                },
+                                                                "imagen": {
+                                                                    "type": "string",
+                                                                    "example": "https://d2j6dbq0eux0bg.cloudfront.net/images/62219457/3384172981.jpg"
+                                                                },
+                                                                "precio": {
+                                                                    "type": "string",
+                                                                    "example": "9999.99"
+                                                                },
+                                                                "descripcion": {
+                                                                    "type": "string",
+                                                                    "example": "Edicion limitada 2023"
+                                                                },
+                                                                "cantidad": {
+                                                                    "type": "number",
+                                                                    "example": "4"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pedidos not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "Crea un pedido.",
+                "description": "Permite crear un pedido con la información del cliente, el monto y las prendas.",
+                "operationId": "21d79c1fd1100d09ceffb3c50ade91cb",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "mail_cliente",
+                                    "monto",
+                                    "prendas"
+                                ],
+                                "properties": {
+                                    "mail_cliente": {
+                                        "description": "El correo electrónico del cliente.",
+                                        "type": "string",
+                                        "example": "cliente@iaw2023.com"
+                                    },
+                                    "monto": {
+                                        "description": "El monto total del pedido.",
+                                        "type": "string",
+                                        "example": "9999.99"
+                                    },
+                                    "prendas": {
+                                        "description": "Un arreglo de prendas que contiene el id y cantidad de cada prenda del pedido.",
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "id",
+                                                "cantidad"
+                                            ],
+                                            "properties": {
+                                                "id": {
+                                                    "description": "El id de la prenda.",
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "cantidad": {
+                                                    "description": "La cantidad de la prenda.",
+                                                    "type": "integer",
+                                                    "example": 4
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "El id del pedido.",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "description": "La fecha y hora de creación del pedido.",
+                                            "type": "string",
+                                            "example": "2023-05-07 00:00:00"
+                                        },
+                                        "updated_at": {
+                                            "description": "La fecha y hora de actualización del pedido.",
+                                            "type": "string",
+                                            "example": "2023-05-07 00:00:00"
+                                        },
+                                        "mail_cliente": {
+                                            "description": "El correo electrónico del cliente.",
+                                            "type": "string",
+                                            "example": "cliente@iaw2023.com"
+                                        },
+                                        "monto": {
+                                            "description": "El monto total del pedido.",
+                                            "type": "number",
+                                            "example": 9999.99
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "UNPROCESSABLE CONTENT",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "El mensaje de error.",
+                                            "type": "string",
+                                            "example": "La informacion ingresada es invalida."
+                                        },
+                                        "errors": {
+                                            "description": "Un objeto que contiene los errores de validación.",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/prendas/": {
+            "get": {
+                "tags": [
+                    "Prendas"
+                ],
+                "summary": "Retorna un listado de prendas.",
+                "description": "Si se especifican parametros de filtrado, se retornan las prendas filtradas.\nDe lo contrario, se retornan todas las prendas.\n(Las prendas se devuelven paginadas de a 10)",
+                "operationId": "0d3515795801364ca5c2e37d264f6bb9",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "marca",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "talle",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "color",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "precio",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "example": "1"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2023-05-07 00:00:00"
+                                                    },
+                                                    "nombre": {
+                                                        "type": "string",
+                                                        "example": "Harden II"
+                                                    },
+                                                    "marca": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "number",
+                                                                "example": "1"
+                                                            },
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "Adidas"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "categoria": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "number",
+                                                                "example": "1"
+                                                            },
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "Remeras"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "talle": {
+                                                        "type": "string",
+                                                        "example": "xl"
+                                                    },
+                                                    "color": {
+                                                        "type": "string",
+                                                        "example": "#FF0000"
+                                                    },
+                                                    "imagen": {
+                                                        "type": "string",
+                                                        "example": "https://d2j6dbq0eux0bg.cloudfront.net/images/62219457/3384172981.jpg"
+                                                    },
+                                                    "precio": {
+                                                        "type": "string",
+                                                        "example": "9999.99"
+                                                    },
+                                                    "descripcion": {
+                                                        "type": "string",
+                                                        "example": "Edicion limitada 2023"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Prendas not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/prendas/{id}": {
+            "get": {
+                "tags": [
+                    "Prendas"
+                ],
+                "summary": "Retorna la informacion de una prenda especifica.",
+                "operationId": "cf9d78154d91c80c893fdd9aa48a39b8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 2
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-05-07 19:57:30"
+                                        },
+                                        "nombre": {
+                                            "type": "string",
+                                            "example": "Lebron V"
+                                        },
+                                        "marca": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": "2"
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Nike"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "categoria": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": "2"
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Buzos"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "talle": {
+                                            "type": "string",
+                                            "example": "s"
+                                        },
+                                        "color": {
+                                            "type": "string",
+                                            "example": "#808080"
+                                        },
+                                        "imagen": {
+                                            "type": "string",
+                                            "example": "https://ferreira.vtexassets.com/arquivos/ids/375759-800-auto?v=637538350967900000&width=800&height=auto&aspect=true"
+                                        },
+                                        "precio": {
+                                            "type": "string",
+                                            "example": "999999.99"
+                                        },
+                                        "descripcion": {
+                                            "type": "string",
+                                            "example": "Edicion NBA"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Prenda not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

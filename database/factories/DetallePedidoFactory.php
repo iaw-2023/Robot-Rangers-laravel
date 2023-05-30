@@ -18,15 +18,10 @@ class DetallePedidoFactory extends Factory
      */
     public function definition(): array
     {
-        //$pedidos = Pedido::pluck('id')->toArray();
-        //$prendas = Prenda::pluck('id')->toArray();
         return [
-            //
-            //'pedido_id' => $this->faker->randomElement($pedidos),
-            'pedido_id' => rand(1, 500),
-            //'prenda_id' => $this->faker->randomElement($prendas),
-            'prenda_id' => rand(1, 500),
-            'cantidad' => rand(1, 10),
+            'pedido_id' => Pedido::inRandomOrder()->first(),
+            'prenda_id' => Prenda::inRandomOrder()->first(),
+            'cantidad' => $this->faker->numberBetween(1, 10),
         ];
     }
 }
