@@ -562,6 +562,14 @@
                 "operationId": "0d3515795801364ca5c2e37d264f6bb9",
                 "parameters": [
                     {
+                        "name": "nombre",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "categoria",
                         "in": "query",
                         "required": false,
