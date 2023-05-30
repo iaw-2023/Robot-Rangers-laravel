@@ -621,51 +621,9 @@
                                                         "type": "number",
                                                         "example": "1"
                                                     },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "example": "2023-05-07 00:00:00"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "example": "2023-05-07 00:00:00"
-                                                    },
                                                     "nombre": {
                                                         "type": "string",
                                                         "example": "Harden II"
-                                                    },
-                                                    "marca": {
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "number",
-                                                                "example": "1"
-                                                            },
-                                                            "nombre": {
-                                                                "type": "string",
-                                                                "example": "Adidas"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    "categoria": {
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "number",
-                                                                "example": "1"
-                                                            },
-                                                            "nombre": {
-                                                                "type": "string",
-                                                                "example": "Remeras"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    "talle": {
-                                                        "type": "string",
-                                                        "example": "xl"
-                                                    },
-                                                    "color": {
-                                                        "type": "string",
-                                                        "example": "#FF0000"
                                                     },
                                                     "imagen": {
                                                         "type": "string",
@@ -674,10 +632,6 @@
                                                     "precio": {
                                                         "type": "string",
                                                         "example": "9999.99"
-                                                    },
-                                                    "descripcion": {
-                                                        "type": "string",
-                                                        "example": "Edicion limitada 2023"
                                                     }
                                                 },
                                                 "type": "object"

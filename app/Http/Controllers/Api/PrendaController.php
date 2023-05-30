@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\PrendaResource;
+use App\Http\Resources\PrendaCompletaResource;
 use App\Models\Prenda;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -63,57 +64,9 @@ class PrendaController extends ApiController
      *                         example="1"
      *                     ),
      *                     @OA\Property(
-     *                         property="created_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="updated_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
      *                         property="nombre",
      *                         type="string",
      *                         example="Harden II"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="marca",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Adidas"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="categoria",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Remeras"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="talle",
-     *                         type="string",
-     *                         example="xl"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="color",
-     *                         type="string",
-     *                         example="#FF0000"
      *                     ),
      *                     @OA\Property(
      *                         property="imagen",
@@ -124,11 +77,6 @@ class PrendaController extends ApiController
      *                         property="precio",
      *                         type="string",
      *                         example="9999.99"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="descripcion",
-     *                         type="string",
-     *                         example="Edicion limitada 2023"
      *                     )
      *                 )
      *             )
@@ -232,7 +180,7 @@ class PrendaController extends ApiController
     {
         try {
             $prenda = Prenda::findOrFail($id);
-            return new PrendaResource($prenda);
+            return new PrendaCompletaResource($prenda);
         } catch (ModelNotFoundException) {
             return response()->json(['message' => 'Prenda not found'], 404);
         }
