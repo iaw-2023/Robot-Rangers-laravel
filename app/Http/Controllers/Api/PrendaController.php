@@ -113,6 +113,8 @@ class PrendaController extends ApiController
             return response()->json(['message' => 'Prendas not found'], 404);
         }
 
+        $result->appends($request->all());
+
         return PrendaResource::collection($result);
     }
 
