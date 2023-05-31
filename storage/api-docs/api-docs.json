@@ -289,7 +289,7 @@
                     "Pedidos"
                 ],
                 "summary": "Retorna los pedidos de un cliente.",
-                "description": "En caso de especificar el parametro opcional {id} se retorna el pedido especifico del cliente.",
+                "description": "En caso de especificar el parametro opcional {id} se retorna el pedido especifico del cliente.\n(Los pedidos se paginan de a 3)",
                 "operationId": "f3107a30b7ffba5fa77e981432d0455e",
                 "parameters": [
                     {
@@ -558,7 +558,7 @@
                     "Prendas"
                 ],
                 "summary": "Retorna un listado de prendas.",
-                "description": "Si se especifican parametros de filtrado, se retornan las prendas filtradas.\nDe lo contrario, se retornan todas las prendas.\n(Las prendas se devuelven paginadas de a 10)",
+                "description": "Si se especifican parametros de filtrado, se retornan las prendas filtradas.\nDe lo contrario, se retornan todas las prendas.\n(Las prendas se devuelven paginadas de a 12)",
                 "operationId": "0d3515795801364ca5c2e37d264f6bb9",
                 "parameters": [
                     {

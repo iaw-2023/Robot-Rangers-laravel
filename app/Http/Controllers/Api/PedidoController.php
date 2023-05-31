@@ -91,7 +91,8 @@ class PedidoController extends ApiController
     /**
      * Retorna los pedidos de un cliente.
      * En caso de especificar el parametro opcional {id} se retorna el pedido especifico del cliente.
-     *
+     * (Los pedidos se paginan de a 3)
+     * 
      * @OA\Get(
      *     path="/rest/pedidos/",
      *     tags={"Pedidos"},
@@ -242,7 +243,7 @@ class PedidoController extends ApiController
             $pedidos->where('id', $id);
         }
 
-        $result = $pedidos->get();
+        $result = $pedidos->paginate(3);
 
         if ($result->isEmpty()) {
             return response()->json(['message' => 'Pedidos not found'], 404);
