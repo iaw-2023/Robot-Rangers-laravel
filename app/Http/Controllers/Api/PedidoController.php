@@ -249,6 +249,8 @@ class PedidoController extends ApiController
             return response()->json(['message' => 'Pedidos not found'], 404);
         }
 
+        $result->appends($request->all());
+
         return PedidoResource::collection($result);
     }
 
