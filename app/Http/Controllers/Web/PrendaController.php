@@ -43,7 +43,7 @@ class PrendaController extends Controller
     {
         $fileName = time().$request->file('imagen')->getClientOriginalName();
         $path = $request->file('imagen')->storeAs('images', $fileName, 'public');
-        $requestData["imagen"] = '/storage/'.$path;
+        $requestData["imagen"] = url('/') . '/storage/' . $path;
 
         Prenda::create($requestData);
         
@@ -75,7 +75,11 @@ class PrendaController extends Controller
      */
     public function update(UpdatePrendaRequest $request, Prenda $prenda)
     {
-        $prenda->update($request->validated());
+        $input = $request->validated();
+        $fileName = time().$request->file('imagen')->getClientOriginalName();
+        $path = $request->file('imagen')->storeAs('images', $fileName, 'public');
+        $requestData["imagen"] = url('/') . '/storage/' . $path;
+        $prenda->update($input);
         return redirect('prendas')->with('success', 'Prenda has been updated.');
     }
 
