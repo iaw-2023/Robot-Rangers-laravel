@@ -51,7 +51,9 @@
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900">
             <label class="form-label bg-gray-800 dark:bg-gray-900">Imagen</label>
-            <input type="text" name="imagen" class="form-control @error('imagen') is-invalid @enderror" value="{{$prenda->imagen}}">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFileLang" lang="es" name="imagen">
+            </div>
             @error('imagen')
                 <span class="text-danger">
                     <strong>{{$message}}</strong>

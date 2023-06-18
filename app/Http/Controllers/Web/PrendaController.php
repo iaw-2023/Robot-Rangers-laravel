@@ -41,9 +41,15 @@ class PrendaController extends Controller
      */
     public function store(StorePrendaRequest $request)
     {
-        Prenda::create($request->validated());
-        return redirect('prendas')->with('success', 'Prenda has been created.');
+        $fileName = time().$request->file('imagen')->getClientOriginalName();
+        $path = $request->file('imagen')->storeAs('images', $fileName, 'public');
+        $requestData["imagen"] = '/storage/'.$path;
+
+        Prenda::create($requestData);
+        
+        return redirect('prendas')->with('success', 'Prenda has been created successfully');
     }
+    
 
     /**
      * Display the specified resource.
