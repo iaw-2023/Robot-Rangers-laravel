@@ -3,10 +3,10 @@
 @section('content')
 <div class="container" >
 <div class="card col-6 offset-3 bg-gray-800 dark:bg-gray-900 shadow">
-  <h5 class="card-header bg-gray-800 dark:bg-gray-900"">Editar prendas</h5>
+  <h5 class="card-header bg-gray-800 dark:bg-gray-900">Editar prendas</h5>
   <div class="card-body">
   @include('messages')
-     <form action="/prendas/{{$prenda->id}}" method="POST">
+     <form action="/prendas/{{$prenda->id}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         
@@ -51,12 +51,15 @@
         </div>
         <div class="mb-3 bg-gray-800 dark:bg-gray-900">
             <label class="form-label bg-gray-800 dark:bg-gray-900">Imagen</label>
-            <div class="custom-file">
+            <div>
+                <img src="{{ $prenda->imagen }}" alt="Imagen actual" style="max-width:40%; height:auto;">
+            </div>
+            <div class="custom-file mt-3">
                 <input type="file" class="custom-file-input" id="customFileLang" lang="es" name="imagen">
             </div>
             @error('imagen')
                 <span class="text-danger">
-                    <strong>{{$message}}</strong>
+                    <strong>{{ $message }}</strong>
                 </span>
             @enderror
         </div>
