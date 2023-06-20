@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
+
+    private $cloudinaryService;
+
+    public function __construct(CloudinaryService $cloudinary)
+    {
+        $this->cloudinaryService = $cloudinary;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -37,7 +45,10 @@ class MarcaController extends Controller
      */
     public function store(StoreMarcaRequest $request)
     {
-        Marca::create($request->validated());
+        $requestData = $request->validated();
+        $requestData["imagen"] = $this->cloudinaryService->uploadImage($request->file('imagen'));
+        Marca::create($requestData);
+
         return redirect('marcas')->with('success', 'Marca has been created.');
     }
 
@@ -62,7 +73,13 @@ class MarcaController extends Controller
      */
     public function update(UpdateMarcaRequest $request, Marca $marca)
     {
-        $marca->update($request->validated());
+        $requestData = $request->validated();
+        if ($request->hasFile('imagen')) {
+            $this->cloudinaryService->deleteImage($marca->imagen);
+            $requestData["imagen"] = $this->cloudinaryService->uploadImage($request->file('imagen'));
+        }
+        $marca->update($requestData);
+
         return redirect('marcas')->with('success', 'Marca has been updated.');;
     }
 

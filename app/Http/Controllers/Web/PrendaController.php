@@ -12,6 +12,13 @@ use Illuminate\Http\Request;
 
 class PrendaController extends Controller
 {
+    private $cloudinaryService;
+
+    public function __construct(CloudinaryService $cloudinary)
+    {
+        $this->cloudinaryService = $cloudinary;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -42,7 +49,7 @@ class PrendaController extends Controller
     public function store(StorePrendaRequest $request)
     {
         $requestData = $request->validated();
-        $requestData["imagen"] = cloudinary()->upload($request->file('imagen')->getRealPath())->getSecurePath();
+        $requestData["imagen"] = $this->cloudinaryService->uploadImage($request->file('imagen'));
         Prenda::create($requestData);
         
         return redirect('prendas')->with('success', 'Prenda has been created successfully');
@@ -75,27 +82,13 @@ class PrendaController extends Controller
     {
         $requestData = $request->validated();
         if ($request->hasFile('imagen')) {
-            $imageId = $this->getImageIdFromUrl($prenda->imagen);
-            cloudinary()->destroy($imageId);
-            $requestData["imagen"] = cloudinary()->upload($request->file('imagen')->getRealPath())->getSecurePath();
+            $this->cloudinaryService->deleteImage($prenda->imagen);
+            $requestData["imagen"] = $this->cloudinaryService->uploadImage($request->file('imagen'));
         }
         $prenda->update($requestData);
 
         return redirect('prendas')->with('success', 'Prenda has been updated.');
     }
-
-    private function getImageIdFromUrl($imageUrl)
-    {
-        $pattern = '/\/v\d+\/([^\/.]+)/';
-        preg_match($pattern, $imageUrl, $matches);
-
-        if (isset($matches[1])) {
-            return $matches[1];
-        }
-
-        return null;
-    }
-
 
     /**
      * Remove the specified resource from storage.
