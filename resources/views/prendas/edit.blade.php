@@ -9,7 +9,6 @@
      <form action="/prendas/{{$prenda->id}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        
         <div class="mb-3 bg-gray-800 dark:bg-gray-900">
             <label class="form-label bg-gray-800 dark:bg-gray-900">Nombre</label>
             <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{$prenda->nombre}}">

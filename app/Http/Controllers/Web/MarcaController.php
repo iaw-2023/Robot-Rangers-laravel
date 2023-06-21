@@ -15,6 +15,13 @@ class MarcaController extends Controller
 
     public function __construct(CloudinaryService $cloudinary)
     {
+        $this->middleware('can.marcas.index')->only('index');
+        $this->middleware('can.marcas.create')->only('create');
+        $this->middleware('can:marcas.store')->only('store');
+        $this->middleware('can:marcas.show')->only('show');
+        $this->middleware('can:marcas.edit')->only('edit');
+        $this->middleware('can:marcas.update')->only('update');
+        $this->middleware('can:marcas.destroy')->only('destroy');
         $this->cloudinaryService = $cloudinary;
     }
 

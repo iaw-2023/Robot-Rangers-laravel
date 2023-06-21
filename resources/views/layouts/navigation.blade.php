@@ -17,26 +17,38 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                @can('categorias.index')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
                         {{ __('Categorias') }}
                     </x-nav-link>
                 </div>
+                @endcan
+
+                @can('categorias.index')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('marcas.index')" :active="request()->routeIs('marcas.index')">
                         {{ __('Marcas') }}
                     </x-nav-link>
                 </div>
+                @endcan
+
+                @can('prendas.index')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('prendas.index')" :active="request()->routeIs('prendas.index')">
                         {{ __('Prendas') }}
                     </x-nav-link>
                 </div>
+                @endcan
+                
+                @can('pedidos.index')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('pedidos.index')" :active="request()->routeIs('pedidos.index')">
                         {{ __('Pedidos') }}
                     </x-nav-link>
                 </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->

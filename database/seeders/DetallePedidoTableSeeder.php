@@ -12,6 +12,6 @@ class DetallePedidoTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DetallePedido::factory(300)->create();
+        DetallePedido::factory(0)->create();
     }
 }

@@ -16,6 +16,13 @@ class PrendaController extends Controller
 
     public function __construct(CloudinaryService $cloudinary)
     {
+        $this->middleware('can.prendas.index')->only('index');
+        $this->middleware('can.prendas.create')->only('create');
+        $this->middleware('can:prendas.store')->only('store');
+        $this->middleware('can:prendas.show')->only('show');
+        $this->middleware('can:prendas.edit')->only('edit');
+        $this->middleware('can:prendas.update')->only('update');
+        $this->middleware('can:prendas.destroy')->only('destroy');
         $this->cloudinaryService = $cloudinary;
     }
 

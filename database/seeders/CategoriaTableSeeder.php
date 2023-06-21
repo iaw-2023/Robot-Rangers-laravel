@@ -12,6 +12,6 @@ class CategoriaTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Categoria::factory(100)->create();
+        Categoria::factory(5)->create();
     }
 }
