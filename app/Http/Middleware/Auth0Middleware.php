@@ -40,7 +40,8 @@ class Auth0Middleware
             // Attempt to decode the token:
             try {
                 $token = $auth0->decode($jwt, null, null, null, null, null, null, \Auth0\SDK\Token::TYPE_TOKEN);
-                var_dump($token);
+                $email = $token['https://example.com/email'];
+                var_dump($email);
                 
                 define('ENDPOINT_AUTHORIZED', true);
             } catch (\Auth0\SDK\Exception\InvalidTokenException $exception) {
