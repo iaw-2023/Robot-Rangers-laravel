@@ -40,6 +40,8 @@ class Auth0Middleware
             // Attempt to decode the token:
             try {
                 $token = $auth0->decode($jwt, null, null, null, null, null, null, \Auth0\SDK\Token::TYPE_TOKEN);
+                $email = $token['https://example.com/email'];
+                
                 define('ENDPOINT_AUTHORIZED', true);
             } catch (\Auth0\SDK\Exception\InvalidTokenException $exception) {
                 // The token wasn't valid. Let's display the error message from the Auth0 SDK.
@@ -51,7 +53,7 @@ class Auth0Middleware
         // Is the request authorized?
         if (defined('ENDPOINT_AUTHORIZED')) {
             // Autorización exitosa, pasa al siguiente middleware y al controlador
-            return $next($request);
+            return $email;
         }
 
         // Issue a HTTP 401 Unauthorized status:
