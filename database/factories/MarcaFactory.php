@@ -19,6 +19,7 @@ class MarcaFactory extends Factory
         return [
             'nombre'=>$this->faker->name(),
             'imagen' => $this->faker->imageUrl(),
+            'imagen_public_id' => $this->faker->unique()->randomNumber(5),
             'descripcion' => $this->faker->text(),
         ];
     }

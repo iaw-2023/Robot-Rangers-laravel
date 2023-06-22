@@ -12,18 +12,15 @@ use Illuminate\Http\Request;
 
 class PrendaController extends Controller
 {
-    private $cloudinaryService;
-
-    public function __construct(CloudinaryService $cloudinary)
+    public function __construct()
     {
-        $this->middleware('can.prendas.index')->only('index');
-        $this->middleware('can.prendas.create')->only('create');
+        $this->middleware('can:prendas.index')->only('index');
+        $this->middleware('can:prendas.create')->only('create');
         $this->middleware('can:prendas.store')->only('store');
         $this->middleware('can:prendas.show')->only('show');
         $this->middleware('can:prendas.edit')->only('edit');
         $this->middleware('can:prendas.update')->only('update');
         $this->middleware('can:prendas.destroy')->only('destroy');
-        $this->cloudinaryService = $cloudinary;
     }
 
     /**
@@ -56,9 +53,23 @@ class PrendaController extends Controller
     public function store(StorePrendaRequest $request)
     {
         $requestData = $request->validated();
-        $requestData["imagen"] = $this->cloudinaryService->uploadImage($request->file('imagen'));
-        Prenda::create($requestData);
-        
+        $image = $request->file('imagen')->getRealPath();
+        $cloudinaryResponse = cloudinary()->upload($image, ['folder'=>'prendas']);
+        $imageUrl = $cloudinaryResponse->getSecurePath();
+        $imagePublicId = $cloudinaryResponse->getPublicId();
+
+        Prenda::create([
+            'nombre' => $requestData['nombre'],
+            'marca_id' => $requestData['marca_id'],
+            'categoria_id' => $requestData['categoria_id'],
+            'talle' => $requestData['talle'],
+            'color' => $requestData['color'],
+            'imagen' => $imageUrl,
+            'imagen_public_id' => $imagePublicId,
+            'precio' => $requestData['precio'],
+            'descripcion' => $requestData['descripcion'],
+        ]);
+
         return redirect('prendas')->with('success', 'Prenda has been created successfully');
     }
     
@@ -88,11 +99,28 @@ class PrendaController extends Controller
     public function update(UpdatePrendaRequest $request, Prenda $prenda)
     {
         $requestData = $request->validated();
+        $imageUrl = $prenda->imagen;
+        $imagePublicId = $prenda->imagen_public_id;
+
         if ($request->hasFile('imagen')) {
-            $this->cloudinaryService->deleteImage($prenda->imagen);
-            $requestData["imagen"] = $this->cloudinaryService->uploadImage($request->file('imagen'));
+            cloudinary()->destroy($prenda->imagen_public_id);
+            $image = $request->file('imagen')->getRealPath();
+            $cloudinaryResponse = cloudinary()->upload($image, ['folder'=>'prendas']);
+            $imageUrl = $cloudinaryResponse->getSecurePath();
+            $imagePublicId = $cloudinaryResponse->getPublicId();
         }
-        $prenda->update($requestData);
+        
+        $prenda->update([
+            'nombre' => $requestData['nombre'],
+            'marca_id' => $requestData['marca_id'],
+            'categoria_id' => $requestData['categoria_id'],
+            'talle' => $requestData['talle'],
+            'color' => $requestData['color'],
+            'imagen' => $imageUrl,
+            'imagen_public_id' => $imagePublicId,
+            'precio' => $requestData['precio'],
+            'descripcion' => $requestData['descripcion'],
+        ]);
 
         return redirect('prendas')->with('success', 'Prenda has been updated.');
     }

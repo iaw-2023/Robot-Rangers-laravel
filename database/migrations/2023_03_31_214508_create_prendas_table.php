@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('talle', ['xs', 's','m', 'l', 'xl']);
             $table->string('color');
             $table->string('imagen');
+            $table->string('imagen_public_id');
             $table->decimal('precio', 8, 2);
             $table->text('descripcion');
         });
