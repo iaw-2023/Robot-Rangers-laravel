@@ -236,7 +236,7 @@ class PedidoController extends ApiController
     {
         $mail_cliente = $request->input('mail_cliente');
         $id = $request->input('id');
-        var_dump($mail_cliente);
+
         $pedidos = Pedido::where('mail_cliente', $mail_cliente);
 
         if ($id) {
