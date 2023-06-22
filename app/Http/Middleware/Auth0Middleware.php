@@ -41,7 +41,7 @@ class Auth0Middleware
             try {
                 $token = $auth0->decode($jwt, null, null, null, null, null, null, \Auth0\SDK\Token::TYPE_TOKEN)->toArray();
                 $email = $token['https://example.com/email'];
-                var_dump($email);
+                $request->attributes->add(['mail_cliente' => $email]);
                 
                 define('ENDPOINT_AUTHORIZED', true);
             } catch (\Auth0\SDK\Exception\InvalidTokenException $exception) {
