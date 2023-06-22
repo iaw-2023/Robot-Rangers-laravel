@@ -3,19 +3,13 @@ namespace App\Http\Middleware;
 
 use Auth0\SDK\Auth0;
 use Closure; 
-use Dotenv\Dotenv;
 use Illuminate\Http\JsonResponse;
 
 class Auth0Middleware
 {
     public function handle($request, Closure $next)
     {
-        // Import the Composer Autoloader to make the SDK classes accessible:
         require __DIR__ . '/../../../vendor/autoload.php';
-
-
-        // Load our environment variables from the .env file:
-        (Dotenv::createImmutable(__DIR__ . '/../../../'))->load();
 
         // Now instantiate the Auth0 class with our configuration:
         $auth0 = new Auth0([
