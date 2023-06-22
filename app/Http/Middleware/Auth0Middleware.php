@@ -1,6 +1,10 @@
 <?php
 
+namespace App\Http\Middleware;
+
 use Auth0\SDK\Auth0;
+use Closure;
+use Dotenv\Dotenv;
 
 class Auth0Middleware
 {
@@ -10,7 +14,7 @@ class Auth0Middleware
         require 'vendor/autoload.php';
 
         // Load our environment variables from the .env file:
-        (Dotenv\Dotenv::createImmutable(__DIR__))->load();
+        (Dotenv::createImmutable(__DIR__))->load();
 
         // Now instantiate the Auth0 class with our configuration:
         $auth0 = new Auth0([
