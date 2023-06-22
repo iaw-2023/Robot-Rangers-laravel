@@ -39,7 +39,7 @@ class Auth0Middleware
 
             // Attempt to decode the token:
             try {
-                $token = $auth0->decode($jwt, null, null, null, null, null, null, \Auth0\SDK\Token::TYPE_TOKEN);
+                $token = $auth0->decode($jwt, null, null, null, null, null, null, \Auth0\SDK\Token::TYPE_TOKEN)->toArray();
                 $email = $token['https://example.com/email'];
                 var_dump($email);
                 
