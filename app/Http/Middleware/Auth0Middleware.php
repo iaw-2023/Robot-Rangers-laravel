@@ -9,6 +9,7 @@ class Auth0Middleware
 {
     public function handle($request, Closure $next)
     {
+        // Import the Composer Autoloader to make the SDK classes accessible:
         require __DIR__ . '/../../../vendor/autoload.php';
 
         // Now instantiate the Auth0 class with our configuration:

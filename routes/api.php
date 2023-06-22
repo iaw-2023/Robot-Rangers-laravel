@@ -33,3 +33,8 @@ Route::get('prendas/{prenda}', [PrendaController::class, 'show']);
 
 Route::post('pedidos', [PedidoController::class, 'store'])->middleware('auth0');
 Route::get('pedidos', [PedidoController::class, 'show'])->middleware('auth0');
+
+Route::middleware('auth0')->group(function () {
+    Route::post('pedidos', [PedidoController::class, 'store']);
+    Route::get('pedidos', [PedidoController::class, 'show']);
+});
