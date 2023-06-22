@@ -22,6 +22,7 @@ class PrendaFactory extends Factory
             'talle' => $this->faker->randomElement(['xs' ,'s', 'm', 'l', 'xl']), 
             'color' => '#' . dechex($this->faker->numberBetween(0, 16777215)),
             'imagen' => $this->faker->imageUrl(),
+            'imagen_public_id' => $this->faker->unique()->randomNumber(5),
             'precio' => $this->faker->randomFloat(2, 0, 999999.99),
             'marca_id' => Marca::inRandomOrder()->first(),
             'categoria_id' => Categoria::inRandomOrder()->first(),
