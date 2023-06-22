@@ -50,14 +50,8 @@ class Auth0Middleware
         
         // Is the request authorized?
         if (defined('ENDPOINT_AUTHORIZED')) {
-            // Respond with a JSON response:
-            echo json_encode([
-                'authorized' => true,
-                'data' => $token->toArray()
-            ], JSON_PRETTY_PRINT);
-
-            $response->setData($responseData);
-            return $response;
+            // Autorización exitosa, pasa al siguiente middleware y al controlador
+            return $next($request);
         }
 
         // Issue a HTTP 401 Unauthorized status:
