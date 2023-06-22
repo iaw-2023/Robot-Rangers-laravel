@@ -31,5 +31,5 @@ Route::get('marcas/{marca}', [MarcaController::class, 'show']);
 Route::get('prendas', [PrendaController::class, 'index']);
 Route::get('prendas/{prenda}', [PrendaController::class, 'show']);
 
-Route::post('pedidos', [PedidoController::class, 'store']);
-Route::get('pedidos', [PedidoController::class, 'show']);
+Route::post('pedidos', [PedidoController::class, 'store'])->middleware('auth0');
+Route::get('pedidos', [PedidoController::class, 'show'])->middleware('auth0');
