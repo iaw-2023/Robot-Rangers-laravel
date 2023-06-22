@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Auth0\SDK\Auth0;
-use Closure;
+use Closure; 
 use Dotenv\Dotenv;
+use Illuminate\Http\JsonResponse;
 
 class Auth0Middleware
 {
@@ -13,8 +13,9 @@ class Auth0Middleware
         // Import the Composer Autoloader to make the SDK classes accessible:
         require __DIR__ . '/../../../vendor/autoload.php';
 
+
         // Load our environment variables from the .env file:
-        (Dotenv::createImmutable(__DIR__. '/../../../'))->load();
+        (Dotenv::createImmutable(__DIR__ . '/../../../'))->load();
 
         // Now instantiate the Auth0 class with our configuration:
         $auth0 = new Auth0([
@@ -25,7 +26,6 @@ class Auth0Middleware
             'cookieSecret' => $_ENV['AUTH0_SECRET']
         ]);
 
-        
         // Caching
         $tokenCache = new \Symfony\Component\Cache\Adapter\FilesystemAdapter();
         $auth0->configuration()->setTokenCache($tokenCache);
@@ -53,7 +53,6 @@ class Auth0Middleware
             }
         }
         
-
         // Is the request authorized?
         if (defined('ENDPOINT_AUTHORIZED')) {
             // Respond with a JSON response:
@@ -62,20 +61,16 @@ class Auth0Middleware
                 'data' => $token->toArray()
             ], JSON_PRETTY_PRINT);
 
-            exit;
+            $response->setData($responseData);
+            return $response;
         }
 
         // Issue a HTTP 401 Unauthorized status:
-        http_response_code(401);
-
-        // Respond with a JSON response:
-        echo json_encode([
+        return new JsonResponse([
             'authorized' => false,
             'error' => [
                 'message' => 'You are NOT authorized to be here!'
             ]
-        ], JSON_PRETTY_PRINT);
-
-        return $next($request);
+        ], 401);
     }
 }
