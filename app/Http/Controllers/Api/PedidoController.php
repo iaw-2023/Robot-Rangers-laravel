@@ -20,13 +20,7 @@ class PedidoController extends ApiController
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
-     *                 required={"mail_cliente", "monto", "prendas"},
-     *                 @OA\Property(
-     *                     property="mail_cliente",
-     *                     type="string",
-     *                     example="cliente@iaw2023.com",
-     *                     description="El correo electrónico del cliente."
-     *                 ),
+     *                 required={"monto", "prendas"},
      *                 @OA\Property(
      *                     property="monto",
      *                     type="string",
@@ -84,7 +78,6 @@ class PedidoController extends ApiController
         foreach ($request->input('prendas') as $prenda) {
             $pedido->prendas()->attach($prenda['id'], ['cantidad' => $prenda['cantidad']]);
         }
-
         return new PedidoResource($pedido);
     }
 
@@ -96,12 +89,6 @@ class PedidoController extends ApiController
      * @OA\Get(
      *     path="/rest/pedidos/",
      *     tags={"Pedidos"},
-     *     @OA\Parameter(
-     *         in="query",
-     *         name="mail_cliente",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
      *     @OA\Parameter(
      *         in="query",
      *         name="id",
@@ -130,11 +117,6 @@ class PedidoController extends ApiController
      *                         property="updated_at",
      *                         type="string",
      *                         example="2023-05-07 20:13:03"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="mail_cliente",
-     *                         type="string",
-     *                         example="clienteiaw2023@gmail.com"
      *                     ),
      *                     @OA\Property(
      *                         property="monto",

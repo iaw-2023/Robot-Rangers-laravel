@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\MarcaController;
+use App\Http\Controllers\Api\PagoController;
 use App\Http\Controllers\Api\PrendaController;
 use App\Http\Controllers\Api\PedidoController;
 
@@ -34,4 +35,5 @@ Route::get('prendas/{prenda}', [PrendaController::class, 'show']);
 Route::middleware('auth0')->group(function () {
     Route::post('pedidos', [PedidoController::class, 'store']);
     Route::get('pedidos', [PedidoController::class, 'show']);
+    Route::post('procesar_pago', [PagoController::class, 'store']);
 });
