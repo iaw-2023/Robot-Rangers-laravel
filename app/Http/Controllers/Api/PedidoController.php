@@ -218,21 +218,22 @@ class PedidoController extends ApiController
     {
         $mail_cliente = $request->input('mail_cliente');
         $id = $request->input('id');
-
+    
         $pedidos = Pedido::where('mail_cliente', $mail_cliente);
-
+    
         if ($id) {
             $pedidos->where('id', $id);
         }
-
+    
         $result = $pedidos->paginate(3);
-
+    
         if ($result->isEmpty()) {
             return response()->json(['message' => 'Pedidos not found'], 404);
         }
-
-        $result->appends($request->all());
-
+    
+        $parameters = $request->except('mail_cliente');
+        $result->appends($parameters);
+    
         return PedidoResource::collection($result);
     }
 
