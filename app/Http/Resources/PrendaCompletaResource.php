@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PrendaResource extends JsonResource
+class PrendaCompletaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,13 @@ class PrendaResource extends JsonResource
         return [
             'id' => $this->id,
             'nombre' => $this->nombre,
+            'marca' => new MarcaResource($this->marca),
+            'categoria' => new CategoriaResource($this->categoria),
+            'talle' => $this->talle,
+            'color' => $this->color,
             'imagen' => $this->imagen,
             'precio' => $this->precio,
+            'descripcion' => $this->descripcion,
         ];
     }
 }

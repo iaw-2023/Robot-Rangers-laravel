@@ -16,6 +16,7 @@ class Pedido extends Model
         'mail_cliente',
         'monto',
         'fecha',
+        'id_pago',
     ];
 
     public function prendas(){

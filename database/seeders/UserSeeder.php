@@ -13,11 +13,23 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        User::truncate();
         User::create([
             'name' => 'Admin',
             'email' => 'admin@iaw.com',
             'password' => Hash::make('admin123'),
-        ]);
+        ])->assignRole('admin');
         
+        User::create([
+            'name' => 'empleado',
+            'email' => 'empleado@iaw.com',
+            'password' => Hash::make('empleado123'),
+        ])->assignRole('empleado');
+
+        User::create([
+            'name' => 'repositor',
+            'email' => 'repositor@iaw.com',
+            'password' => Hash::make('repositor123'),
+        ])->assignRole('repositor');
     }
 }

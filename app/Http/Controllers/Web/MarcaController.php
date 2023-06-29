@@ -10,6 +10,17 @@ use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:marcas.index')->only('index');
+        $this->middleware('can:marcas.create')->only('create');
+        $this->middleware('can:marcas.store')->only('store');
+        $this->middleware('can:marcas.show')->only('show');
+        $this->middleware('can:marcas.edit')->only('edit');
+        $this->middleware('can:marcas.update')->only('update');
+        $this->middleware('can:marcas.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -37,7 +48,19 @@ class MarcaController extends Controller
      */
     public function store(StoreMarcaRequest $request)
     {
-        Marca::create($request->validated());
+        $requestData = $request->validated();
+        $image = $request->file('imagen')->getRealPath();
+        $cloudinaryResponse = cloudinary()->upload($image, ['folder'=>'marcas']);
+        $imageUrl = $cloudinaryResponse->getSecurePath();
+        $imagePublicId = $cloudinaryResponse->getPublicId();
+
+        Marca::create([
+            'nombre' => $requestData['nombre'],
+            'imagen' => $imageUrl,
+            'imagen_public_id' => $imagePublicId,
+            'descripcion' => $requestData['descripcion'],
+        ]);
+
         return redirect('marcas')->with('success', 'Marca has been created.');
     }
 
@@ -62,7 +85,23 @@ class MarcaController extends Controller
      */
     public function update(UpdateMarcaRequest $request, Marca $marca)
     {
-        $marca->update($request->validated());
+        $requestData = $request->validated();
+        if ($request->hasFile('imagen')) {
+            cloudinary()->destroy($marca->imagen_public_id);
+            $image = $request->file('imagen')->getRealPath();
+            $cloudinaryResponse = cloudinary()->upload($image, ['folder'=>'marcas']);
+            $imageUrl = $cloudinaryResponse->getSecurePath();
+            $imagePublicId = $cloudinaryResponse->getPublicId();
+            $marca->update([
+                'nombre' => $requestData['nombre'],
+                'imagen' => $imageUrl,
+                'imagen_public_id' => $imagePublicId,
+                'descripcion' => $requestData['descripcion'],
+            ]);
+        } else {
+            $marca->update($requestData);
+        }
+
         return redirect('marcas')->with('success', 'Marca has been updated.');;
     }
 
@@ -76,6 +115,7 @@ class MarcaController extends Controller
         }
 
         $marca->delete();
+
         return redirect('marcas')->with('success', 'Marca has been deleted.');
     }
 }

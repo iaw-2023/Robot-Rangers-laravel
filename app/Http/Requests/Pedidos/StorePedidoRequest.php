@@ -26,7 +26,8 @@ class StorePedidoRequest extends FormRequest
             'monto' => ['required','numeric','regex:/^\d{1,10}(\.\d{1,2})?$/'],
             'prendas' => 'required|array|min:1',
             'prendas.*.id' => 'required|exists:prendas,id',
-            'prendas.*.cantidad' => 'required|numeric|min:1'
+            'prendas.*.cantidad' => 'required|numeric|min:1',
+            'id_pago' => 'required|numeric'
         ];
     }   
 

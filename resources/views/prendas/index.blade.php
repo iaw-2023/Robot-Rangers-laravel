@@ -11,9 +11,11 @@
                 <input type="submit" class="btn btn-primary h-100 btn-block ml-3" value="Buscar">
             </div>
         </div>
-         </form>
+        </form>
     </div>
-    <a href="/prendas/create" class="btn btn-success my-3">Crear prenda</a>
+    @can('prendas.create')
+        <a href="/prendas/create" class="btn btn-success my-3">Crear prenda</a>
+    @endcan
     <table class="table border-b border-gray-100 dark:border-gray-700">
         <thead>
             <tr>
@@ -35,15 +37,21 @@
                     <th scope="row" class="text-white">{{$prenda->id}}</th>
                     <td class="text-white">{{$prenda->nombre}}</td>
                     <td class="text-white">{{$prenda->talle}}</td>
-                    <td><span class="color-box" style="background-color: {{$prenda->color}}"></span></td>
+                    <td><span class="color-box" style="background-color:{{$prenda->color}}"></span></td>
                     <td class="text-white">${{$prenda->precio}}</td>
                     <td>
                         <form action="/prendas/{{$prenda->id}}" method="POST">
                             @method('DELETE')
-                            @csrf 
-                            <a href="/prendas/{{$prenda->id}}" class="btn btn-success">Ver</a>
-                            <a href="/prendas/{{$prenda->id}}/edit" class="btn btn-success">Editar</a>
-                            <button type="submit" class="btn btn-danger">Borrar</button>
+                            @csrf
+                            @can('prendas.show') 
+                                <a href="/prendas/{{$prenda->id}}" class="btn btn-success">Ver</a>
+                            @endcan
+                            @can('prendas.edit')
+                                <a href="/prendas/{{$prenda->id}}/edit" class="btn btn-success">Editar</a>
+                            @endcan
+                            @can('prendas.destroy')    
+                                <button type="submit" class="btn btn-danger">Borrar</button>
+                            @endcan
                         </form>
                     </td>
                 </tr>

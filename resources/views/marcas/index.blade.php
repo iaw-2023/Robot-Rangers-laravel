@@ -13,7 +13,9 @@
         </div>
          </form>
     </div>
-    <a href="/marcas/create" class="btn btn-success my-3">Crear marca</a>
+    @can('marcas.create')
+        <a href="/marcas/create" class="btn btn-success my-3">Crear marca</a>
+    @endcan
     <table class="table border-b border-gray-100 dark:border-gray-700">
         <thead>
             <tr>
@@ -34,10 +36,16 @@
                     <td>
                         <form action="/marcas/{{$marca->id}}" method="POST">
                             @method('DELETE')
-                            @csrf 
-                            <a href="/marcas/{{$marca->id}}" class="btn btn-success">Ver</a>
-                            <a href="/marcas/{{$marca->id}}/edit" class="btn btn-success">Editar</a>
-                            <button type="submit" class="btn btn-danger">Borrar</button>
+                            @csrf
+                            @can('marcas.show') 
+                                <a href="/marcas/{{$marca->id}}" class="btn btn-success">Ver</a>
+                            @endcan
+                            @can('marcas.edit')
+                                <a href="/marcas/{{$marca->id}}/edit" class="btn btn-success">Editar</a>
+                            @endcan
+                            @can('marcas.destroy')
+                                <button type="submit" class="btn btn-danger">Borrar</button>
+                            @endcan
                         </form>
                     </td>
                 </tr>

@@ -36,8 +36,10 @@
                     <td class="text-white">{{$pedido->created_at->format('d/m/Y H:i:s')}}</td>
                     <td>
                         <form action="/pedidos/{{$pedido->id}}" method="POST">
-                            @csrf 
-                            <a href="/pedidos/{{$pedido->id}}" class="btn btn-success">Ver</a>
+                            @csrf
+                            @can('pedidos.show') 
+                                <a href="/pedidos/{{$pedido->id}}" class="btn btn-success">Ver</a>
+                            @endcan
                         </form>
                     </td>
                 </tr>

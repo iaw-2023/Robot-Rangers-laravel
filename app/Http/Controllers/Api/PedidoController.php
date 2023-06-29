@@ -20,13 +20,7 @@ class PedidoController extends ApiController
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
-     *                 required={"mail_cliente", "monto", "prendas"},
-     *                 @OA\Property(
-     *                     property="mail_cliente",
-     *                     type="string",
-     *                     example="cliente@iaw2023.com",
-     *                     description="El correo electrónico del cliente."
-     *                 ),
+     *                 required={"monto", "prendas"},
      *                 @OA\Property(
      *                     property="monto",
      *                     type="string",
@@ -84,23 +78,17 @@ class PedidoController extends ApiController
         foreach ($request->input('prendas') as $prenda) {
             $pedido->prendas()->attach($prenda['id'], ['cantidad' => $prenda['cantidad']]);
         }
-
         return new PedidoResource($pedido);
     }
 
     /**
      * Retorna los pedidos de un cliente.
      * En caso de especificar el parametro opcional {id} se retorna el pedido especifico del cliente.
-     *
+     * (Los pedidos se paginan de a 3)
+     * 
      * @OA\Get(
      *     path="/rest/pedidos/",
      *     tags={"Pedidos"},
-     *     @OA\Parameter(
-     *         in="query",
-     *         name="mail_cliente",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
      *     @OA\Parameter(
      *         in="query",
      *         name="id",
@@ -129,11 +117,6 @@ class PedidoController extends ApiController
      *                         property="updated_at",
      *                         type="string",
      *                         example="2023-05-07 20:13:03"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="mail_cliente",
-     *                         type="string",
-     *                         example="clienteiaw2023@gmail.com"
      *                     ),
      *                     @OA\Property(
      *                         property="monto",
@@ -235,19 +218,22 @@ class PedidoController extends ApiController
     {
         $mail_cliente = $request->input('mail_cliente');
         $id = $request->input('id');
-
+    
         $pedidos = Pedido::where('mail_cliente', $mail_cliente);
-
+    
         if ($id) {
             $pedidos->where('id', $id);
         }
-
-        $result = $pedidos->get();
-
+    
+        $result = $pedidos->paginate(3);
+    
         if ($result->isEmpty()) {
             return response()->json(['message' => 'Pedidos not found'], 404);
         }
-
+    
+        $parameters = $request->except('mail_cliente');
+        $result->appends($parameters);
+    
         return PedidoResource::collection($result);
     }
 

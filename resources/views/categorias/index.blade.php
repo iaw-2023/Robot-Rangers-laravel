@@ -13,7 +13,9 @@
         </div>
          </form>
     </div>
-    <a href="/categorias/create" class="btn btn-success my-3">Crear categoria</a>
+    @can('categorias.create')
+        <a href="/categorias/create" class="btn btn-success my-3">Crear categoria</a>
+    @endcan
     <table class="table border-b border-gray-100 dark:border-gray-700">
         <thead>
             <tr>
@@ -35,9 +37,15 @@
                         <form action="/categorias/{{$categoria->id}}" method="POST">
                             @method('DELETE')
                             @csrf 
-                            <a href="/categorias/{{$categoria->id}}" class="btn btn-success">Ver</a>
-                            <a href="/categorias/{{$categoria->id}}/edit" class="btn btn-success">Editar</a>
-                            <button type="submit" class="btn btn-danger">Borrar</button>
+                            @can('categorias.show')
+                                <a href="/categorias/{{$categoria->id}}" class="btn btn-success">Ver</a>
+                            @endcan
+                            @can('categorias.edit')
+                                <a href="/categorias/{{$categoria->id}}/edit" class="btn btn-success">Editar</a>
+                            @endcan
+                            @can('categorias.destroy')
+                                <button type="submit" class="btn btn-danger">Borrar</button>
+                            @endcan
                         </form>
                     </td>
                 </tr>

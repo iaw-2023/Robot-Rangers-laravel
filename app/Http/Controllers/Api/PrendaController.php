@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\PrendaResource;
+use App\Http\Resources\PrendaCompletaResource;
 use App\Models\Prenda;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -14,10 +15,16 @@ class PrendaController extends ApiController
      * Retorna un listado de prendas.
      * Si se especifican parametros de filtrado, se retornan las prendas filtradas.
      * De lo contrario, se retornan todas las prendas.
-     * (Las prendas se devuelven paginadas de a 10)
+     * (Las prendas se devuelven paginadas de a 12)
      * @OA\Get (
      *     path="/rest/prendas/",
      *     tags={"Prendas"},
+     *     @OA\Parameter(
+     *         in="query",
+     *         name="nombre",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\Parameter(
      *         in="query",
      *         name="categoria",
@@ -63,57 +70,9 @@ class PrendaController extends ApiController
      *                         example="1"
      *                     ),
      *                     @OA\Property(
-     *                         property="created_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="updated_at",
-     *                         type="string",
-     *                         example="2023-05-07 00:00:00"
-     *                     ),
-     *                     @OA\Property(
      *                         property="nombre",
      *                         type="string",
      *                         example="Harden II"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="marca",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Adidas"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="categoria",
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="id",
-     *                             type="number",
-     *                             example="1"
-     *                         ),
-     *                         @OA\Property(
-     *                             property="nombre",
-     *                             type="string",
-     *                             example="Remeras"
-     *                         )
-     *                     ),
-     *                     @OA\Property(
-     *                         property="talle",
-     *                         type="string",
-     *                         example="xl"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="color",
-     *                         type="string",
-     *                         example="#FF0000"
      *                     ),
      *                     @OA\Property(
      *                         property="imagen",
@@ -124,11 +83,6 @@ class PrendaController extends ApiController
      *                         property="precio",
      *                         type="string",
      *                         example="9999.99"
-     *                     ),
-     *                     @OA\Property(
-     *                         property="descripcion",
-     *                         type="string",
-     *                         example="Edicion limitada 2023"
      *                     )
      *                 )
      *             )
@@ -146,17 +100,20 @@ class PrendaController extends ApiController
     public function index(Request $request)
     {
         $prendas = Prenda::query()
+            ->when($request->has('nombre'), fn($query) => $query->whereRaw('LOWER(nombre) LIKE ?', ['%'.strtolower($request->input('nombre')).'%']))
             ->when($request->has('categoria'), fn($query) => $query->where('categoria_id', $request->input('categoria')))
             ->when($request->has('marca'), fn($query) => $query->where('marca_id', $request->input('marca')))
             ->when($request->has('talle'), fn($query) => $query->whereRaw('LOWER(talle) = ?', [strtolower($request->input('talle'))]))
             ->when($request->has('color'), fn($query) => $query->whereRaw('LOWER(color) = ?', [strtolower($request->input('color'))]))
             ->when($request->has('precio'), fn($query) => $query->orderBy('precio', $request->input('precio')));
 
-        $result = $prendas->paginate(10);
+        $result = $prendas->paginate(12);
 
         if ($result->isEmpty()) {
             return response()->json(['message' => 'Prendas not found'], 404);
         }
+
+        $result->appends($request->all());
 
         return PrendaResource::collection($result);
     }
@@ -232,7 +189,7 @@ class PrendaController extends ApiController
     {
         try {
             $prenda = Prenda::findOrFail($id);
-            return new PrendaResource($prenda);
+            return new PrendaCompletaResource($prenda);
         } catch (ModelNotFoundException) {
             return response()->json(['message' => 'Prenda not found'], 404);
         }

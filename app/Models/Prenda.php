@@ -22,6 +22,7 @@ class Prenda extends Model
         'talle',
         'color',
         'imagen',
+        'imagen_public_id',
         'precio',
         'descripcion',
     ];

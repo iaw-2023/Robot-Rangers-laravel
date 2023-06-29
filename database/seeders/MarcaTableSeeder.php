@@ -12,6 +12,6 @@ class MarcaTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Marca::factory(100)->create();
+        Marca::factory(5)->create();
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->string('imagen');
+            $table->string('imagen_public_id');
             $table->text('descripcion');
         });
     }
