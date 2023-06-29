@@ -13,6 +13,9 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        Role::truncate();
+        Permission::truncate();
+
         $admin = Role::create(['name' => 'admin']);
         $empleado = Role::create(['name' => 'empleado']);
         $repositor = Role::create(['name' => 'repositor']);
@@ -42,7 +45,7 @@ class RoleSeeder extends Seeder
         $prendasDestroy = Permission::create(['name' => 'prendas.destroy']);
         
         $pedidosIndex = Permission::create(['name' => 'pedidos.index']);
-        $pedidosShow = Permission::create(['name' => 'pedidos.create']);
+        $pedidosShow = Permission::create(['name' => 'pedidos.show']);
 
         $admin->syncPermissions(
             $categoriasIndex, $categoriasCreate, $categoriasStore, $categoriasShow, $categoriasEdit, $categoriasUpdate, $categoriasDestroy,
